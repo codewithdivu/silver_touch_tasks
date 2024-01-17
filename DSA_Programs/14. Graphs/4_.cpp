@@ -1,120 +1,124 @@
 #include <iostream>
+#include <climits>
 #include <vector>
 #include <queue>
-#include <climits>
-
+#include <algorithm>
 using namespace std;
 
-// Data structure to represent an edge in the graph
+const int INF = INT_MAX;
+
 struct Edge
 {
-    int to;       // The destination vertex
-    int capacity; // The capacity of the edge
-    int flow;     // The current flow through the edge
-    int reverse;  // Index of the reverse edge in the residual graph
+    int to, capacity, flow;
 };
 
 // Ford-Fulkerson algorithm using Edmonds-Karp method
-class FordFulkerson
+int fordFulkerson(vector<vector<Edge>> &graph, int source, int sink)
 {
-private:
-    int numVertices;            // Number of vertices in the graph
-    vector<vector<Edge>> graph; // Adjacency list representation of the graph
-    vector<bool> visited;       // Array to mark visited vertices during BFS
+    int nodes = graph.size();
+    vector<vector<int>> residualCapacity(nodes, vector<int>(nodes, 0));
 
-public:
-    FordFulkerson(int vertices) : numVertices(vertices), graph(vertices), visited(vertices) {}
-
-    // Add an edge to the graph
-    void addEdge(int from, int to, int capacity)
+    for (int u = 0; u < nodes; ++u)
     {
-        Edge forwardEdge = {to, capacity, 0, static_cast<int>(graph[to].size())};
-        Edge reverseEdge = {from, 0, 0, static_cast<int>(graph[from].size())};
-
-        graph[from].push_back(forwardEdge);
-        graph[to].push_back(reverseEdge);
-    }
-
-    // Ford-Fulkerson algorithm
-    int maxFlow(int source, int sink)
-    {
-        int maxFlow = 0;
-
-        while (true)
+        for (const Edge &edge : graph[u])
         {
-            // Reset the visited array for each iteration
-            fill(visited.begin(), visited.end(), false);
-
-            // Find an augmenting path using BFS
-            int flow = findAugmentingPath(source, sink);
-
-            // If no more augmenting paths can be found, break the loop
-            if (flow == 0)
-            {
-                break;
-            }
-
-            // Update the residual graph by backtracking the augmenting path
-            maxFlow += flow;
+            residualCapacity[u][edge.to] = edge.capacity;
         }
-
-        return maxFlow;
     }
 
-private:
-    // BFS to find an augmenting path
-    int findAugmentingPath(int source, int sink)
+    vector<int> parent(nodes, -1);
+    int maxFlow = 0;
+
+    while (true)
     {
-        queue<pair<int, int>> q;   // Queue for BFS
-        q.push({source, INT_MAX}); // Start with the source vertex
+        queue<pair<int, int>> q;
+        q.push({source, INF});
+        fill(parent.begin(), parent.end(), -1);
 
         while (!q.empty())
         {
-            int currentVertex = q.front().first;
+            int u = q.front().first;
             int minCapacity = q.front().second;
             q.pop();
 
-            visited[currentVertex] = true;
-
-            for (const Edge &edge : graph[currentVertex])
+            for (const Edge &edge : graph[u])
             {
-                if (!visited[edge.to] && edge.capacity > 0)
+                int v = edge.to;
+                if (parent[v] == -1 && residualCapacity[u][v] > 0)
                 {
-                    int newMinCapacity = min(minCapacity, edge.capacity);
-                    q.push({edge.to, newMinCapacity});
-                    visited[edge.to] = true;
-
-                    // If we reached the sink, return the minimum capacity on the path
-                    if (edge.to == sink)
+                    int newMinCapacity = min(minCapacity, residualCapacity[u][v]);
+                    parent[v] = u;
+                    if (v == sink)
                     {
-                        return newMinCapacity;
+                        maxFlow += newMinCapacity;
+                        int curr = v;
+                        while (curr != source)
+                        {
+                            int prev = parent[curr];
+                            residualCapacity[prev][curr] -= newMinCapacity;
+                            residualCapacity[curr][prev] += newMinCapacity;
+                            curr = prev;
+                        }
+                        break;
                     }
+                    q.push({v, newMinCapacity});
                 }
             }
         }
 
-        return 0; // No augmenting path found
+        if (parent[sink] == -1)
+        {
+            break;
+        }
     }
-};
+
+    return maxFlow;
+}
 
 int main()
 {
-    // Example usage
-    FordFulkerson fordFulkerson(6);
+    int nodes, edges;
+    cout << "Enter the number of nodes: ";
+    cin >> nodes;
+    cout << "Enter the number of edges: ";
+    cin >> edges;
 
-    fordFulkerson.addEdge(0, 1, 10);
-    fordFulkerson.addEdge(0, 2, 5);
-    fordFulkerson.addEdge(1, 2, 15);
-    fordFulkerson.addEdge(1, 3, 5);
-    fordFulkerson.addEdge(2, 3, 10);
-    fordFulkerson.addEdge(2, 4, 10);
-    fordFulkerson.addEdge(3, 4, 5);
-    fordFulkerson.addEdge(3, 5, 15);
-    fordFulkerson.addEdge(4, 5, 10);
+    vector<vector<Edge>> graph(nodes);
 
-    int maxFlow = fordFulkerson.maxFlow(0, 5);
+    cout << "Enter the edges (source destination capacity):" << endl;
+    for (int i = 0; i < edges; ++i)
+    {
+        int u, v, capacity;
+        cin >> u >> v >> capacity;
+        graph[u].push_back({v, capacity, 0});
+        // Uncomment the next line if the graph is undirected
+        // graph[v].push_back({u, capacity, 0});
+    }
 
-    cout << "Maximum Flow: " << maxFlow << endl;
+    int source, sink;
+    cout << "Enter the source and sink nodes: ";
+    cin >> source >> sink;
+
+    int maxFlow = fordFulkerson(graph, source, sink);
+
+    cout << "Maximum flow in the network: " << maxFlow << endl;
 
     return 0;
 }
+
+/*
+Enter the number of nodes: 6
+Enter the number of edges: 9
+Enter the edges (source destination capacity):
+0 1 10
+0 2 10
+1 2 2
+1 3 4
+1 4 8
+2 4 9
+3 5 10
+4 3 6
+4 5 10
+Enter the source and sink nodes: 0 5
+
+*/

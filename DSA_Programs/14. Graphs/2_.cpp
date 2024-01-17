@@ -1,5 +1,7 @@
 #include <iostream>
-#include <bits/stdc++.h>
+#include <vector>
+#include <algorithm>
+#include <set>
 using namespace std;
 
 void print(vector<int> adj[], int nodes)
@@ -15,7 +17,59 @@ void print(vector<int> adj[], int nodes)
     }
 }
 
-int articulation(vector<int> adj, int start, int V) {}
+void articulationDFS(vector<int> adj[], int u, vector<bool> &visited, vector<int> &disc, vector<int> &low, vector<int> &parent, set<int> &articulationPoints)
+{
+    static int time = 0;
+    int children = 0;
+
+    visited[u] = true;
+    disc[u] = low[u] = ++time;
+
+    for (auto v : adj[u])
+    {
+        if (!visited[v])
+        {
+            children++;
+            parent[v] = u;
+            articulationDFS(adj, v, visited, disc, low, parent, articulationPoints);
+
+            low[u] = min(low[u], low[v]);
+
+            if (low[v] >= disc[u] && parent[u] != -1)
+            {
+                articulationPoints.insert(u);
+            }
+        }
+        else if (v != parent[u])
+        {
+            low[u] = min(low[u], disc[v]);
+        }
+    }
+
+    if (parent[u] == -1 && children > 1)
+    {
+        articulationPoints.insert(u);
+    }
+}
+
+set<int> findArticulationPoints(vector<int> adj[], int nodes)
+{
+    vector<bool> visited(nodes + 1, false);
+    vector<int> disc(nodes + 1, 0);
+    vector<int> low(nodes + 1, 0);
+    vector<int> parent(nodes + 1, -1);
+    set<int> articulationPoints;
+
+    for (int i = 1; i <= nodes; i++)
+    {
+        if (!visited[i])
+        {
+            articulationDFS(adj, i, visited, disc, low, parent, articulationPoints);
+        }
+    }
+
+    return articulationPoints;
+}
 
 int main()
 {
@@ -24,8 +78,6 @@ int main()
     cin >> nodes;
     cout << "enter no of edges" << endl;
     cin >> edges;
-    cout << "enter 1 for directed graph and 0 for undirected graph" << endl;
-    cin >> direction;
 
     vector<int> adj[nodes + 1];
 
@@ -38,17 +90,19 @@ int main()
         cin >> v;
 
         adj[u].push_back(v);
-        if (direction == 0)
-        {
-            adj[v].push_back(u);
-        }
+        adj[v].push_back(u);
     }
 
     print(adj, nodes);
 
-    int answer = articulation(adj, 1, nodes);
+    set<int> articulationPoints = findArticulationPoints(adj, nodes);
 
-    cout << "Articulation point is -> " << answer << endl;
+    cout << "Articulation points are: ";
+    for (auto point : articulationPoints)
+    {
+        cout << point << " ";
+    }
+    cout << endl;
 
     return 0;
 }
