@@ -15,37 +15,39 @@ void print(vector<pair<int, int>> adj[], int nodes)
     }
 }
 
-vector<int> dijakstra(vector<pair<int, int>> adj[], int V, int start)
+int krushkal(vector<pair<int, int>> adj[], int V, int start)
 {
     priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
-    vector<int> dist(V);
+    vector<int> visited(V + 1, 0);
 
-    for (int i = 0; i < V; i++)
-    {
-        dist[i] = 1e9;
-    }
-
-    dist[start] = 0;
-    pq.push({0, start});
-
+    /*if you want to add mst then you can take another parent*/
+    // {weight,node}
+    pq.push({0, 0});
+    int sum = 0;
     while (!pq.empty())
     {
-        int distance = pq.top().first;
-        int node = pq.top().second;
+        auto itt = pq.top();
         pq.pop();
+        int node = itt.second;
+        int weight = itt.first;
+
+        if (visited[node] == 1)
+            continue;
+
+        sum = sum + weight;
+        visited[node] = 1;
 
         for (auto it : adj[node])
         {
-            int adjNode = it.second;
-            int adjWeight = it.first;
-            if (distance + adjWeight < dist[adjNode])
+            int adjNode = it.first;
+            int adjNodeWeight = it.second;
+            if (!visited[adjNode])
             {
-                dist[adjNode] = distance + adjWeight;
-                pq.push({dist[adjNode], adjNode});
+                pq.push({adjNodeWeight, adjNode});
             }
         }
     }
-    return dist;
+    return sum;
 }
 
 int main()
@@ -81,12 +83,9 @@ int main()
 
     cout << endl;
 
-    vector<int> answer = dijakstra(adj, nodes, 0);
+    int answer = krushkal(adj, nodes, 0);
 
-    for (int i = 0; i < nodes; i++)
-    {
-        cout << "distance from 0 to " << i << " is " << answer[i] << endl;
-    }
+    cout << "sum of mst is " << answer << endl;
 
     return 0;
 }
