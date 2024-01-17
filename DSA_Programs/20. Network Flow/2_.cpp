@@ -39,7 +39,7 @@ public:
 
     void findMinCut(int source, vector<bool> &reachable)
     {
-        // Run DFS to find vertices reachable from the source
+        
         dfs(source, reachable);
     }
 
@@ -106,10 +106,10 @@ private:
 
 int main()
 {
-    // Example flow network:
-    // Source (0) --2--> (1) --3--> (2) --2--> Sink (3)
-    //                           \--1--> Sink (4)
-    //                            \--2--> Sink (5)
+    
+    
+    
+    
 
     FordFulkerson fordFulkerson(6);
 
@@ -123,7 +123,7 @@ int main()
 
     cout << "Maximum Flow: " << maxFlow << endl;
 
-    // Find the minimum cut
+    
     vector<bool> reachable(6, false);
     fordFulkerson.findMinCut(0, reachable);
 

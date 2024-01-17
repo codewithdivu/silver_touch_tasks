@@ -23,7 +23,7 @@ public:
         adjList[leftVertex].push_back(rightVertex);
     }
 
-    // Function to find the maximum bipartite matching using Hopcroft-Karp algorithm
+    
     int hopcroftKarp()
     {
         vector<int> leftMatching(leftSetSize, -1);
@@ -112,10 +112,10 @@ private:
 
 int main()
 {
-    // Example bipartite graph:
-    // 1 -- 3
-    // |    |
-    // 2 -- 4
+    
+    
+    
+    
 
     BipartiteGraph graph(4, 4);
 

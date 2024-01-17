@@ -76,7 +76,7 @@ public:
         double verticalMidpoint = bounds.x + bounds.width / 2.0;
         double horizontalMidpoint = bounds.y + bounds.height / 2.0;
 
-        // Check in which quadrant the point lies
+        
         bool topQuadrant = (point.y < horizontalMidpoint && point.y >= bounds.y);
         bool bottomQuadrant = (point.y >= horizontalMidpoint && point.y < bounds.y + bounds.height);
 
@@ -84,22 +84,22 @@ public:
         {
             if (topQuadrant)
             {
-                index = 1; // Top left
+                index = 1; 
             }
             else if (bottomQuadrant)
             {
-                index = 2; // Bottom left
+                index = 2; 
             }
         }
         else if (point.x >= verticalMidpoint && point.x < bounds.x + bounds.width)
         {
             if (topQuadrant)
             {
-                index = 0; // Top right
+                index = 0; 
             }
             else if (bottomQuadrant)
             {
-                index = 3; // Bottom right
+                index = 3; 
             }
         }
 
@@ -186,17 +186,17 @@ int main()
     Rectangle bounds(0, 0, 100, 100);
     Quadtree quadtree(bounds);
 
-    // Insert some points into the Quadtree
+    
     for (int i = 0; i < 20; ++i)
     {
         quadtree.insert(Point(rand() % 100, rand() % 100));
     }
 
-    // Query points within a range
+    
     Rectangle queryRange(25, 25, 50, 50);
     vector<Point> pointsInRange = quadtree.queryRange(queryRange);
 
-    // Print the points within the range
+    
     cout << "Points within the range:" << endl;
     for (const Point &point : pointsInRange)
     {
