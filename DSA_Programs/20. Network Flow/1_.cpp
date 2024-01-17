@@ -47,7 +47,6 @@ public:
     }
 
 private:
-    // Breadth-First Search to find augmenting paths
     bool bfs(const vector<int> &leftMatching, const vector<int> &rightMatching, vector<int> &distance)
     {
         queue<int> q;
@@ -88,7 +87,6 @@ private:
         return (distance[INT_MAX - 1] != INT_MAX);
     }
 
-    // Depth-First Search to find augmenting paths
     bool dfs(int leftVertex, vector<int> &leftMatching, vector<int> &rightMatching, vector<int> &distance)
     {
         if (leftVertex != -1)
