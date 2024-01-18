@@ -2,16 +2,17 @@
 #include <unordered_map>
 #include <string>
 #include <vector>
+using namespace std;
 
-std::vector<int> compressLZW(const std::string& input) {
-    std::unordered_map<std::string, int> dictionary;
+vector<int> compressLZW(const string& input) {
+    unordered_map<string, int> dictionary;
     int code = 256; 
 
-    std::vector<int> result;
-    std::string current;
+    vector<int> result;
+    string current;
 
     for (char c : input) {
-        std::string combined = current + c;
+        string combined = current + c;
         if (dictionary.find(combined) != dictionary.end()) {
             current = combined;
         } else {
@@ -29,11 +30,11 @@ std::vector<int> compressLZW(const std::string& input) {
 }
 
 int main() {
-    std::string input = "ABABABABA";
-    std::vector<int> compressed = compressLZW(input);
+    string input = "ABABABABA";
+    vector<int> compressed = compressLZW(input);
 
     for (int code : compressed) {
-        std::cout << code << " ";
+        cout << code << " ";
     }
 
     return 0;

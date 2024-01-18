@@ -1,4 +1,6 @@
 #include <bits/stdc++.h>
+using namespace std;
+
 
 template <typename Key, typename Value>
 class CacheObliviousSearchTree {
@@ -26,7 +28,7 @@ private:
         
     }
 
-    static Node* build_tree(const std::vector<std::pair<Key, Value>>& data) {
+    static Node* build_tree(const vector<pair<Key, Value>>& data) {
         
         
     }
@@ -41,7 +43,7 @@ private:
         
     }
 
-    static Node* insert(Node* node, const std::pair<Key, Value>& data) {
+    static Node* insert(Node* node, const pair<Key, Value>& data) {
         
         
     }
@@ -59,11 +61,11 @@ private:
 public:
     CacheObliviousSearchTree() : root(nullptr), block_size(get_block_size()) {}
 
-    void build(const std::vector<std::pair<Key, Value>>& data) {
+    void build(const vector<pair<Key, Value>>& data) {
         root = build_tree(data);
     }
 
-    void insert(const std::pair<Key, Value>& data) {
+    void insert(const pair<Key, Value>& data) {
         root = insert(root, data);
     }
 
@@ -74,7 +76,7 @@ public:
     Value search(const Key& key) {
         Node* node = search(root, key);
         if (node == nullptr) {
-            throw std::out_of_range("Key not found");
+            throw out_of_range("Key not found");
         }
         return node->value;
     }

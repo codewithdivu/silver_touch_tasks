@@ -1,5 +1,7 @@
 #include <algorithm>
 #include <iostream>
+using namespace std;
+
 
 template <typename T>
 class AvlTree {
@@ -36,8 +38,8 @@ private:
         p->left = node;
         node->right = q;
 
-        node->height = std::max(height(node->left), height(node->right)) + 1;
-        p->height = std::max(height(p->left), height(p->right)) + 1;
+        node->height = max(height(node->left), height(node->right)) + 1;
+        p->height = max(height(p->left), height(p->right)) + 1;
 
         return p;
     }
@@ -49,8 +51,8 @@ private:
         p->right = node;
         node->left = q;
 
-        node->height = std::max(height(node->left), height(node->right)) + 1;
-        p->height = std::max(height(p->left), height(p->right)) + 1;
+        node->height = max(height(node->left), height(node->right)) + 1;
+        p->height = max(height(p->left), height(p->right)) + 1;
 
         return p;
     }
@@ -68,7 +70,7 @@ private:
             return node;
         }
 
-        node->height = std::max(height(node->left), height(node->right)) + 1;
+        node->height = max(height(node->left), height(node->right)) + 1;
 
         int balance = getBalance(node);
 
@@ -132,7 +134,7 @@ private:
             return node;
         }
 
-        node->height = std::max(height(node->left), height(node->right)) + 1;
+        node->height = max(height(node->left), height(node->right)) + 1;
 
         int balance = getBalance(node);
 
@@ -199,8 +201,8 @@ int main() {
     avlTree.insert(80);
 
     
-    std::cout << "Search for 20: " << (avlTree.search(20) ? "Found" : "Not Found") << std::endl;
-    std::cout << "Search for 100: " << (avlTree.search(100) ? "Found" : "Not Found") << std::endl;
+    cout << "Search for 20: " << (avlTree.search(20) ? "Found" : "Not Found") << endl;
+    cout << "Search for 100: " << (avlTree.search(100) ? "Found" : "Not Found") << endl;
 
     
     avlTree.remove(20);
@@ -208,8 +210,8 @@ int main() {
     avlTree.remove(50);
 
     
-    std::cout << "Search for 20 after removal: " << (avlTree.search(20) ? "Found" : "Not Found") << std::endl;
-    std::cout << "Search for 30 after removal: " << (avlTree.search(30) ? "Found" : "Not Found") << std::endl;
+    cout << "Search for 20 after removal: " << (avlTree.search(20) ? "Found" : "Not Found") << endl;
+    cout << "Search for 30 after removal: " << (avlTree.search(30) ? "Found" : "Not Found") << endl;
 
     return 0;
 }

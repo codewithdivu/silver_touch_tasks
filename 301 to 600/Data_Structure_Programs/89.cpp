@@ -1,11 +1,13 @@
 #include <iostream>
 #include <unordered_map>
 #include <string>
+using namespace std;
+
 
 class SuffixTree {
 private:
     struct Node {
-        std::unordered_map<char, Node*> children;
+        unordered_map<char, Node*> children;
         Node* suffixLink;
         int start;
         int* end;
