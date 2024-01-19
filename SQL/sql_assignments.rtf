@@ -1,0 +1,899 @@
+{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1033{\fonttbl{\f0\fnil\fcharset0 Times New Roman;}}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sa200\sl276\slmult1\f0\fs28\lang9\par
+\b Assignment-I:\par
+Date & Time: 17/01/2024 between 4:30 p.m. to 5:30 p.m\par
+\par
+\par
+1. Describe 5 differences between RDBMS vs DBMS (which are not covered in training session)\b0\par
+=> \par
+\ul\b 1. Data Structure:\par
+\ulnone\b0 DBMS: In a generic DBMS, data is stored in various ways, and the relationships between different pieces of data may not be explicitly defined.\par
+RDBMS: RDBMS is a type of DBMS that organizes data into tables with rows and columns. It enforces a structure called a schema, which defines the relationships between tables.\par
+\par
+\ul\b 2. Data Integrity and Constraints:\par
+\ulnone\b0 DBMS: DBMS may or may not enforce data integrity constraints (such as unique keys or foreign keys). It depends on the specific implementation.\par
+RDBMS: RDBMS enforces data integrity through various constraints, such as primary keys, unique keys, foreign keys, and check constraints. This ensures the accuracy and consistency of the data.\par
+\par
+\ul\b 3. Normalization:\par
+\ulnone\b0 DBMS: Normalization is not a strict requirement in a generic DBMS, and data redundancy may exist.\par
+RDBMS: RDBMS encourages normalization, a process that reduces data redundancy by organizing data efficiently into related tables. This helps in maintaining data consistency and avoids anomalies.\par
+\par
+\ul\b 4. Query Language:\par
+\ulnone\b0 DBMS: DBMS typically uses a simpler query language that allows basic operations like insert, update, delete, and select.\par
+RDBMS: RDBMS uses a more sophisticated query language, usually SQL (Structured Query Language). SQL supports complex queries involving multiple tables, aggregations, and joins.\par
+\par
+\ul\b 5. ACID Properties:\par
+\ulnone\b0 DBMS: ACID (Atomicity, Consistency, Isolation, Durability) properties may or may not be fully supported by a generic DBMS.\par
+RDBMS: RDBMS adheres to the ACID properties, ensuring that database transactions are reliable even in the presence of errors, crashes, or system failures.\par
+\par
+\b 2. Write DDL && Relations between master and child tables\b0\par
+=> \par
+\ul\b Inventory - DB\par
+\ulnone\b0\tab\par
+\tab create database Inventory;\par
+\tab use Inventory;\par
+\ul\b TABLES\ulnone\b0\par
+
+\pard\li720\sa200\sl276\slmult1\ul\b 1. Product (Child)\ulnone\b0\par
+CREATE TABLE Product (\par
+    ProductID INT IDENTITY(1,1) PRIMARY KEY,\par
+    ProductName VARCHAR(50) NOT NULL,\par
+    CategoryID INT FOREIGN KEY REFERENCES         Category(CategoryID),\par
+    Price DECIMAL(10, 2) NOT NULL,\par
+    StockQuantity INT NULL\par
+);\par
+\par
+\ul\b 2. Category (Master)\ulnone\b0\par
+CREATE TABLE Category (\par
+    CategoryID INT IDENTITY(1,1) PRIMARY KEY,\par
+    CategoryName NVARCHAR(50) NOT NULL,\par
+    Description TEXT NULL,\par
+    CreatedDate DATE NOT NULL,\par
+    UpdatedDate DATETIME NULL\par
+);\par
+\par
+\par
+\ul\b 3. Supplier\ulnone\b0\par
+CREATE TABLE Supplier (\par
+    SupplierID INT IDENTITY(1,1) PRIMARY KEY,\par
+    SupplierName VARCHAR(50) NOT NULL,\par
+    ContactPerson VARCHAR(50) NULL,\par
+    Email VARCHAR(100) NULL,\par
+    Phone VARCHAR(20) NOT NULL\par
+);\par
+\par
+\ul\b 4. Order\ulnone\b0\par
+CREATE TABLE Order (\par
+    OrderID INT IDENTITY(1,1) PRIMARY KEY,\par
+    CustomerID INT NOT NULL,\par
+    OrderDate DATETIME NOT NULL,\par
+    TotalAmount DECIMAL(10, 2) NULL,\par
+    Status VARCHAR(20) NOT NULL\par
+);\par
+\par
+\par
+\ul\b 5. OrderItem\ulnone\b0\par
+CREATE TABLE OrderItem (\par
+    OrderItemID INT IDENTITY(1,1) PRIMARY KEY,\par
+    OrderID INT NOT NULL,\par
+    ProductID INT NOT NULL,\par
+    Quantity INT NOT NULL,\par
+    Subtotal DECIMAL(10, 2) NULL\par
+);\par
+
+\pard\sa200\sl276\slmult1\par
+\par
+\par
+\ul\b LibraryManagement - DB\par
+\ulnone\b0\tab\par
+\tab create database LibraryManagement;\par
+\tab use LibraryManagement;\par
+\ul\b TABLES\ulnone\b0\par
+
+\pard\li720\sa200\sl276\slmult1\ul\b 1. Book (Child)\ulnone\b0\par
+CREATE TABLE Book (\par
+    BookID INT IDENTITY(1,1) PRIMARY KEY,\par
+    Title VARCHAR(100) NOT NULL,\par
+    AuthorID INT NULL,\par
+    ISBN VARCHAR(20) NOT NULL,\par
+    PublishedDate DATE NOT NULL\par
+    GenreID INT FOREIGN KEY REFERENCES Genre(GenreID)\par
+);\par
+\ul\b 2. Author\par
+\ulnone\b0 CREATE TABLE Author (\par
+    AuthorID INT IDENTITY(1,1) PRIMARY KEY,\par
+    AuthorName VARCHAR(50) NOT NULL,\par
+    BirthDate DATE NULL,\par
+    Nationality VARCHAR(50) NULL,\par
+    Biography TEXT NULL\par
+);\ul\b\par
+3. Member\par
+\ulnone\b0 CREATE TABLE Member (\par
+    MemberID INT IDENTITY(1,1) PRIMARY KEY,\par
+    FirstName VARCHAR(50) NOT NULL,\par
+    LastName VARCHAR(50) NOT NULL,\par
+    Email VARCHAR(100) NULL,\par
+    JoinDate DATETIME NOT NULL\par
+);\ul\b\par
+4. Loan\par
+\ulnone\b0 CREATE TABLE Loan (\par
+    LoanID INT IDENTITY(1,1) PRIMARY KEY,\par
+    MemberID INT NOT NULL,\par
+    BookID INT NOT NULL,\par
+    LoanDate DATETIME NOT NULL,\par
+    ReturnDate DATETIME NULL\par
+);\ul\b\par
+5. Genre (Master)\par
+\ulnone\b0 CREATE TABLE Genre (\par
+    GenreID INT IDENTITY(1,1) PRIMARY KEY,\par
+    GenreName VARCHAR(50) NOT NULL,\par
+    Description TEXT NULL,\par
+    CreatedDate DATE NOT NULL,\par
+    UpdatedDate DATETIME NULL\par
+);\ul\b\par
+\ulnone\b0\par
+
+\pard\sa200\sl276\slmult1\par
+\par
+\ul\b SocialMediaApp - DB\par
+\ulnone\b0\tab\par
+\tab create database SocialMediaApp;\par
+\tab use SocialMediaApp;\par
+\ul\b TABLES\ulnone\b0\par
+
+\pard\li720\sa200\sl276\slmult1\ul\b 1. User (Master)\ulnone\b0\par
+CREATE TABLE [User] (\par
+    UserID INT IDENTITY(1,1) PRIMARY KEY,\par
+    FirstName VARCHAR(50) NOT NULL,\par
+    LastName VARCHAR(50) NOT NULL,\par
+    Email VARCHAR(100) NOT NULL,\par
+    BirthDate DATE NULL\par
+);\par
+\ul\b 2. Post (Child)\par
+\ulnone\b0 CREATE TABLE Post (\par
+    PostID INT IDENTITY(1,1) PRIMARY KEY,\par
+    UserID INT FOREIGN KEY REFERENCES [User](UserID),\par
+    Content TEXT NOT NULL,\par
+    PostDate DATETIME NOT NULL,\par
+    LikesCount INT NOT NULL\par
+);\par
+\ul\b 3. Comment\par
+\ulnone\b0 CREATE TABLE Comment (\par
+    CommentID INT IDENTITY(1,1) PRIMARY KEY,\par
+    PostID INT NOT NULL,\par
+    UserID INT NOT NULL,\par
+    CommentText TEXT NOT NULL,\par
+    CommentDate DATETIME NOT NULL\par
+);\ul\b\par
+4. Friendship\par
+\ulnone\b0 CREATE TABLE Friendship (\par
+    FriendshipID INT IDENTITY(1,1) PRIMARY KEY,\par
+    UserID1 INT NOT NULL,\par
+    UserID2 INT NOT NULL,\par
+    Status VARCHAR(20) NOT NULL,\par
+    RequestDate DATETIME NOT NULL\par
+);\ul\b\par
+5. Notification\par
+\ulnone\b0 CREATE TABLE Notification (\par
+    NotificationID INT IDENTITY(1,1) PRIMARY KEY,\par
+    UserID INT NOT NULL,\par
+    NotificationText TEXT NOT NULL,\par
+    IsRead BIT NOT NULL,\par
+    NotificationDate DATETIME NOT NULL\par
+);\par
+
+\pard\sa200\sl276\slmult1\par
+\par
+\par
+\b Assignment-II:\par
+Date & Time: 18/01/2024 between 5:00 p.m. to 6:00 p.m.\par
+\par
+\par
+1. Inline and Sub Queries Task:\par
+\b0 =>  \par
+\ul\b 1. Inventory Database:\par
+\ulnone\b0\tab\b Inline Queries:\par
+\tab\b0 1. Retrieve all products with their category names\par
+
+\pard\li1440\sa200\sl276\slmult1 SELECT Product.ProductID, Product.ProductName, Category.CategoryName FROM Product\par
+INNER JOIN Category ON Product.CategoryID = Category.CategoryID;\par
+
+\pard\sa200\sl276\slmult1\b\par
+
+\pard\li720\sa200\sl276\slmult1\b0 2. Find the total stock quantity of all products\par
+\tab SELECT SUM(StockQuantity) AS TotalStock\par
+\tab FROM Product;\par
+
+\pard\li2160\sa200\sl276\slmult1\par
+
+\pard\li720\sa200\sl276\slmult1 3. List products with a price greater than 50\par
+\tab SELECT ProductID, ProductName, Price\par
+\tab FROM Product WHERE Price > 50;\par
+\par
+
+\pard\sa200\sl276\slmult1\tab\b Sub Queries:\par
+\tab\b0 1. Find products in a specific category (Electronics)\par
+\tab\tab SELECT ProductID, ProductName, Price\par
+\tab\tab FROM Product WHERE CategoryID = (SELECT CategoryID \tab\tab\tab FROM Category WHERE CategoryName = 'Electronics');\par
+
+\pard\li2160\sa200\sl276\slmult1\b\par
+
+\pard\li720\sa200\sl276\slmult1\b0 2. Retrieve the category with the highest number of products\par
+\tab SELECT CategoryName FROM Category\par
+\tab WHERE CategoryID = (SELECT TOP 1 CategoryID FROM \tab Product GROUP BY CategoryID ORDER BY \tab\tab COUNT(ProductID) DESC);\par
+
+\pard\li2160\sa200\sl276\slmult1\par
+
+\pard\li720\sa200\sl276\slmult1 3. Get the average price of products\par
+\tab SELECT AVG(Price) AS AveragePrice FROM Product;\par
+
+\pard\sa200\sl276\slmult1\par
+\par
+\ul\b 2. Library Management Database:\par
+\ulnone\b0\tab\b Inline Queries:\par
+\tab\b0 1. Retrieve all books with their genres\par
+
+\pard\li1440\sa200\sl276\slmult1 SELECT Book.BookID, Book.Title, Genre.GenreName\par
+FROM Book\par
+INNER JOIN Genre ON Book.GenreID = Genre.GenreID;\par
+\b\par
+
+\pard\li720\sa200\sl276\slmult1\b0 2. Find the total number of books published before a specific date\par
+\tab SELECT COUNT(BookID) AS TotalBooks\par
+\tab FROM Book WHERE PublishedDate < '2022-01-01';\par
+
+\pard\li2160\sa200\sl276\slmult1\par
+
+\pard\li720\sa200\sl276\slmult1 3. List books with titles containing the word 'programming\par
+\tab SELECT BookID, Title, PublishedDate\par
+\tab FROM Book WHERE Title LIKE '%programming%';\par
+\par
+
+\pard\sa200\sl276\slmult1\tab\b Sub Queries:\par
+\tab\b0 1. Find books by a specific author (e.g., AuthorID = 1):\par
+\tab\tab SELECT BookID, Title, PublishedDate\par
+\tab\tab FROM Book WHERE AuthorID = 1;\par
+
+\pard\li2160\sa200\sl276\slmult1\b\par
+
+\pard\li720\sa200\sl276\slmult1\b0 2. Retrieve the genre with the highest number of books\par
+\tab SELECT GenreName FROM Genre\par
+\tab WHERE GenreID = (SELECT TOP 1 GenreID FROM Book \tab GROUP BY GenreID ORDER BY COUNT(BookID) DESC);\par
+
+\pard\li2160\sa200\sl276\slmult1\par
+
+\pard\li720\sa200\sl276\slmult1 3. Get the average published year of books\par
+\tab SELECT AVG(YEAR(PublishedDate)) AS \tab AveragePublishedYear FROM Book;\par
+
+\pard\sa200\sl276\slmult1\par
+\ul\b 3. Social Media App Database:\par
+\ulnone\b0\tab\b Inline Queries:\par
+\tab\b0 1. Retrieve all posts with the names of the users who created them\par
+
+\pard\li1440\sa200\sl276\slmult1 SELECT Post.PostID, Post.Content, [User].FirstName, [User].LastName FROM Post\par
+INNER JOIN [User] ON Post.UserID = [User].UserID;\par
+\b\par
+
+\pard\li720\sa200\sl276\slmult1\b0 2. Find the total number of likes for a specific post (e.g., PostID = 1)\par
+\tab SELECT SUM(LikesCount) AS TotalLikes\par
+\tab FROM Post WHERE PostID = 1;\par
+
+\pard\li2160\sa200\sl276\slmult1\par
+
+\pard\li720\sa200\sl276\slmult1 3. List users with more than 1000 posts\par
+\tab SELECT [User].UserID, [User].FirstName, [User].LastName\par
+\tab FROM [User] WHERE UserID IN (SELECT UserID FROM \tab Post GROUP BY UserID HAVING COUNT(PostID) > 1000);\par
+\par
+
+\pard\sa200\sl276\slmult1\tab\b Sub Queries:\par
+\tab\b0 1. Find posts with more than 50 comments\par
+\tab\tab SELECT PostID, Content FROM Post\par
+\tab\tab WHERE PostID IN (SELECT PostID FROM Comment \tab\tab\tab\tab GROUP BY PostID HAVING COUNT(CommentID) > 50);\par
+
+\pard\li2160\sa200\sl276\slmult1\b\par
+
+\pard\li720\sa200\sl276\slmult1\b0 2. Retrieve the user who made the first post\par
+\tab SELECT [User].FirstName, [User].LastName FROM [User]\par
+\tab WHERE UserID = (SELECT TOP 1 UserID FROM Post \tab ORDER BY PostDate ASC);\par
+
+\pard\li2160\sa200\sl276\slmult1\par
+
+\pard\li720\sa200\sl276\slmult1 3. Get the average number of comments per post\par
+\tab SELECT AVG(CommentsPerPost) AS \tab AverageCommentsPerPost\par
+\tab FROM (SELECT COUNT(CommentID) AS \tab CommentsPerPost FROM Comment GROUP BY PostID) AS \tab SubQuery;\par
+
+\pard\sa200\sl276\slmult1\par
+\par
+\b\par
+2. SQL Functions:\par
+\b0 =>  \par
+\ul\b 1. String Functions\ulnone\b0\par
+\tab 1. LEN()\par
+\tab Description: Returns the length (number of characters) of a string.\par
+\tab Query: SELECT LEN('Hello, World!') AS StringLength;\par
+\par
+\tab 2. LEFT()\par
+
+\pard\li720\sa200\sl276\slmult1 Description: Returns a specified number of characters from the beginning of a string.\par
+Query: SELECT LEFT('Hello, World!', 5) AS LeftSubstring;\par
+\par
+3. RIGHT()\par
+Description: Returns a specified number of characters from the end of a string.\par
+Query: SELECT RIGHT('Hello, World!', 6) AS RightSubstring;\par
+\tab\par
+4. LOWER()\par
+Description: Converts all characters in a string to lowercase.\par
+Query: SELECT LOWER('Hello, World!') AS LowercaseString;\par
+\par
+5. UPPER()\par
+Description: Converts all characters in a string to uppercase.\par
+Query: SELECT UPPER('Hello, World!') AS UppercaseString;\par
+\par
+6. LTRIM()\par
+Description: Removes leading spaces from a string.\par
+Query: SELECT LTRIM('   Trimmed String') AS TrimmedString;\par
+\par
+7. RTRIM()\par
+Description: Removes trailing spaces from a string.\par
+Query: SELECT RTRIM('Trimmed String   ') AS TrimmedString;\par
+\par
+8. TRIM()\par
+Description: Removes leading and trailing spaces from a string.\par
+Query: SELECT TRIM('   Trimmed String   ') AS TrimmedString;\par
+\par
+9. CONCAT()\par
+Description: Concatenates two or more strings.\par
+Query: SELECT CONCAT('Hello', ', ', 'World!') AS ConcatenatedString;\par
+\par
+10. SUBSTRING()\par
+Description: Extracts a substring from a string.\par
+Query: SELECT SUBSTRING('Hello, World!', 7, 5) AS SubstringResult;\par
+\par
+11. CHARINDEX()\par
+Description: Returns the starting position of a substring in a string.\par
+Query: SELECT CHARINDEX('World', 'Hello, World!') AS SubstringPosition;\par
+\par
+12. REPLACE()\par
+Description: Replaces occurrences of a specified substring with another substring.\par
+Query: SELECT REPLACE('Hello, World!', 'Hello', 'Hi') AS ReplacedString;\par
+\par
+13. LEN()\par
+Description: Returns the number of characters in a string, excluding trailing spaces.\par
+Query: SELECT LEN('Hello, World!   ') AS StringLengthWithoutSpaces;\par
+\par
+14. STUFF()\par
+Description: Deletes a specified length of characters and inserts a new substring at a specified starting point.\par
+Query: SELECT STUFF('Hello, World!', 7, 5, 'Universe') AS ModifiedString;\par
+\par
+15. REVERSE()\par
+Description: Reverses the characters in a string.\par
+Query: SELECT REVERSE('Hello, World!') AS ReversedString;\par
+
+\pard\sa200\sl276\slmult1\ul\b\par
+2. Numeric/Math Functions\ulnone\b0\par
+\par
+
+\pard\li720\sa200\sl276\slmult1 1.ABS()\par
+Description: Returns the absolute value of a numeric expression.\par
+Query: SELECT ABS(-10) AS AbsoluteValue;\par
+\par
+2. ROUND()\par
+Description: Rounds a numeric value to the nearest whole number or to a specified number of decimal places.\par
+Query: SELECT ROUND(15.567, 2) AS RoundedValue;\par
+\par
+3. CEILING()\par
+Description: Returns the smallest integer greater than or equal to a numeric expression.\par
+Query: SELECT CEILING(12.34) AS CeiledValue;\par
+\par
+4. FLOOR()\par
+Description: Returns the largest integer less than or equal to a numeric expression.\par
+Query: SELECT FLOOR(12.34) AS FlooredValue;\par
+\par
+5. POWER()\par
+Description: Raises a numeric value to the power of another.\par
+Query: SELECT POWER(2, 3) AS Result; -- 2^3 = 8\par
+\par
+6. SQRT()\par
+Description: Returns the square root of a numeric expression.\par
+Query: SELECT SQRT(25) AS SquareRoot;\par
+\par
+7. EXP()\par
+Description: Returns the exponential value of a numeric expression (e^x).\par
+Query: SELECT EXP(2) AS ExponentialValue; -- e^2\par
+\par
+8. LOG()\par
+Description: Returns the natural logarithm of a numeric expression.\par
+Query: SELECT LOG(10) AS NaturalLogarithm;\par
+\par
+9. RAND()\par
+\par
+Description: Returns a random float value between 0 and 1.\par
+Query: SELECT RAND() AS RandomValue;\par
+\par
+10. SIGN()\par
+Description: Returns the sign of a numeric expression (-1 for negative, 0 for zero, 1 for positive).\par
+Query: SELECT SIGN(-15) AS SignValue;\par
+\par
+11. PI()\par
+Description: Returns the mathematical constant Pi (3.141592653589793).\par
+Query: SELECT PI() AS PiValue;\par
+\par
+12. DEGREES()\par
+Description: Converts radians to degrees.\par
+Query: SELECT DEGREES(1) AS DegreesValue; -- 1 radian in degrees\par
+13. RADIANS()\par
+Description: Converts degrees to radians.\par
+Query: SELECT RADIANS(180) AS RadiansValue; -- 180 degrees in radians\par
+\par
+14. TRUNCATE()\par
+Description: Truncates a numeric value to a specified number of decimal places.\par
+Query: SELECT TRUNCATE(15.678, 2) AS TruncatedValue;\par
+\par
+15. MOD()\par
+Description: Returns the remainder of a division operation.\par
+Query: SELECT MOD(17, 5) AS ModuloResult; -- 17 % 5\par
+
+\pard\sa200\sl276\slmult1\par
+\ul\b 3. Date Functions\ulnone\b0\par
+
+\pard\li720\sa200\sl276\slmult1\par
+1. GETDATE()\par
+Description: Returns the current date and time.\par
+Query: SELECT GETDATE() AS CurrentDateTime;\par
+\par
+2. DATEPART()\par
+Description: Returns a specific part of a date (e.g., year, month, day).\par
+Query: SELECT DATEPART(YEAR, GETDATE()) AS CurrentYear;\par
+\par
+3. DATEDIFF()\par
+Description: Returns the difference between two dates in a specified datepart.\par
+Query: SELECT DATEDIFF(DAY, '2022-01-01', '2022-01-10') AS DaysDifference;\par
+\par
+4. DATEADD()\par
+Description: Adds or subtracts a specified time interval to a date.\par
+Query: SELECT DATEADD(MONTH, 3, '2022-01-01') AS DateAfter3Months;\par
+\par
+5. CONVERT()\par
+Description: Converts a date or time from one format to another.\par
+Query: SELECT CONVERT(VARCHAR, GETDATE(), 103) AS FormattedDate;\par
+\par
+6. MONTH()\par
+Description: Returns the month part of a date.\par
+Query: SELECT MONTH('2022-01-15') AS MonthValue;\par
+\par
+7. DAY()\par
+Description: Returns the day part of a date.\par
+Query: SELECT DAY('2022-01-15') AS DayValue;\par
+\par
+8. YEAR()\par
+Description: Returns the year part of a date.\par
+Query: SELECT YEAR('2022-01-15') AS YearValue;\par
+\par
+9. FORMAT()\par
+Description: Formats a date or time value.\par
+Query: SELECT FORMAT(GETDATE(), 'yyyy-MM-dd HH:mm:ss') AS FormattedDateTime;\par
+\par
+10. EOMONTH()\par
+Description: Returns the last day of the month for a given date.\par
+Query: SELECT EOMONTH('2022-01-15') AS LastDayOfMonth;\par
+
+\pard\sa200\sl276\slmult1\ul\b\par
+\par
+4. Advance Functions\ulnone\b0\par
+
+\pard\li720\sa200\sl276\slmult1\par
+1. ROW_NUMBER()\par
+Description: Assigns a unique number to each row within a partition of a result set.\par
+Query:\par
+SELECT FirstName, LastName,  ROW_NUMBER() OVER (ORDER BY LastName, FirstName) AS RowNum FROM [User];\par
+\par
+2. RANK()\par
+Description: Assigns a unique rank to each distinct row within a result set, with ties receiving the same rank.\par
+Query: \par
+SELECT FirstName, LastName, RANK() OVER (ORDER BY LastName, FirstName) AS RankNum FROM [User];\par
+\par
+3. DENSE_RANK()\par
+Description: Similar to RANK(), but without gaps between rank values when there are ties.\par
+Query:\par
+SELECT FirstName, LastName, DENSE_RANK() OVER (ORDER BY LastName, FirstName) AS DenseRankNum FROM [User];\par
+\par
+4. LAG()\par
+Description: Accesses data from a previous row in the result set without using a self-join.\par
+Query:\par
+SELECT FirstName,  LastName, LAG(LastName) OVER (ORDER BY LastName, FirstName) AS PreviousLastName FROM [User];\par
+\par
+5. CTE (Common Table Expression)\par
+Description: Defines a temporary result set that can be referenced within a SELECT, INSERT, UPDATE, or DELETE statement.\par
+Query:\par
+WITH ExpensiveProducts AS (\par
+    SELECT ProductName, Price\par
+    FROM Product\par
+    WHERE Price > 100\par
+)\par
+SELECT * FROM ExpensiveProducts;\par
+
+\pard\sa200\sl276\slmult1\fs22\par
+\fs28\par
+\ul\b 5. Queries for above functions\par
+\ulnone\b0\tab\par
+\ul\b Inventory Database:\par
+\ulnone\b0\par
+
+\pard\li720\sa200\sl276\slmult1 1. Query using CONCAT() and UPPER():\par
+SELECT\par
+    CONCAT('Product: ', Product.ProductName) AS ProductDescription,\par
+    UPPER(Category.CategoryName) AS UppercaseCategory\par
+FROM\par
+    Product\par
+INNER JOIN\par
+    Category ON Product.CategoryID = Category.CategoryID;\par
+\par
+2. Query using LEFT() and LEN():\par
+SELECT\par
+    LEFT(Product.ProductName, 3) AS ShortProductName,\par
+    LEN(Category.Description) AS CategoryDescriptionLength\par
+FROM\par
+    Product\par
+INNER JOIN\par
+    Category ON Product.CategoryID = Category.CategoryID;\par
+\par
+3. Query using REPLACE() and TRIM():\par
+SELECT\par
+    REPLACE(Product.ProductName, ' ', '_') AS ReplacedProductName,\par
+    TRIM(Category.CategoryName) AS TrimmedCategory\par
+FROM\par
+    Product\par
+INNER JOIN\par
+    Category ON Product.CategoryID = Category.CategoryID;\par
+\par
+4. Query using ROUND() and POWER():\par
+SELECT\par
+    Product.ProductName,\par
+    ROUND(Product.Price, 2) AS RoundedPrice,\par
+    POWER(Product.StockQuantity, 2) AS StockQuantitySquared\par
+FROM\par
+    Product;\par
+\par
+5. Query using ABS() and RAND():\par
+SELECT\par
+    Product.ProductName,\par
+    ABS(Product.Price) AS AbsolutePrice,\par
+    RAND() AS RandomValue\par
+FROM\par
+    Product;\par
+\par
+6. Query using CEILING() and FLOOR():\par
+SELECT\par
+    Product.ProductName,\par
+    CEILING(Product.Price) AS CeiledPrice,\par
+    FLOOR(Product.Price) AS FlooredPrice\par
+FROM\par
+    Product;\par
+\par
+7. Query using GETDATE() and DATEADD():\par
+SELECT\par
+    OrderID,\par
+    GETDATE() AS CurrentDateTime,\par
+    DATEADD(DAY, 7, OrderDate) AS OrderDateAfter7Days\par
+FROM\par
+    [Order];\par
+\par
+8. Query using MONTH() and FORMAT():\par
+SELECT\par
+    Product.ProductName,\par
+    MONTH(Product.CreatedDate) AS CreatedMonth,\par
+    FORMAT(Product.CreatedDate, 'yyyy-MM-dd') AS FormattedCreatedDate\par
+FROM\par
+    Product;\par
+\par
+9. Query using DATEDIFF() and EOMONTH():\par
+SELECT\par
+    Product.ProductName,\par
+    DATEDIFF(DAY, Product.CreatedDate, GETDATE()) AS DaysSinceCreation,\par
+    EOMONTH(Product.CreatedDate) AS EndOfMonth\par
+FROM\par
+    Product;\par
+\par
+10. Query using ROW_NUMBER() and LAG():\par
+WITH OrderedProducts AS (\par
+    SELECT\par
+        ProductID,\par
+        ProductName,\par
+        ROW_NUMBER() OVER (ORDER BY Price DESC) AS RowNum,\par
+        LAG(ProductName) OVER (ORDER BY Price DESC) AS PreviousProduct\par
+    FROM\par
+        Product\par
+)\par
+SELECT\par
+    ProductID,\par
+    ProductName,\par
+    RowNum,\par
+    PreviousProduct\par
+FROM\par
+    OrderedProducts\par
+WHERE\par
+    RowNum <= 5;\par
+\par
+11. Query using CTE (Common Table Expression) and FORMAT():\par
+WITH FormattedOrders AS (\par
+    SELECT\par
+        OrderID,\par
+        FORMAT(OrderDate, 'yyyy-MM-dd') AS FormattedOrderDate\par
+    FROM\par
+        [Order]\par
+)\par
+SELECT\par
+    OrderID,\par
+    FormattedOrderDate\par
+FROM\par
+    FormattedOrders;\par
+\par
+12. Query using SUM() and PARTITION BY:\par
+SELECT\par
+    Category.CategoryName,\par
+    Product.ProductName,\par
+    Product.Price,\par
+    SUM(Product.Price) OVER (PARTITION BY Category.CategoryID) AS CategoryTotalPrice\par
+FROM\par
+    Product\par
+INNER JOIN\par
+    Category ON Product.CategoryID = Category.CategoryID;\b\par
+\par
+
+\pard\fi-142\li142\sa200\sl276\slmult1\tx426\ul Library Management Database:\par
+
+\pard\li720\sa200\sl276\slmult1\ulnone\b0\par
+1. Query using CONCAT() and UPPER():\par
+SELECT\par
+    CONCAT('Book Title: ', Book.Title) AS BookDescription,\par
+    UPPER(Genre.GenreName) AS UppercaseGenre\par
+FROM\par
+    Book\par
+INNER JOIN\par
+    Genre ON Book.GenreID = Genre.GenreID;\par
+\par
+2. Query using LEFT() and LEN():\par
+SELECT\par
+    LEFT(Book.Title, 3) AS ShortBookTitle,\par
+    LEN(Genre.Description) AS GenreDescriptionLength\par
+FROM\par
+    Book\par
+INNER JOIN\par
+    Genre ON Book.GenreID = Genre.GenreID;\par
+\par
+3. Query using REPLACE() and TRIM():\par
+SELECT\par
+    REPLACE(Book.Title, ' ', '_') AS ReplacedBookTitle,\par
+    TRIM(Genre.GenreName) AS TrimmedGenre\par
+FROM\par
+    Book\par
+INNER JOIN\par
+    Genre ON Book.GenreID = Genre.GenreID;\par
+\par
+4. Query using ROUND() and POWER():\par
+SELECT\par
+    Book.Title,\par
+    ROUND(Book.Price, 2) AS RoundedPrice,\par
+    POWER(Book.CopiesAvailable, 2) AS CopiesAvailableSquared\par
+FROM\par
+    Book;\par
+\par
+5. Query using ABS() and RAND():\par
+SELECT\par
+    Book.Title,\par
+    ABS(Book.Price) AS AbsolutePrice,\par
+    RAND() AS RandomValue\par
+FROM\par
+    Book;\par
+\par
+6. Query using CEILING() and FLOOR():\par
+SELECT\par
+    Book.Title,\par
+    CEILING(Book.Price) AS CeiledPrice,\par
+    FLOOR(Book.Price) AS FlooredPrice\par
+FROM\par
+    Book;\par
+\par
+7. Query using GETDATE() and DATEADD():\par
+SELECT\par
+    LoanID,\par
+    GETDATE() AS CurrentDateTime,\par
+    DATEADD(DAY, 14, LoanDate) AS DueDate\par
+FROM\par
+    Loan;\par
+\par
+8. Query using MONTH() and FORMAT():\par
+SELECT\par
+    Book.Title,\par
+    MONTH(Book.PublishedDate) AS PublishedMonth,\par
+    FORMAT(Book.PublishedDate, 'yyyy-MM-dd') AS FormattedPublishedDate\par
+FROM\par
+    Book;\par
+\par
+9. Query using DATEDIFF() and EOMONTH():\par
+SELECT\par
+    Book.Title,\par
+    DATEDIFF(YEAR, Book.PublishedDate, GETDATE()) AS YearsSincePublication,\par
+    EOMONTH(Book.PublishedDate) AS EndOfMonth\par
+FROM\par
+    Book;\par
+\par
+10. Query using ROW_NUMBER() and LAG():\par
+WITH OrderedBooks AS (\par
+    SELECT\par
+        BookID,\par
+        Title,\par
+        ROW_NUMBER() OVER (ORDER BY PublishedDate DESC) AS RowNum,\par
+        LAG(Title) OVER (ORDER BY PublishedDate DESC) AS PreviousTitle\par
+    FROM\par
+        Book\par
+)\par
+SELECT\par
+    BookID,\par
+    Title,\par
+    RowNum,\par
+    PreviousTitle\par
+FROM\par
+    OrderedBooks\par
+WHERE\par
+    RowNum <= 5;\par
+\par
+11. Query using CTE (Common Table Expression) and FORMAT():\par
+WITH FormattedLoans AS (\par
+    SELECT\par
+        LoanID,\par
+        FORMAT(LoanDate, 'yyyy-MM-dd') AS FormattedLoanDate\par
+    FROM\par
+        Loan\par
+)\par
+SELECT\par
+    LoanID,\par
+    FormattedLoanDate\par
+FROM\par
+    FormattedLoans;\par
+\par
+12. Query using SUM() and PARTITION BY:\par
+SELECT\par
+    Genre.GenreName,\par
+    Book.Title,\par
+    Book.Price,\par
+    SUM(Book.Price) OVER (PARTITION BY Genre.GenreID) AS GenreTotalPrice\par
+FROM\par
+    Book\par
+INNER JOIN\par
+    Genre ON Book.GenreID = Genre.GenreID;\par
+
+\pard\sa200\sl276\slmult1\fs22\par
+\par
+\par
+\par
+\ul\b\fs28 Social Media App Database:\par
+\ulnone\b0\par
+
+\pard\li720\sa200\sl276\slmult1 1. Query using CONCAT() and UPPER():\par
+SELECT\par
+    CONCAT('Post Content: ', Post.Content) AS PostDescription,\par
+    UPPER([User].FirstName) AS UppercaseFirstName\par
+FROM\par
+    Post\par
+INNER JOIN\par
+    [User] ON Post.UserID = [User].UserID;\par
+\par
+2. Query using LEFT() and LEN():\par
+SELECT\par
+    LEFT(Post.Content, 50) AS ShortPostContent,\par
+    LEN([User].LastName) AS LastNameLength\par
+FROM\par
+    Post\par
+INNER JOIN\par
+    [User] ON Post.UserID = [User].UserID;\par
+\par
+3. Query using REPLACE() and TRIM():\par
+SELECT\par
+    REPLACE(Post.Content, ' ', '_') AS ReplacedPostContent,\par
+    TRIM([User].FirstName) AS TrimmedFirstName\par
+FROM\par
+    Post\par
+INNER JOIN\par
+    [User] ON Post.UserID = [User].UserID;\par
+\par
+4. Query using ROUND() and POWER():\par
+SELECT\par
+    Post.Content,\par
+    ROUND(Post.LikesCount / 2.0, 2) AS RoundedLikes,\par
+    POWER(Post.CommentsCount, 2) AS CommentsCountSquared\par
+FROM\par
+    Post;\par
+\par
+5. Query using ABS() and RAND():\par
+SELECT\par
+    Post.Content,\par
+    ABS(Post.LikesCount - Post.CommentsCount) AS LikesMinusComments,\par
+    RAND() AS RandomValue\par
+FROM\par
+    Post;\par
+\par
+6. Query using CEILING() and FLOOR():\par
+SELECT\par
+    Post.Content,\par
+    CEILING(Post.LikesCount / 1000.0) AS ThousandLikesCeiled,\par
+    FLOOR(Post.CommentsCount / 50.0) AS FiftyCommentsFloored\par
+FROM\par
+    Post;\par
+\par
+7. Query using GETDATE() and DATEADD():\par
+SELECT\par
+    CommentID,\par
+    GETDATE() AS CurrentDateTime,\par
+    DATEADD(MINUTE, 30, CommentDate) AS CommentDateAfter30Minutes\par
+FROM\par
+    Comment;\par
+\par
+8. Query using MONTH() and FORMAT():\par
+SELECT\par
+    Post.Content,\par
+    MONTH(Post.PostDate) AS PostMonth,\par
+    FORMAT(Post.PostDate, 'yyyy-MM-dd') AS FormattedPostDate\par
+FROM\par
+    Post;\par
+\par
+9. Query using DATEDIFF() and EOMONTH():\par
+SELECT\par
+    Comment.Content,\par
+    DATEDIFF(DAY, Comment.CommentDate, GETDATE()) AS DaysSinceComment,\par
+    EOMONTH(Comment.CommentDate) AS EndOfMonth\par
+FROM\par
+    Comment;\par
+\par
+10. Query using ROW_NUMBER() and LAG():\par
+WITH OrderedComments AS (\par
+    SELECT\par
+        CommentID,\par
+        Content,\par
+        ROW_NUMBER() OVER (ORDER BY CommentDate DESC) AS RowNum,\par
+        LAG(Content) OVER (ORDER BY CommentDate DESC) AS PreviousContent\par
+    FROM\par
+        Comment\par
+)\par
+SELECT\par
+    CommentID,\par
+    Content,\par
+    RowNum,\par
+    PreviousContent\par
+FROM\par
+    OrderedComments\par
+WHERE\par
+    RowNum <= 5;\par
+\par
+11. Query using CTE (Common Table Expression) and FORMAT():\par
+WITH FormattedPosts AS (\par
+    SELECT\par
+        PostID,\par
+        FORMAT(PostDate, 'yyyy-MM-dd HH:mm:ss') AS FormattedPostDate\par
+    FROM\par
+        Post\par
+)\par
+SELECT\par
+    PostID,\par
+    FormattedPostDate\par
+FROM\par
+    FormattedPosts;\par
+\par
+12. Query using SUM() and PARTITION BY:\par
+SELECT\par
+    [User].FirstName,\par
+    Post.Content,\par
+    Post.LikesCount,\par
+    SUM(Post.LikesCount) OVER (PARTITION BY [User].UserID) AS UserTotalLikes\par
+FROM\par
+    Post\par
+INNER JOIN\par
+    [User] ON Post.UserID = [User].UserID;\par
+
+\pard\sa200\sl276\slmult1\fs22\par
+\par
+\par
+\par
+}
+ 
