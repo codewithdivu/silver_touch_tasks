@@ -22,7 +22,7 @@ public:
     }
 
     void removeItem(const string& productName) {
-        // Implement removal logic
+        
         cout << "Removed " << productName << " from the cart." << endl;
     }
 
@@ -54,7 +54,7 @@ public:
     void checkout() {
         double total = cart.calculateTotal();
         cout << "Total amount to pay: $" << total << endl;
-        // Implement payment and order placement logic
+        
         cout << "Checkout completed. Thank you!" << endl;
     }
 };

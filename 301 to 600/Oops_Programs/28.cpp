@@ -10,7 +10,7 @@ class TransferContract : public SmartContract {
 public:
     void execute() const override {
         cout << "Executing Transfer Contract\n";
-        // Implement transfer logic
+        
     }
 };
 
@@ -18,7 +18,7 @@ class EscrowContract : public SmartContract {
 public:
     void execute() const override {
         cout << "Executing Escrow Contract\n";
-        // Implement escrow logic
+        
     }
 };
 

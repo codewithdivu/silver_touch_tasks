@@ -38,13 +38,13 @@ public:
     }
 
     void retrieveVehicle(const Ticket& ticket) {
-        // Implement retrieval logic
+        
         cout << "Retrieved vehicle with ticket number " << ticket.ticketNumber << endl;
     }
 
     double calculateParkingFee(const Ticket& ticket) const {
-        // Implement fee calculation based on vehicle type and duration
-        return 10.0; // Placeholder value
+        
+        return 10.0; 
     }
 };
 

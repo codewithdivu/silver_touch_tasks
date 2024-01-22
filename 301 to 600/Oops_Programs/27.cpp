@@ -5,30 +5,33 @@
 #include <stdexcept>
 using namespace std;
 
-class TransactionalFileSystem {
+class TransactionalFileSystem
+{
 public:
-    TransactionalFileSystem(const string& filename)
+    TransactionalFileSystem(const string &filename)
         : filename_(filename), buffer_(), committed_(false) {}
 
-    // Begin a new transaction
-    void begin_transaction() {
+    void begin_transaction()
+    {
         buffer_.clear();
         committed_ = false;
     }
 
-    // Append data to the transaction buffer
-    void append_to_file(const string& data) {
+    void append_to_file(const string &data)
+    {
         buffer_.append(data);
     }
 
-    // Commit the current transaction, writing the buffer to the file
-    void commit_transaction() {
-        if (committed_) {
+    void commit_transaction()
+    {
+        if (committed_)
+        {
             throw runtime_error("Cannot commit a transaction that has already been committed");
         }
 
         fstream file(filename_, ios_base::out | ios_base::app);
-        if (!file) {
+        if (!file)
+        {
             throw runtime_error("Failed to open file for writing");
         }
 
@@ -38,8 +41,8 @@ public:
         committed_ = true;
     }
 
-    // Rollback the current transaction, discarding any changes
-    void rollback_transaction() {
+    void rollback_transaction()
+    {
         buffer_.clear();
         committed_ = false;
     }
@@ -50,7 +53,8 @@ private:
     bool committed_;
 };
 
-int main() {
+int main()
+{
     TransactionalFileSystem tfs("27output.txt");
 
     tfs.begin_transaction();

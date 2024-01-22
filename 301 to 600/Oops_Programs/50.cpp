@@ -21,17 +21,17 @@ void parallelSort(RandomIt begin, RandomIt end, size_t numThreads) {
         thread.join();
     }
 
-    // Merge sorted chunks
+    
     inplace_merge(begin, begin + chunkSize, end);
 }
 
 int main() {
     vector<int> data = {5, 2, 9, 1, 5, 6};
 
-    // Sort using parallel algorithm
+    
     parallelSort(data.begin(), data.end(), thread::hardware_concurrency());
 
-    // Print the sorted result
+    
     for (const auto& element : data) {
         cout << element << " ";
     }

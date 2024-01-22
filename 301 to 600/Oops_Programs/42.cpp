@@ -17,7 +17,7 @@ struct Fibonacci<1> {
 };
 
 int main() {
-    constexpr int result = Fibonacci<10>::value; // Change the value to get a different Fibonacci number
+    constexpr int result = Fibonacci<10>::value; 
     cout << "Fibonacci(10) = " << result << endl;
 
     return 0;

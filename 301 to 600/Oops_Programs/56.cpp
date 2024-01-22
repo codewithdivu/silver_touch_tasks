@@ -18,9 +18,9 @@ void performOperation(T value) {
 }
 
 int main() {
-    performOperation(42);      // Calls the integral specialization
-    performOperation(3.14);    // Calls the floating-point specialization
-    performOperation("Hello"); // Calls the generic template
+    performOperation(42);      
+    performOperation(3.14);    
+    performOperation("Hello"); 
 
     return 0;
 }

@@ -4,7 +4,7 @@
 
 using namespace std;
 
-// Forward declaration
+
 class WeatherStation;
 
 class WeatherData {
@@ -41,7 +41,7 @@ public:
     }
 
     Forecast generateForecast() const {
-        // Simple forecast: use the average of historical data
+        
         if (weatherHistory.empty()) {
             return Forecast(0.0, 0.0, 0.0);
         }
@@ -65,17 +65,17 @@ int main() {
     WeatherStation station1("Station 1");
     WeatherStation station2("Station 2");
 
-    // Collect data from stations
+    
     station1.collectWeatherData(25.0, 60.0, 10.0);
     station1.collectWeatherData(28.0, 55.0, 12.0);
     station2.collectWeatherData(22.0, 70.0, 8.0);
     station2.collectWeatherData(20.0, 75.0, 9.0);
 
-    // Generate forecasts
+    
     Forecast forecast1 = station1.generateForecast();
     Forecast forecast2 = station2.generateForecast();
 
-    // Display forecasts
+    
     cout << "Forecast for " << station1.name << ":" << endl;
     cout << "Temperature: " << forecast1.predictedTemperature << "°C, Humidity: " << forecast1.predictedHumidity << "%, Wind Speed: " << forecast1.predictedWindSpeed << " m/s" << endl;
 

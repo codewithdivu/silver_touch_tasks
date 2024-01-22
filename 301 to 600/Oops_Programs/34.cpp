@@ -6,10 +6,10 @@ using namespace std;
 class MemoryPool {
 public:
     MemoryPool(size_t block_size, size_t pool_size) : block_size(block_size), pool_size(pool_size) {
-        // Allocate a pool of memory
+        
         pool = new char[block_size * pool_size];
         
-        // Initialize the free list
+        
         for (size_t i = 0; i < pool_size; ++i) {
             free_list.push_back(pool + i * block_size);
         }
@@ -41,7 +41,7 @@ private:
 };
 
 int main() {
-    // Example usage
+    
     MemoryPool pool(sizeof(int), 10);
 
     int* a = static_cast<int*>(pool.allocate());

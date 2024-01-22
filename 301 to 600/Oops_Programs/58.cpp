@@ -9,7 +9,7 @@ public:
     DistributedNode(int id) : nodeId(id) {}
 
     void executeTransaction(const string& transaction) const {
-        // Simulate the execution of a transaction on the distributed node
+        
         cout << "Node " << nodeId << " executes transaction: " << transaction << endl;
     }
 };
@@ -24,7 +24,7 @@ public:
     }
 
     void executeDistributedTransaction(const string& transaction) const {
-        // Simulate distributing the transaction to all nodes
+        
         for (const auto& node : nodes) {
             node.executeTransaction(transaction);
         }

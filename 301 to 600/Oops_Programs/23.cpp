@@ -18,8 +18,8 @@ int main() {
 
     cout << "Immutable Object Value: " << obj.getValue() << endl;
 
-    // Uncommenting the line below will result in a compilation error
-    // obj.setValue(100);
+    
+    
 
     return 0;
 }

@@ -10,8 +10,8 @@ public:
     Sensor(const string& type) : sensorType(type) {}
 
     double readData() const {
-        // Simulate reading data from the sensor
-        return 25.5; // Placeholder value
+        
+        return 25.5; 
     }
 };
 

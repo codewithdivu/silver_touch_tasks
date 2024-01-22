@@ -4,13 +4,13 @@
 #include <functional>
 using namespace std;
 
-// Simulated UI Element Base Class
+
 class UIElement {
 public:
     virtual void render() const = 0;
 };
 
-// Simulated Button Class
+
 class Button : public UIElement {
 public:
     Button(const string& label) : label_(label) {}
@@ -23,7 +23,7 @@ private:
     string label_;
 };
 
-// Simulated Textbox Class
+
 class Textbox : public UIElement {
 public:
     Textbox(const string& placeholder) : placeholder_(placeholder) {}
@@ -36,7 +36,7 @@ private:
     string placeholder_;
 };
 
-// Simulated GUI Framework
+
 class GUIFramework {
 public:
     void addUIElement(const string& id, const function<UIElement*()>& creator) {
@@ -53,23 +53,23 @@ private:
 };
 
 int main() {
-    // Simulate GUI Framework usage
+    
 
     GUIFramework guiFramework;
 
-    // Register button and textbox creators with the framework
+    
     guiFramework.addUIElement("Button", []() { return new Button("Click me!"); });
     guiFramework.addUIElement("Textbox", []() { return new Textbox("Enter text..."); });
 
-    // Create UI elements using the framework
+    
     UIElement* button = guiFramework.createUIElement("Button");
     UIElement* textbox = guiFramework.createUIElement("Textbox");
 
-    // Render UI elements
+    
     if (button) button->render();
     if (textbox) textbox->render();
 
-    // Cleanup
+    
     delete button;
     delete textbox;
 

@@ -3,7 +3,7 @@
 #include <functional>
 using namespace std;
 
-// Example classes to be injected
+
 class ServiceA {
 public:
     void performOperation() const {
@@ -18,7 +18,7 @@ public:
     }
 };
 
-// Dependency Injection Container
+
 class DIContainer {
 private:
     unordered_map<string, function<void*()>> instances;
@@ -42,11 +42,11 @@ public:
 int main() {
     DIContainer container;
 
-    // Register instances in the container
+    
     container.registerInstance<ServiceA>("serviceA");
     container.registerInstance<ServiceB>("serviceB");
 
-    // Resolve and use instances
+    
     ServiceA* serviceA = container.resolveInstance<ServiceA>("serviceA");
     ServiceB* serviceB = container.resolveInstance<ServiceB>("serviceB");
 

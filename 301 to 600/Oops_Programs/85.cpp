@@ -4,7 +4,7 @@
 
 using namespace std;
 
-// Class representing an Aircraft
+
 class Aircraft {
 private:
     string model;
@@ -26,7 +26,7 @@ public:
     }
 };
 
-// Class representing an Airport
+
 class Airport {
 private:
     string code;
@@ -52,7 +52,7 @@ public:
     }
 };
 
-// Class representing a Flight
+
 class Flight {
 private:
     string flightNumber;

@@ -4,11 +4,11 @@
 
 using namespace std;
 
-// Forward declarations
+
 class ChatRoom;
 class Message;
 
-// Class representing a User
+
 class User {
 private:
     string username;
@@ -25,7 +25,7 @@ public:
     void receiveMessage(const Message& message) const;
 };
 
-// Class representing a Message
+
 class Message {
 private:
     const User& sender;
@@ -43,7 +43,7 @@ public:
     }
 };
 
-// Class representing a ChatRoom
+
 class ChatRoom {
 private:
     string name;
@@ -73,7 +73,7 @@ public:
     }
 };
 
-// Member function implementation for User class
+
 void User::sendMessage(ChatRoom& chatRoom, const string& content) {
     Message message(*this, content);
     chatRoom.broadcastMessage(message);
@@ -84,25 +84,25 @@ void User::receiveMessage(const Message& message) const {
 }
 
 int main() {
-    // Create users
+    
     User user1("Alice");
     User user2("Bob");
     User user3("Charlie");
 
-    // Create a chat room
+    
     ChatRoom chatRoom("General Chat");
 
-    // Add users to the chat room
+    
     chatRoom.addUser(&user1);
     chatRoom.addUser(&user2);
     chatRoom.addUser(&user3);
 
-    // Users send messages
+    
     user1.sendMessage(chatRoom, "Hello, everyone!");
     user2.sendMessage(chatRoom, "Hi, Alice!");
     user3.sendMessage(chatRoom, "Hey, Bob!");
 
-    // View message history in the chat room
+    
     const vector<Message>& history = chatRoom.getMessageHistory();
     cout << "\nChat Room History:\n";
     for (const Message& message : history) {

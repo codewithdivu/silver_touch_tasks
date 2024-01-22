@@ -3,7 +3,7 @@
 #include <string>
 using namespace std;
 
-// Serialization trait for types
+
 template <typename T>
 struct Serialize {
     static string serialize(const T& value) {
@@ -15,7 +15,7 @@ struct Serialize {
     }
 };
 
-// Serialize and Deserialize string directly
+
 template <>
 struct Serialize<string> {
     static string serialize(const string& value) {
@@ -27,7 +27,7 @@ struct Serialize<string> {
     }
 };
 
-// Serialize and Deserialize tuple recursively
+
 template <typename... Args>
 struct Serialize<tuple<Args...>> {
     static string serialize(const tuple<Args...>& t) {
@@ -57,14 +57,14 @@ private:
     }
 };
 
-// Example usage
+
 int main() {
-    // Serialize
+    
     tuple<int, double, string> data = {42, 3.14, "Hello"};
     string serialized = Serialize<decltype(data)>::serialize(data);
     cout << "Serialized: " << serialized << endl;
 
-    // Deserialize
+    
     auto deserialized = Serialize<decltype(data)>::deserialize(serialized);
     cout << "Deserialized: {" << get<0>(deserialized) << ", " << get<1>(deserialized) << ", " << get<2>(deserialized) << "}" << endl;
 

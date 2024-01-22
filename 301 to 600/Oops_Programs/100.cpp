@@ -4,7 +4,7 @@
 
 using namespace std;
 
-// Class representing an Employee
+
 class Employee {
 private:
     string name;
@@ -28,7 +28,7 @@ public:
     }
 };
 
-// Class representing Salary information
+
 class Salary {
 private:
     double baseSalary;
@@ -42,7 +42,7 @@ public:
     }
 };
 
-// Class representing Payroll, managing employee information and generating pay stubs
+
 class Payroll {
 private:
     vector<Employee> employees;
@@ -69,19 +69,19 @@ public:
 };
 
 int main() {
-    // Create instances of employees and their salaries
+    
     Employee emp1("John Doe", 101, "Software Engineer");
     Employee emp2("Jane Smith", 102, "Product Manager");
 
     Salary salary1(60000.0, 5000.0);
     Salary salary2(80000.0, 7000.0);
 
-    // Create Payroll and add employees with their salaries
+    
     Payroll payroll;
     payroll.addEmployee(emp1, salary1);
     payroll.addEmployee(emp2, salary2);
 
-    // Generate pay stubs
+    
     payroll.generatePayStubs();
 
     return 0;

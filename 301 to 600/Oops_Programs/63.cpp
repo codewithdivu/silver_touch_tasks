@@ -41,7 +41,7 @@ public:
 
     void promoteEmployee(Employee* employee) {
         cout << "Promoting employee " << employee->getName() << " in department " << name << endl;
-        // Implement promotion logic
+        
     }
 };
 

@@ -5,11 +5,11 @@
 
 using namespace std;
 
-// Class representing a fitness activity
+
 class Activity {
 private:
     string name;
-    double duration; // in minutes
+    double duration; 
 
 public:
     Activity(const string& activityName, double activityDuration) : name(activityName), duration(activityDuration) {}
@@ -23,7 +23,7 @@ public:
     }
 };
 
-// Class representing a user with fitness tracking capabilities
+
 class User {
 private:
     string username;
@@ -49,7 +49,7 @@ public:
     }
 };
 
-// Class representing a fitness tracker
+
 class Tracker {
 private:
     vector<User> users;

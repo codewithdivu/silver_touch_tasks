@@ -11,8 +11,8 @@ public:
     Game(const string& t) : title(t), progressPercentage(0) {}
 
     void updateProgress(int hours) {
-        // Simulate playing the game and updating progress
-        progressPercentage += hours * 5; // Just a placeholder, you can define your logic here
+        
+        progressPercentage += hours * 5; 
     }
 };
 
@@ -29,7 +29,7 @@ public:
     }
 
     void playGame(Game& game, int hours) {
-        // Use a non-const reference to the Game object
+        
         cout << playerName << " played " << game.title << " for " << hours << " hours." << endl;
         game.updateProgress(hours);
     }

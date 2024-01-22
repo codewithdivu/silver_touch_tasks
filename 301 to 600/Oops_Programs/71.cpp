@@ -27,7 +27,7 @@ public:
 
         for (const auto& question : questions) {
             cout << question.text << endl;
-            // Simulate random user selection
+            
             int userSelection = rand() % 4 + 1;
             
             if (userSelection == question.correctOption) {

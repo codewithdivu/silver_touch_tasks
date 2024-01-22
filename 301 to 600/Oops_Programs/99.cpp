@@ -4,12 +4,12 @@
 
 using namespace std;
 
-// Forward declarations
+
 class Course;
 class Student;
 class Instructor;
 
-// Class representing a Course
+
 class Course {
 private:
     string title;
@@ -46,7 +46,7 @@ public:
     }
 };
 
-// Class representing a Student
+
 class Student {
 private:
     string name;
@@ -77,7 +77,7 @@ public:
     }
 };
 
-// Class representing an Instructor
+
 class Instructor {
 private:
     string name;
@@ -96,7 +96,7 @@ public:
 };
 
 int main() {
-    // Create instances of courses, students, and instructor
+    
     Course cppCourse("C++ Programming", "John Instructor");
     cppCourse.addAssignment("Introduction to C++");
     cppCourse.addAssignment("Object-Oriented Programming");
@@ -110,19 +110,19 @@ int main() {
 
     Instructor instructor("Dr. Smith");
 
-    // Enroll students in courses
+    
     student1.enrollInCourse(&cppCourse);
     student2.enrollInCourse(&webDevCourse);
 
-    // View enrolled courses for each student
+    
     student1.viewEnrolledCourses();
     student2.viewEnrolledCourses();
 
-    // Students complete assignments
+    
     student1.completeAssignment(&cppCourse, "Introduction to C++");
     student2.completeAssignment(&webDevCourse, "HTML Basics");
 
-    // Instructor assigns grades
+    
     instructor.assignGrade(&student1, &cppCourse, "Introduction to C++", 90);
     instructor.assignGrade(&student2, &webDevCourse, "HTML Basics", 85);
 

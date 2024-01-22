@@ -29,7 +29,7 @@ public:
     }
 };
 
-class Customer;  // Forward declaration
+class Customer;  
 
 class RentalAgency {
 public:
@@ -55,7 +55,7 @@ public:
 class Customer {
 public:
     string name;
-    vector<Car*> rentedCars;  // Use pointers to Car
+    vector<Car*> rentedCars;  
 
     Customer(const string& name) : name(name) {}
 
@@ -98,30 +98,30 @@ void RentalAgency::returnCar(Customer& customer, const string& licensePlate) {
 }
 
 int main() {
-    // Create cars
+    
     Car car1("Toyota", "Camry", "ABC123");
     Car car2("Honda", "Accord", "XYZ789");
 
-    // Create rental agency
+    
     RentalAgency rentalAgency("BestRentals");
     rentalAgency.cars = {car1, car2};
 
-    // Create customer
+    
     Customer customer("John");
 
-    // Display available cars
+    
     rentalAgency.displayAvailableCars();
 
-    // Rent a car
+    
     rentalAgency.rentCar(customer, "ABC123");
 
-    // Display rental history
+    
     customer.displayRentalHistory();
 
-    // Return the rented car
+    
     rentalAgency.returnCar(customer, "ABC123");
 
-    // Display available cars after return
+    
     rentalAgency.displayAvailableCars();
 
     return 0;

@@ -4,7 +4,7 @@
 
 using namespace std;
 
-// Class representing a Task
+
 class Task {
 private:
     string name;
@@ -33,7 +33,7 @@ public:
     }
 };
 
-// Class representing a Project
+
 class Project {
 private:
     string name;
@@ -59,7 +59,7 @@ public:
     }
 };
 
-// Class representing a Team Member
+
 class TeamMember {
 private:
     string name;

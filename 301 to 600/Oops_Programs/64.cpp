@@ -22,7 +22,7 @@ public:
     }
 
     void removeFriend(const string& friendName) {
-        // Implement removal logic
+        
         cout << friendName << " removed as a friend." << endl;
     }
 };

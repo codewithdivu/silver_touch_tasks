@@ -2,13 +2,13 @@
 #include <vector>
 using namespace std;
 
-// Base class representing a shape
+
 class Shape {
 public:
     virtual void draw() const = 0;
 };
 
-// Derived classes for specific shapes: Circle, Rectangle, Triangle
+
 class Circle : public Shape {
 public:
     void draw() const override {
@@ -30,7 +30,7 @@ public:
     }
 };
 
-// Drawing class managing a collection of shapes
+
 class Drawing {
 private:
     vector<Shape*> shapes;

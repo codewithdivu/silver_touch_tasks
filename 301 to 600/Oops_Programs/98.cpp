@@ -9,7 +9,7 @@ class TestCase {
 private:
     string name;
     function<void()> testFunction;
-    mutable bool isSuccess;  // Make isSuccess mutable
+    mutable bool isSuccess;  
 
 public:
     TestCase(const string& name, const function<void()>& testFunction)
@@ -63,7 +63,7 @@ public:
     }
 };
 
-// Sample test cases
+
 void testAddition() {
     TestCase testCase("Test Addition", []() {
         int result = 1 + 1;

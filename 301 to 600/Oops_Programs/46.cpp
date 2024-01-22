@@ -10,18 +10,18 @@ public:
     TransactionalFileSystem(const string& filename)
         : filename_(filename), buffer_(), committed_(false) {}
 
-    // Begin a new transaction
+    
     void begin_transaction() {
         buffer_.clear();
         committed_ = false;
     }
 
-    // Append data to the transaction buffer
+    
     void append_to_file(const string& data) {
         buffer_.append(data);
     }
 
-    // Commit the current transaction, writing the buffer to the file
+    
     void commit_transaction() {
         if (committed_) {
             throw runtime_error("Cannot commit a transaction that has already been committed");
@@ -38,7 +38,7 @@ public:
         committed_ = true;
     }
 
-    // Rollback the current transaction, discarding any changes
+    
     void rollback_transaction() {
         buffer_.clear();
         committed_ = false;
