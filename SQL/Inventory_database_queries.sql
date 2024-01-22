@@ -306,83 +306,83 @@ select * from OrderItem;
 
 -- 8. Create 2 user-defined views.
 
-	CREATE VIEW ProductView AS
-	SELECT
-		p.ProductID,
-		p.ProductName,
-		c.CategoryName,
-		p.Price,
-		p.StockQuantity
-	FROM
-		Product p
-	JOIN
-		Category c ON p.CategoryID = c.CategoryID;
+		CREATE VIEW ProductView AS
+		SELECT
+			p.ProductID,
+			p.ProductName,
+			c.CategoryName,
+			p.Price,
+			p.StockQuantity
+		FROM
+			Product p
+		JOIN
+			Category c ON p.CategoryID = c.CategoryID;
 
-	SELECT * FROM ProductView;
+		SELECT * FROM ProductView;
 
 
-	CREATE VIEW OrderDetailsView AS
-	SELECT
-		o.OrderID,
-		o.CustomerID,
-		o.OrderDate,
-		o.TotalAmount,
-		o.Status,
-		oi.ProductID,
-		oi.Quantity,
-		oi.Subtotal
-	FROM
-		Orderr o
-	JOIN
-		OrderItem oi ON o.OrderID = oi.OrderID;
+		CREATE VIEW OrderDetailsView AS
+		SELECT
+			o.OrderID,
+			o.CustomerID,
+			o.OrderDate,
+			o.TotalAmount,
+			o.Status,
+			oi.ProductID,
+			oi.Quantity,
+			oi.Subtotal
+		FROM
+			Orderr o
+		JOIN
+			OrderItem oi ON o.OrderID = oi.OrderID;
 
-	SELECT * FROM OrderDetailsView;
+		SELECT * FROM OrderDetailsView;
 
--- 9. Create 2 Scalar-valued functions (e.g. split string).-- 1. GetProductStockValue
-	CREATE FUNCTION dbo.GetProductStockValue
-	(
-		@ProductID INT
-	)
-	RETURNS DECIMAL(10, 2)
-	AS
-	BEGIN
+-- 9. Create 2 Scalar-valued functions (e.g. split string).	-- 1. GetProductStockValue
+		CREATE FUNCTION dbo.GetProductStockValue
+		(
+			@ProductID INT
+		)
+		RETURNS DECIMAL(10, 2)
+		AS
+		BEGIN
+			DECLARE @StockValue DECIMAL(10, 2);
+
+			SELECT @StockValue = Price * StockQuantity
+			FROM Product
+			WHERE ProductID = @ProductID;
+
+			RETURN @StockValue;
+		END;
+		GO
+
 		DECLARE @StockValue DECIMAL(10, 2);
-
-		SELECT @StockValue = Price * StockQuantity
-		FROM Product
-		WHERE ProductID = @ProductID;
-
-		RETURN @StockValue;
-	END;
-	GO
-
-	DECLARE @StockValue DECIMAL(10, 2);
-	SET @StockValue = dbo.GetProductStockValue(1);
-	PRINT 'Stock Value for ProductID 1: ' + COALESCE(CAST(@StockValue AS VARCHAR), 'NULL');
+		SET @StockValue = dbo.GetProductStockValue(1);
+		PRINT 'Stock Value for ProductID 1: ' + COALESCE(CAST(@StockValue AS VARCHAR), 'NULL');
 
 
 
 
--- 2. CalculateOrderTotal
-	CREATE FUNCTION dbo.CalculateOrderTotal
-	(
-		@OrderID INT
-	)
-	RETURNS DECIMAL(10, 2)
-	AS
-	BEGIN
-		DECLARE @TotalAmount DECIMAL(10, 2);
+	-- 2. CalculateOrderTotal
+		CREATE FUNCTION dbo.CalculateOrderTotal
+		(
+			@OrderID INT
+		)
+		RETURNS DECIMAL(10, 2)
+		AS
+		BEGIN
+			DECLARE @TotalAmount DECIMAL(10, 2);
 
-		SELECT @TotalAmount = SUM(Subtotal)
-		FROM OrderItem
-		WHERE OrderID = @OrderID;
+			SELECT @TotalAmount = SUM(Subtotal)
+			FROM OrderItem
+			WHERE OrderID = @OrderID;
 
-		RETURN @TotalAmount;
-	END;
+			RETURN @TotalAmount;
+		END;
 
-	DECLARE @OrderTotal DECIMAL(10, 2);
-	SET @OrderTotal = dbo.CalculateOrderTotal(1);
-	PRINT 'Total Amount for OrderID 1: ' + CAST(@OrderTotal AS VARCHAR);
+		DECLARE @OrderTotal DECIMAL(10, 2);
+		SET @OrderTotal = dbo.CalculateOrderTotal(1);
+		PRINT 'Total Amount for OrderID 1: ' + CAST(@OrderTotal AS VARCHAR);
 
 
 -- 10. Create 5 store procedures (select, add, update, delete and full).

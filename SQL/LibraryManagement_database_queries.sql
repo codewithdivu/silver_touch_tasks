@@ -150,7 +150,6 @@ select * from Book
 
 --  SQL Functions:
 
-
 -- 1. Query using CONCAT() and UPPER():
 	SELECT
 		CONCAT('Book Title: ', Book.Title) AS BookDescription,
@@ -270,3 +269,330 @@ select * from Book
 		SUM(BookID) OVER (PARTITION BY GenreID) AS TotalBookIDInGenre
 	FROM
 		Book;
+
+
+
+-- ---------------------ASSIGNMENT-3---------------------------
+
+-- 8. Create 2 user-defined views.
+	
+	-- 1. BookDetailsView
+		CREATE VIEW BookDetailsView AS
+		SELECT
+			B.BookID,
+			B.Title,
+			B.ISBN,
+			B.PublishedDate,
+			A.AuthorID,
+			A.AuthorName,
+			A.BirthDate,
+			A.Nationality
+		FROM
+			Book B
+		JOIN
+			Author A ON B.AuthorID = A.AuthorID;
+
+		select * from BookDetailsView;
+	
+	-- 1. MemberLoanHistoryView
+		CREATE VIEW MemberLoanHistoryView AS
+		SELECT
+			M.MemberID,
+			M.FirstName,
+			M.LastName,
+			M.Email,
+			L.LoanID,
+			L.BookID,
+			L.LoanDate,
+			L.ReturnDate
+		FROM
+			Member M
+		LEFT JOIN
+			Loan L ON M.MemberID = L.MemberID;
+
+		select * from MemberLoanHistoryView;
+
+
+
+-- 9. Create 2 Scalar-valued functions.	-- 1. GetAuthorAge		CREATE FUNCTION GetAuthorAge(@AuthorID INT)
+		RETURNS INT
+		AS
+		BEGIN
+			DECLARE @Age INT;
+
+			SELECT @Age = DATEDIFF(YEAR, BirthDate, GETDATE())
+			FROM Author
+			WHERE AuthorID = @AuthorID;
+
+			RETURN @Age;
+		END;
+
+		SELECT dbo.GetAuthorAge(1) AS AuthorAge;
+
+	-- 2. CalculateLateFee		CREATE FUNCTION CalculateLateFee(@LoanID INT)
+		RETURNS DECIMAL(10, 2)
+		AS
+		BEGIN
+			DECLARE @LateFee DECIMAL(10, 2);
+
+			SELECT @LateFee = 
+				CASE
+					WHEN DATEDIFF(DAY, LoanDate, GETDATE()) > 30 THEN (DATEDIFF(DAY, LoanDate, GETDATE()) - 30) * 0.50
+					ELSE 0
+				END
+			FROM Loan
+			WHERE LoanID = @LoanID;
+
+			RETURN @LateFee;
+		END;
+
+		SELECT dbo.CalculateLateFee(1) AS LateFee;
+
+
+
+-- 10. Create 5 store procedures (select, add, update, delete and full).
+
+	-- 1. Select
+		CREATE PROCEDURE SelectBook
+			@BookID INT
+		AS
+		BEGIN
+			SELECT *
+			FROM Book
+			WHERE BookID = @BookID;
+		END;
+
+		EXEC SelectBook @BookID = 2;
+	
+	-- 2. Create
+		CREATE PROCEDURE AddBook
+			@Title VARCHAR(100),
+			@AuthorID INT,
+			@ISBN VARCHAR(20),
+			@PublishedDate DATE,
+			@GenreID INT
+		AS
+		BEGIN
+			INSERT INTO Book (Title, AuthorID, ISBN, PublishedDate, GenreID)
+			VALUES (@Title, @AuthorID, @ISBN, @PublishedDate, @GenreID);
+		END;
+
+		EXEC AddBook 
+		@Title = 'Prison of Azakaban',
+		@AuthorID = 1,
+		@ISBN = '978-1234567890',
+		@PublishedDate = '2023-01-01',
+		@GenreID = 1;
+
+		select * from Book;
+
+	-- 3. Update
+
+		CREATE PROCEDURE UpdateBook
+			@BookID INT,
+			@Title VARCHAR(100),
+			@AuthorID INT,
+			@ISBN VARCHAR(20),
+			@PublishedDate DATE,
+			@GenreID INT
+		AS
+		BEGIN
+			UPDATE Book
+			SET
+				Title = @Title,
+				AuthorID = @AuthorID,
+				ISBN = @ISBN,
+				PublishedDate = @PublishedDate,
+				GenreID = @GenreID
+			WHERE
+				BookID = @BookID;
+		END;
+
+		EXEC UpdateBook 
+		@BookID = 6,
+		@Title = 'goli book',
+		@AuthorID = 2,
+		@ISBN = '978-9876543210',
+		@PublishedDate = '2022-12-01',
+		@GenreID = 2;
+		
+	-- 4. Delete
+		CREATE PROCEDURE DeleteBook
+			@BookID INT
+		AS
+		BEGIN
+			DELETE FROM Book
+			WHERE BookID = @BookID;
+		END;
+
+		EXEC DeleteBook @BookID = 6;
+
+	-- 5. Fully
+		CREATE PROCEDURE FullBookOperation
+			@OperationType NVARCHAR(10),
+			@BookID INT = NULL,
+			@Title VARCHAR(100) = NULL,
+			@AuthorID INT = NULL,
+			@ISBN VARCHAR(20) = NULL,
+			@PublishedDate DATE = NULL,
+			@GenreID INT = NULL
+		AS
+		BEGIN
+			IF @OperationType = 'Select'
+			BEGIN
+				EXEC SelectBook @BookID;
+			END
+			ELSE IF @OperationType = 'Add'
+			BEGIN
+				EXEC AddBook @Title, @AuthorID, @ISBN, @PublishedDate, @GenreID;
+			END
+			ELSE IF @OperationType = 'Update'
+			BEGIN
+				EXEC UpdateBook @BookID, @Title, @AuthorID, @ISBN, @PublishedDate, @GenreID;
+			END
+			ELSE IF @OperationType = 'Delete'
+			BEGIN
+				EXEC DeleteBook @BookID;
+			END
+		END;
+
+		EXEC FullBookOperation @OperationType = 'Select', @BookID = 1;
+
+		EXEC FullBookOperation @OperationType = 'Add',
+			@Title = 'Harry Potter',
+			@AuthorID = 1,
+			@ISBN = '978-1234567890',
+			@PublishedDate = '2023-01-01',
+			@GenreID = 1;
+
+		EXEC FullBookOperation @OperationType = 'Update',
+			@BookID = 1,
+			@Title = 'Choota bheem',
+			@AuthorID = 2,
+			@ISBN = '978-9876543210',
+			@PublishedDate = '2022-12-01',
+			@GenreID = 2;
+
+		EXEC FullBookOperation @OperationType = 'Delete', @BookID = 3;
+
+
+
+
+-- 11.  Create 2 non-clustered indexes.
+
+	-- 1. Non-Clustered Index on Author Table (AuthorID)
+		CREATE NONCLUSTERED INDEX IX_Book_AuthorID
+		ON Book (AuthorID);
+
+
+	-- 2. Non-Clustered Index on Genre Table (GenreID)
+		CREATE NONCLUSTERED INDEX IX_Book_GenreID
+		ON Book (GenreID);
+
+
+
+
+-- 12.  Create Before and After triggers for insert, update and delete operations.
+
+	--1 Before Insert
+		CREATE TRIGGER BeforeInsertBook
+		ON Book
+		INSTEAD OF INSERT
+		AS
+		BEGIN
+			PRINT 'Before Insert Book Trigger is called';
+		END;
+
+	--2 After Insert
+		CREATE TRIGGER AfterInsertBook
+		ON Book
+		AFTER INSERT
+		AS
+		BEGIN
+			PRINT 'After Inser Book Trigger is Called';
+		END;
+
+
+	--3 Before Update
+		CREATE TRIGGER BeforeUpdateBook
+		ON Book
+		INSTEAD OF UPDATE
+		AS
+		BEGIN
+			PRINT 'Before Update Book Trigger is called';
+		END;
+
+
+	--4 After Update
+		CREATE TRIGGER AfterUpdateBook
+		ON Book
+		AFTER UPDATE
+		AS
+		BEGIN
+			PRINT 'After Update Book Trigger is called';
+		END;
+
+
+	--5 Before Delete
+		CREATE TRIGGER BeforeDeleteBook
+		ON Book
+		INSTEAD OF DELETE
+		AS
+		BEGIN
+			PRINT 'Before Delete Book Trigger is called';
+		END;
+
+	--6 After Delete
+		CREATE TRIGGER AfterDeleteBook
+		ON Book
+		AFTER DELETE
+		AS
+		BEGIN
+			PRINT 'After Delete Book Trigger is called';
+		END;
+	
+
+
+-- 13. Write SQL queries for Union and Union All.
+
+	-- 1. UNION
+		SELECT Title AS Name FROM Book
+		UNION
+		SELECT FirstName AS Name FROM Member;
+
+	--2; UNION ALL
+		SELECT Title AS Name FROM Book
+		UNION ALL
+		SELECT FirstName AS Name FROM Member;	
+
+
+-- JOINS
+	
+	-- 1. Inner Join
+		SELECT Book.Title, Author.AuthorName
+		FROM Book
+		INNER JOIN Author ON Book.AuthorID = Author.AuthorID;
+		
+
+	-- 2. Left Outer Join
+		SELECT Book.Title, ISNULL(Author.AuthorName, 'Unknown Author') AS AuthorName
+		FROM Book
+		LEFT JOIN Author ON Book.AuthorID = Author.AuthorID;
+	
+
+	-- 3. Right Outer Join
+		SELECT ISNULL(Book.Title, 'No Books') AS Title, Author.AuthorName
+		FROM Author
+		RIGHT JOIN Book ON Author.AuthorID = Book.AuthorID;
+	
+
+	-- 4. Full Outer Join
+		SELECT ISNULL(Book.Title, 'No Books') AS Title, ISNULL(Author.AuthorName, 'Unknown Author') AS AuthorName
+		FROM Book
+		FULL JOIN Author ON Book.AuthorID = Author.AuthorID;
+	
+
+	-- 5. Cross Join
+		SELECT Book.Title, Author.AuthorName
+		FROM Book
+		CROSS JOIN Author;	

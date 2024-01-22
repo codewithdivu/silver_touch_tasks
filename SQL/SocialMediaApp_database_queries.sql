@@ -276,3 +276,279 @@ select * from Notification;
 		Post
 	INNER JOIN
 		[User] ON Post.UserID = [User].UserID;
+
+
+
+-- ---------------------ASSIGNMENT-3---------------------------
+-- 8. Create 2 user-defined views.
+	--1. UserPostView
+		CREATE VIEW UserPostView As
+		SELECT 
+			U.FirstName,
+			U.Email,
+			P.PostDate,
+			P.LikesCount,
+			P.Content
+		FROM 
+			[User] U
+		JOIN 
+			Post P ON P.UserID = U.UserID;
+
+		select * from UserPostView;
+
+	--2.  UserCommentView
+		CREATE VIEW UserCommentView AS
+		SELECT
+			C.CommentID,
+			U.UserID,
+			U.FirstName,
+			U.LastName,
+			U.Email,
+			U.BirthDate,
+			C.PostID,
+			C.CommentText,
+			C.CommentDate
+		FROM [User] U
+		INNER JOIN Comment C ON U.UserID = C.UserID;
+
+		select * from UserCommentView;
+	
+-- 9. Create 2 Scalar-valued functions (e.g. split string).	-- 1. GetUserFullName		CREATE FUNCTION dbo.GetUserFullName (@UserID INT)
+		RETURNS NVARCHAR(100)
+		AS
+		BEGIN
+			DECLARE @FullName NVARCHAR(100);
+
+			SELECT @FullName = CONCAT(FirstName, ' ', LastName)
+			FROM [User]
+			WHERE UserID = @UserID;
+			RETURN @FullName;
+		END;
+
+		DECLARE @FullName NVARCHAR(100);
+		SET @FullName = dbo.GetUserFullName(5);
+		SELECT @FullName AS UserFullName;
+
+
+
+	-- 2. GetPostLikesCount		CREATE FUNCTION dbo.GetPostLikesCount (@PostID INT)
+		RETURNS INT
+		AS
+		BEGIN
+			DECLARE @LikesCount INT;
+
+			SELECT @LikesCount = LikesCount
+			FROM Post
+			WHERE PostID = @PostID;
+
+			RETURN @LikesCount;
+		END;
+
+		DECLARE @LikesCount INT;
+		SET @LikesCount = dbo.GetPostLikesCount(8);
+		SELECT @LikesCount AS PostLikesCount;
+
+
+-- 10. Create 5 store procedures (select, add, update, delete and full).
+
+	-- 1. Select
+		CREATE PROCEDURE SelectUser
+		@UserID INT
+		AS
+		BEGIN
+			Select * from [User] Where UserID = @userID;
+		END;
+		
+		Exec SelectUser @UserID = 5;
+
+	-- 2. Create
+		CREATE PROCEDURE CreateUser 
+			@FirstName VARCHAR(50),
+			@LastName VARCHAR(50),
+			@Email VARCHAR(100),
+			@BirthDate DATE
+		AS
+		BEGIN
+			INSERT INTO [User] (FirstName, LastName, Email, BirthDate)
+			VALUES (@FirstName,@LastName,@Email,@BirthDate);
+		END;
+
+		select * from [User];
+
+		Exec CreateUser @FirstName = 'Divyesh', @LastName = 'Mavadiya', @Email = 'mavadiyadivyesh56@gmail.com', @BirthDate = '2003-08-17';
+
+	-- 3. Update
+		
+		CREATE PROCEDURE UpdateUser 
+			@UserID INT,
+			@UpdatedFirstName VARCHAR(50),
+			@UpdatedLastName VARCHAR(50),
+			@UpdatedEmail VARCHAR(100),
+			@UpdatedBirthDate DATE
+		AS
+		BEGIN
+			Update [User] SET
+				FirstName = @UpdatedFirstName,
+				LastName = @UpdatedLastName,
+				Email = @UpdatedEmail,
+				BirthDate = @UpdatedBirthDate WHERE UserID = @UserID;
+		END;
+
+		Exec UpdateUser @UserID = 6, @UpdatedFirstName = 'Divu', @UpdatedLastName = 'Mavadiya', @UpdatedEmail = 'Divu0017@gmail.com', @UpdatedBirthDate = '2003-08-17';
+
+	-- 5. Fully
+		CREATE PROCEDURE UserCRUD
+			@Action VARCHAR(10), 
+			@UserID INT = NULL,
+			@FirstName VARCHAR(50) = NULL,
+			@LastName VARCHAR(50) = NULL,
+			@Email VARCHAR(100) = NULL,
+			@BirthDate DATE = NULL
+		AS
+		BEGIN
+			IF @Action = 'SELECT'
+			BEGIN
+				SELECT *
+				FROM [User]
+				WHERE UserID = @UserID;
+			END
+			ELSE IF @Action = 'INSERT'
+			BEGIN
+				INSERT INTO [User] (FirstName, LastName, Email, BirthDate)
+				VALUES (@FirstName, @LastName, @Email, @BirthDate);
+			END
+			ELSE IF @Action = 'UPDATE'
+			BEGIN
+				UPDATE [User]
+				SET FirstName = ISNULL(@FirstName, FirstName),
+					LastName = ISNULL(@LastName, LastName),
+					Email = ISNULL(@Email, Email),
+					BirthDate = ISNULL(@BirthDate, BirthDate)
+				WHERE UserID = @UserID;
+			END
+			ELSE IF @Action = 'DELETE'
+			BEGIN
+				DELETE FROM [User]
+				WHERE UserID = @UserID;
+			END
+		END;
+
+		EXEC UserCRUD 'INSERT', NULL, 'John', 'Doe', 'john.doe@email.com', '1990-01-01';
+		EXEC UserCRUD 'UPDATE', 1, 'Updated', 'User', 'updated.user@email.com', '1995-05-05';
+		EXEC UserCRUD 'DELETE', 2;
+		EXEC UserCRUD 'SELECT', 3;
+
+
+
+-- 11.  Create 2 non-clustered indexes.
+
+	--1. Non-Clustered Index on Post Table (UserID)
+		CREATE NONCLUSTERED INDEX IX_Post_UserID
+		ON Post (UserID);
+
+	--2. Non-Clustered Index on Comment Table (PostID)
+		CREATE NONCLUSTERED INDEX IX_Comment_PostID
+		ON Comment (PostID);
+
+
+
+-- 12.  Create Before and After triggers for insert, update and delete operations.
+
+	--1 Before Insert
+		CREATE TRIGGER BeforeInsertUser
+		ON [User]
+		INSTEAD OF INSERT
+		AS
+		BEGIN
+			PRINT 'Before Insert User Trigger is called';
+		END;
+
+	--2 After Insert
+		CREATE TRIGGER AfterInsertUser
+		ON [User]
+		AFTER INSERT
+		AS
+		BEGIN
+			PRINT 'After Insert User Trigger is Called';
+		END;
+
+	--3 Before Update
+		CREATE TRIGGER BeforeUpdateUser
+		ON [User]
+		INSTEAD OF UPDATE
+		AS
+		BEGIN
+			PRINT 'Before Update User Trigger is Called';
+		END;
+
+	--4 After Update
+		CREATE TRIGGER AfterUpdateUser
+		ON [User]
+		AFTER UPDATE
+		AS
+		BEGIN
+			PRINT 'After Update User Trigger is Called';
+		END;		
+
+	--5 Before Delete
+		CREATE TRIGGER BeforeDeleteUser
+		ON [User]
+		INSTEAD OF DELETE
+		AS
+		BEGIN
+			PRINT 'Before Delete User Trigger is Called';
+		END;
+
+	--6 After Delete
+		CREATE TRIGGER AfterDeleteUser
+		ON [User]
+		AFTER DELETE
+		AS
+		BEGIN
+			PRINT 'After Delte User Trigger is Called';
+		END;
+
+-- 13. Write SQL queries for Union and Union All.
+
+	-- 1. UNION
+		
+	
+
+	--2; UNION ALL
+		SELECT PostID, Content, 'Post' AS ItemType
+		FROM Post
+		WHERE LikesCount > 10
+
+		UNION ALL
+
+		SELECT CommentID, CommentText, 'Comment' AS ItemType
+		FROM Comment
+		WHERE DATALENGTH(CommentText) > 20;
+
+
+-- JOINS
+	
+	-- 1. Inner Join
+		SELECT Post.PostID, Post.Content, [User].FirstName, [User].LastName
+		FROM Post
+		INNER JOIN [User] ON Post.UserID = [User].UserID;
+
+	-- 2. Left Join
+		SELECT [User].UserID, [User].FirstName, [User].LastName, Post.Content
+		FROM [User]
+		LEFT JOIN Post ON [User].UserID = Post.UserID;		
+
+	-- 3. Right Join
+		SELECT [User].UserID, [User].FirstName, [User].LastName, Post.Content
+		FROM Post
+		RIGHT JOIN [User] ON Post.UserID = [User].UserID;
+
+	-- 4. Full Outer Join
+		SELECT [User].UserID, [User].FirstName, [User].LastName, Post.Content
+		FROM [User]
+		FULL OUTER JOIN Post ON [User].UserID = Post.UserID;	
+
+	-- 5. Cross Join
+		SELECT [User].UserID, [User].FirstName, [User].LastName, Post.PostID, Post.Content
+		FROM [User]
+		CROSS JOIN Post;
