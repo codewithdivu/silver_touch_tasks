@@ -1,0 +1,173 @@
+:root {
+  --main: navy;
+  --secondary: white;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Gotham SSm", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul {
+  list-style-type: none;
+}
+
+main {
+  height: 100vh;
+  width: 100vw;
+  background-color: var(--main);
+}
+
+/* ------------Navbar------------------- */
+
+header {
+  width: 100vw;
+  background-color: var(--secondary);
+}
+
+.navbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  padding-left: -5rem;
+  padding-right: -5rem;
+}
+
+.logos {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  margin-left: -5rem;
+}
+
+.logos img {
+  margin-left: 2rem;
+}
+
+.logos:nth-child(2) {
+  margin-top: 10px;
+}
+
+.navbar-items {
+  /* margin-left: 3rem; */
+}
+
+.navbar-items ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.navbar-items ul li {
+  margin-left: 2rem;
+  font-size: 17px;
+  font-weight: bold;
+  color: grey;
+}
+
+.avatar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.avatarDetails {
+  display: flex;
+  flex-direction: column;
+  margin-left: 0.5rem;
+}
+
+.avatarDetails p:first-child {
+  font-size: 14px;
+  font-weight: bold;
+}
+.avatarDetails p:last-child {
+  font-size: 12px;
+  color: grey;
+  font-weight: bold;
+}
+
+/* ------------------hero-section-------------------- */
+
+section {
+  height: 70vh;
+  background-image: url("/assets/power_station.jpg");
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+  z-index: 5;
+}
+
+.section {
+  position: relative;
+  left: 7rem;
+  top: 5rem;
+}
+
+.section p {
+  font-size: 50px;
+  color: var(--secondary);
+}
+
+.hero-info {
+  position: relative;
+  top: 10rem;
+  background-color: var(--secondary);
+  margin: 0 10rem 0 10rem;
+  border-radius: 7px;
+  padding: 2rem;
+  z-index: 10;
+}
+
+.hero-info p {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-left: 20rem;
+}
+.hero-info p i {
+  color: grey;
+  font-size: 2rem;
+}
+
+.hero-info h1 {
+  color: orange;
+  font-weight: 500;
+  font-size: 20px;
+  margin-left: 20rem;
+}
+.hero-info h1::before {
+  content: "- ";
+}
+
+.hero-info h6 {
+  font-size: 15px;
+  font-weight: 400;
+  color: grey;
+  margin-left: 1rem;
+  margin-left: 21rem;
+}
+
+.modiji {
+  position: absolute;
+  top: -61px;
+  left: 70px;
+}
+
+.modiji img {
+  height: 15rem;
+  width: 12rem;
+  transform: scaleY(-1);
+  transform: scaleX(-1);
+  background-color: white;
+  mix-blend-mode: multiply;
+}
