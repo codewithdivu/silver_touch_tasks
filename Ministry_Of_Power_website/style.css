@@ -46,7 +46,6 @@ header {
 
 .topleftnav ul {
   padding-left: 0;
-  list-style: none;
   display: flex;
   margin: 0;
   color: #404040;
@@ -62,7 +61,6 @@ header {
 
 .toprightnav ul {
   justify-content: center;
-  list-style: none;
   display: flex;
   color: #404040;
   margin: 0;
@@ -181,6 +179,15 @@ input[type="radio"] {
   font-size: 12px;
   color: grey;
   font-weight: bold;
+}
+
+.sign-button a {
+  padding: 7px 16px 8px 17px;
+  border: 1px solid #f58216;
+  border-radius: 5px;
+  font-weight: normal;
+  color: #f58216;
+  font-size: 14px;
 }
 
 /* ------------------hero-section-------------------- */
@@ -384,8 +391,162 @@ section {
 
 /* ------------------Press-Release-section-------------------- */
 
-#release{
-  
+#release {
+  padding-left: 10rem;
+  padding-right: 10rem;
+  padding-top: 3rem;
+  padding-bottom: 5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.release-press {
+  display: flex;
+  flex-direction: column;
+  /* background-color: rebeccapurple; */
+  width: 25vw;
+  margin-right: 2rem;
+  margin-left: 10px;
+}
+.press-first {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.press-heading h1 {
+  font-size: 30px;
+}
+.press-buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.press-buttons a {
+  color: orange;
+  font-size: 16px;
+  margin-top: -3px;
+  margin-right: 1rem;
+}
+.press-buttons img {
+  height: 15px;
+  width: 30px;
+}
+
+.press-second {
+  /* margin-top: -20px; */
+}
+.calendar-box {
+}
+.calendar-box p {
+  color: #f58216;
+  font-size: 16px;
+  margin-top: 1rem;
+}
+.calendar-box hr {
+  /* border: 1px solid #707070; */
+  opacity: 0.2;
+  margin-top: 1.5rem;
+}
+.calendar-box p img {
+  width: 14px;
+  height: 14px;
+}
+.calendar-box-pdf p {
+  color: #333333;
+  font-weight: bold;
+  font-size: 16px;
+}
+.calendar-box-pdf p span {
+  color: #333333;
+  font-weight: normal;
+  font-size: 16px;
+}
+
+.calendar-box-pdf {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.release-media {
+  /* background-color: rebeccapurple; */
+  display: flex;
+  flex-direction: column;
+  width: 53vw;
+}
+
+.media-first {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.media-first h1 {
+  font-size: 30px;
+}
+
+.media-second {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.media-second-search {
+  width: 440px;
+  height: 345px;
+  position: relative;
+}
+.media-second-search img {
+  width: 100%;
+}
+.media-second-youtube {
+  width: 440px;
+  height: 345px;
+  position: relative;
+}
+.media-second-youtube img {
+  width: 100%;
+}
+
+.media-second-search-icon {
+}
+.media-second-search-icon img {
+  width: 120px;
+  height: 120px;
+  position: absolute;
+  top: 29%;
+  left: 36%;
+}
+.media-second-search-description {
+}
+.media-second-search-description p {
+  font-size: 16px;
+  color: #ffffff;
+  position: absolute;
+  bottom: 5%;
+  left: 6%;
+}
+.media-second-youtube-icon {
+}
+.media-second-youtube-icon img {
+  width: 70px;
+  height: 50px;
+  position: absolute;
+  top: 41%;
+  left: 42%;
+}
+.media-second-youtube-description {
+}
+.media-second-youtube-description p {
+  font-size: 16px;
+  color: #ffffff;
+  position: absolute;
+  bottom: 5%;
+  left: 15%;
 }
 
 /* ------------------Footer-Logo-section-------------------- */
@@ -462,6 +623,12 @@ footer {
 .footer-second img {
   margin-right: 10px;
   margin-left: 10px;
+}
+.footer-second i {
+  margin-right: 10px;
+  margin-left: 10px;
+  font-size: 20px;
+  font-weight: normal;
 }
 .footer-second span {
   font-size: 1.4rem;
