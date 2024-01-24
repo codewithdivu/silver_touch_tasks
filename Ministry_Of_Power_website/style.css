@@ -224,7 +224,7 @@ input[type="radio"]:checked {
 
 section {
   height: 70vh;
-  background-image: url("/assets/power_station.png");
+  background-image: url("assets/power_station.png");
   background-size: cover;
   background-position: center;
 }
