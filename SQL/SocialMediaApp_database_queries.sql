@@ -457,11 +457,12 @@ select * from Notification;
 	--1 Before Insert
 		CREATE TRIGGER BeforeInsertUser
 		ON [User]
-		INSTEAD OF INSERT
+		FOR INSERT
 		AS
 		BEGIN
 			PRINT 'Before Insert User Trigger is called';
 		END;
+		
 
 	--2 After Insert
 		CREATE TRIGGER AfterInsertUser
@@ -475,7 +476,7 @@ select * from Notification;
 	--3 Before Update
 		CREATE TRIGGER BeforeUpdateUser
 		ON [User]
-		INSTEAD OF UPDATE
+		FOR UPDATE
 		AS
 		BEGIN
 			PRINT 'Before Update User Trigger is Called';
@@ -493,7 +494,7 @@ select * from Notification;
 	--5 Before Delete
 		CREATE TRIGGER BeforeDeleteUser
 		ON [User]
-		INSTEAD OF DELETE
+		FOR DELETE
 		AS
 		BEGIN
 			PRINT 'Before Delete User Trigger is Called';
@@ -533,12 +534,12 @@ select * from Notification;
 		FROM Post
 		INNER JOIN [User] ON Post.UserID = [User].UserID;
 
-	-- 2. Left Join
+	-- 2. Left Outer Join
 		SELECT [User].UserID, [User].FirstName, [User].LastName, Post.Content
 		FROM [User]
 		LEFT JOIN Post ON [User].UserID = Post.UserID;		
 
-	-- 3. Right Join
+	-- 3. Right Outer Join
 		SELECT [User].UserID, [User].FirstName, [User].LastName, Post.Content
 		FROM Post
 		RIGHT JOIN [User] ON Post.UserID = [User].UserID;
@@ -552,3 +553,30 @@ select * from Notification;
 		SELECT [User].UserID, [User].FirstName, [User].LastName, Post.PostID, Post.Content
 		FROM [User]
 		CROSS JOIN Post;
+
+
+
+
+
+
+-- Data Dictionary
+
+
+	use SocialMediaApp;
+
+
+	SELECT 
+		t.name AS TableName,
+		c.name AS ColumnName,
+		ty.name AS DataType,
+		c.max_length AS Size,
+		c.is_nullable AS IsNullable
+	FROM 
+		sys.tables t
+	INNER JOIN 
+		sys.columns c ON t.object_id = c.object_id
+	INNER JOIN 
+		sys.types ty ON c.user_type_id = ty.user_type_id
+	ORDER BY 
+		TableName,
+		ColumnName;

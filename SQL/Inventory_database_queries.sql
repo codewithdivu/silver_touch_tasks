@@ -506,11 +506,12 @@ select * from OrderItem;
 	--1 Before Insert
 		CREATE TRIGGER tr_Product_BeforeInsert
 		ON Product
-		INSTEAD OF INSERT
+		FOR INSERT
 		AS
 		BEGIN
 			PRINT 'BEFORE INSERT trigger on Product table';
 		END;
+
 
 	--2 After Insert
 		CREATE TRIGGER tr_Product_AfterInsert
@@ -524,7 +525,7 @@ select * from OrderItem;
 	--3 Before Update
 		CREATE TRIGGER tr_Product_BeforeUpdate
 		ON Product
-		INSTEAD OF UPDATE
+		FOR UPDATE
 		AS
 		BEGIN
 			PRINT 'BEFORE UPDATE trigger on Product table';
@@ -546,6 +547,15 @@ select * from OrderItem;
 		AS
 		BEGIN
 			PRINT 'AFTER DELETE trigger on Product table';
+		END;
+
+	--6 Before Delete
+		CREATE TRIGGER tr_Product_BeforeDelete
+		ON Product
+		FOR DELETE
+		AS
+		BEGIN
+			PRINT 'BEFORE DELETE trigger on Product table';
 		END;
 
 
@@ -624,3 +634,27 @@ select * from OrderItem;
 			Product
 		CROSS JOIN
 			Category;
+
+
+
+-- Data Dictionary
+
+
+	use Inventory;
+
+
+	SELECT 
+		t.name AS TableName,
+		c.name AS ColumnName,
+		ty.name AS DataType,
+		c.max_length AS Size,
+		c.is_nullable AS IsNullable
+	FROM 
+		sys.tables t
+	INNER JOIN 
+		sys.columns c ON t.object_id = c.object_id
+	INNER JOIN 
+		sys.types ty ON c.user_type_id = ty.user_type_id
+	ORDER BY 
+		TableName,
+		ColumnName;

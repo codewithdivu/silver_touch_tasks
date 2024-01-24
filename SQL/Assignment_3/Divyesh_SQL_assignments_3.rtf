@@ -1,0 +1,1002 @@
+{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1033{\fonttbl{\f0\fnil\fcharset0 Times New Roman;}{\f1\fnil Consolas;}}
+{\colortbl ;\red0\green0\blue0;\red0\green0\blue255;\red128\green128\blue128;\red0\green128\blue0;\red255\green0\blue0;\red255\green0\blue255;\red0\green255\blue0;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sa200\sl276\slmult1\b\f0\fs28\lang9\par
+\par
+\par
+\fs36 Assignment #3:\par
+Date & Time: 19/01/2024 between 5:00 p.m. to 6:00 p.m.\par
+\b0\fs28\par
+\ul\b Q8. Create 2 user-defined views.\par
+\cf1\ulnone\b0\tab\par
+\cf0\tab\ul\b 1. Inventory DB\ulnone\b0\par
+\cf1\tab\tab\cf2 CREATE\cf1  \cf2 VIEW\cf1  ProductView \cf2 AS\cf1\par
+\tab\tab\cf2 SELECT\cf1\par
+\tab\tab\tab p\cf3 .\cf1 ProductID\cf3 ,\cf1\par
+\tab\tab\tab p\cf3 .\cf1 ProductName\cf3 ,\cf1\par
+\tab\tab\tab c\cf3 .\cf1 CategoryName\cf3 ,\cf1\par
+\tab\tab\tab p\cf3 .\cf1 Price\cf3 ,\cf1\par
+\tab\tab\tab p\cf3 .\cf1 StockQuantity\par
+\tab\tab\cf2 FROM\cf1\par
+\tab\tab\tab Product p\par
+\tab\tab\cf3 JOIN\cf1\par
+\tab\tab\tab Category c \cf2 ON\cf1  p\cf3 .\cf1 CategoryID \cf3 =\cf1  c\cf3 .\cf1 CategoryID\cf3 ;\cf1\par
+\par
+\tab\tab\cf2 SELECT\cf1  \cf3 *\cf1  \cf2 FROM\cf1  ProductView\cf3 ;\cf1\par
+\par
+\par
+\tab\tab\cf2 CREATE\cf1  \cf2 VIEW\cf1  OrderDetailsView \cf2 AS\cf1\par
+\tab\tab\cf2 SELECT\cf1\par
+\tab\tab\tab o\cf3 .\cf1 OrderID\cf3 ,\cf1\par
+\tab\tab\tab o\cf3 .\cf1 CustomerID\cf3 ,\cf1\par
+\tab\tab\tab o\cf3 .\cf1 OrderDate\cf3 ,\cf1\par
+\tab\tab\tab o\cf3 .\cf1 TotalAmount\cf3 ,\cf1\par
+\tab\tab\tab o\cf3 .\cf2 Status\cf3 ,\cf1\par
+\tab\tab\tab oi\cf3 .\cf1 ProductID\cf3 ,\cf1\par
+\tab\tab\tab oi\cf3 .\cf1 Quantity\cf3 ,\cf1\par
+\tab\tab\tab oi\cf3 .\cf1 Subtotal\par
+\tab\tab\cf2 FROM\cf1\par
+\tab\tab\tab Orderr o\par
+\tab\tab\cf3 JOIN\cf1\par
+\tab\tab\tab OrderItem oi \cf2 ON\cf1  o\cf3 .\cf1 OrderID \cf3 =\cf1  oi\cf3 .\cf1 OrderID\cf3 ;\cf1\par
+\par
+\tab\tab\cf2 SELECT\cf1  \cf3 *\cf1  \cf2 FROM\cf1  OrderDetailsView\cf3 ;\par
+\cf0\par
+\tab\ul\b 2. Library Management DB\par
+\cf1\ulnone\b0\tab\par
+\tab\cf4 -- 1. BookDetailsView\cf1\par
+\tab\tab\cf2 CREATE\cf1  \cf2 VIEW\cf1  BookDetailsView \cf2 AS\cf1\par
+\tab\tab\cf2 SELECT\cf1\par
+\tab\tab\tab B\cf3 .\cf1 BookID\cf3 ,\cf1\par
+\tab\tab\tab B\cf3 .\cf1 Title\cf3 ,\cf1\par
+\tab\tab\tab B\cf3 .\cf1 ISBN\cf3 ,\cf1\par
+\tab\tab\tab B\cf3 .\cf1 PublishedDate\cf3 ,\cf1\par
+\tab\tab\tab A\cf3 .\cf1 AuthorID\cf3 ,\cf1\par
+\tab\tab\tab A\cf3 .\cf1 AuthorName\cf3 ,\cf1\par
+\tab\tab\tab A\cf3 .\cf1 BirthDate\cf3 ,\cf1\par
+\tab\tab\tab A\cf3 .\cf1 Nationality\par
+\tab\tab\cf2 FROM\cf1\par
+\tab\tab\tab Book B\par
+\tab\tab\cf3 JOIN\cf1\par
+\tab\tab\tab Author A \cf2 ON\cf1  B\cf3 .\cf1 AuthorID \cf3 =\cf1  A\cf3 .\cf1 AuthorID\cf3 ;\cf1\par
+\par
+\tab\tab\cf2 select\cf1  \cf3 *\cf1  \cf2 from\cf1  BookDetailsView\cf3 ;\cf1\par
+\tab\par
+\tab\cf4 -- 1. MemberLoanHistoryView\cf1\par
+\tab\tab\cf2 CREATE\cf1  \cf2 VIEW\cf1  MemberLoanHistoryView \cf2 AS\cf1\par
+\tab\tab\cf2 SELECT\cf1\par
+\tab\tab\tab M\cf3 .\cf1 MemberID\cf3 ,\cf1\par
+\tab\tab\tab M\cf3 .\cf1 FirstName\cf3 ,\cf1\par
+\tab\tab\tab M\cf3 .\cf1 LastName\cf3 ,\cf1\par
+\tab\tab\tab M\cf3 .\cf1 Email\cf3 ,\cf1\par
+\tab\tab\tab L\cf3 .\cf1 LoanID\cf3 ,\cf1\par
+\tab\tab\tab L\cf3 .\cf1 BookID\cf3 ,\cf1\par
+\tab\tab\tab L\cf3 .\cf1 LoanDate\cf3 ,\cf1\par
+\tab\tab\tab L\cf3 .\cf1 ReturnDate\par
+\tab\tab\cf2 FROM\cf1\par
+\tab\tab\tab Member M\par
+\tab\tab\cf3 LEFT\cf1  \cf3 JOIN\cf1\par
+\tab\tab\tab Loan L \cf2 ON\cf1  M\cf3 .\cf1 MemberID \cf3 =\cf1  L\cf3 .\cf1 MemberID\cf3 ;\cf1\par
+\par
+\tab\tab\cf2 select\cf1  \cf3 *\cf1  \cf2 from\cf1  MemberLoanHistoryView\cf3 ;\cf1\par
+\par
+\cf0\par
+\tab\ul\b 3. Social Media App DB\ulnone\b0\par
+\cf4\tab\par
+\tab --1. UserPostView\cf1\par
+\tab\tab\cf2 CREATE\cf1  \cf2 VIEW\cf1  UserPostView \cf2 As\cf1\par
+\tab\tab\cf2 SELECT\cf1  \par
+\tab\tab\tab U\cf3 .\cf1 FirstName\cf3 ,\cf1\par
+\tab\tab\tab U\cf3 .\cf1 Email\cf3 ,\cf1\par
+\tab\tab\tab P\cf3 .\cf1 PostDate\cf3 ,\cf1\par
+\tab\tab\tab P\cf3 .\cf1 LikesCount\cf3 ,\cf1\par
+\tab\tab\tab P\cf3 .\cf1 Content\par
+\tab\tab\cf2 FROM\cf1  \par
+\tab\tab\tab [User] U\par
+\tab\tab\cf3 JOIN\cf1  \par
+\tab\tab\tab Post P \cf2 ON\cf1  P\cf3 .\cf1 UserID \cf3 =\cf1  U\cf3 .\cf1 UserID\cf3 ;\cf1\par
+\par
+\tab\tab\cf2 select\cf1  \cf3 *\cf1  \cf2 from\cf1  UserPostView\cf3 ;\cf1\par
+\par
+\tab\cf4 --2.  UserCommentView\cf1\par
+\tab\tab\cf2 CREATE\cf1  \cf2 VIEW\cf1  UserCommentView \cf2 AS\cf1\par
+\tab\tab\cf2 SELECT\cf1\par
+\tab\tab\tab C\cf3 .\cf1 CommentID\cf3 ,\cf1\par
+\tab\tab\tab U\cf3 .\cf1 UserID\cf3 ,\cf1\par
+\tab\tab\tab U\cf3 .\cf1 FirstName\cf3 ,\cf1\par
+\tab\tab\tab U\cf3 .\cf1 LastName\cf3 ,\cf1\par
+\tab\tab\tab U\cf3 .\cf1 Email\cf3 ,\cf1\par
+\tab\tab\tab U\cf3 .\cf1 BirthDate\cf3 ,\cf1\par
+\tab\tab\tab C\cf3 .\cf1 PostID\cf3 ,\cf1\par
+\tab\tab\tab C\cf3 .\cf1 CommentText\cf3 ,\cf1\par
+\tab\tab\tab C\cf3 .\cf1 CommentDate\par
+\tab\tab\cf2 FROM\cf1  [User] U\par
+\tab\tab\cf3 INNER\cf1  \cf3 JOIN\cf1  Comment C \cf2 ON\cf1  U\cf3 .\cf1 UserID \cf3 =\cf1  C\cf3 .\cf1 UserID\cf3 ;\cf1\par
+\par
+\tab\tab\cf2 select\cf1  \cf3 *\cf1  \cf2 from\cf1  UserCommentView\cf3 ;\cf1\par
+\tab\par
+\par
+\cf0\ul\b Q9. Create 2 Scalar-valued functions (e.g. split string).\par
+\ulnone\b0\tab\par
+\tab\ul\b 1. Inventory DB\ulnone\b0\par
+\cf1\par
+\tab\cf4 -- 1. GetProductStockValue\cf1\par
+\par
+\tab\tab\cf2 CREATE\cf1  \cf2 FUNCTION\cf1  dbo\cf3 .\cf1 GetProductStockValue\par
+\cf2\tab\tab\cf3 (\cf1\par
+\tab\tab\tab @ProductID \cf2 INT\cf1\par
+\tab\tab\cf3 )\cf1\par
+\tab\tab\cf2 RETURNS\cf1  \cf2 DECIMAL\cf3 (\cf1 10\cf3 ,\cf1  2\cf3 )\cf1\par
+\tab\tab\cf2 AS\cf1\par
+\tab\tab\cf2 BEGIN\cf1\par
+\tab\tab\tab\cf2 DECLARE\cf1  @StockValue \cf2 DECIMAL\cf3 (\cf1 10\cf3 ,\cf1  2\cf3 );\cf1\par
+\par
+\tab\tab\tab\cf2 SELECT\cf1  @StockValue \cf3 =\cf1  Price \cf3 *\cf1  StockQuantity\par
+\tab\tab\tab\cf2 FROM\cf1  Product\par
+\tab\tab\tab\cf2 WHERE\cf1  ProductID \cf3 =\cf1  @ProductID\cf3 ;\cf1\par
+\par
+\tab\tab\tab\cf2 RETURN\cf1  @StockValue\cf3 ;\cf1\par
+\tab\tab\cf2 END\cf3 ;\cf1\par
+\tab\tab\cf2 GO\cf1\par
+\par
+\tab\tab\cf2 DECLARE\cf1  @StockValue \cf2 DECIMAL\cf3 (\cf1 10\cf3 ,\cf1  2\cf3 );\cf1\par
+\tab\tab\cf2 SET\cf1  @StockValue \cf3 =\cf1  dbo\cf3 .\cf1 GetProductStockValue\cf3 (\cf1 1\cf3 );\cf1\par
+\tab\tab\cf2 PRINT\cf1  \cf5 'Stock Value for ProductID 1: '\cf1  \cf3 +\cf1  \cf6 COALESCE\cf3 (\cf6 CAST\cf3 (\cf1 @StockValue \cf2 AS\cf1  \cf2 VARCHAR\cf3 ),\cf1  \cf5 'NULL'\cf3 );\cf1\par
+\par
+\tab\cf4 -- 2. CalculateOrderTotal\cf1\par
+\par
+\tab\tab\cf2 CREATE\cf1  \cf2 FUNCTION\cf1  dbo\cf3 .\cf1 CalculateOrderTotal\par
+\cf2\tab\tab\cf3 (\cf1\par
+\tab\tab\tab @OrderID \cf2 INT\cf1\par
+\tab\tab\cf3 )\cf1\par
+\tab\tab\cf2 RETURNS\cf1  \cf2 DECIMAL\cf3 (\cf1 10\cf3 ,\cf1  2\cf3 )\cf1\par
+\tab\tab\cf2 AS\cf1\par
+\tab\tab\cf2 BEGIN\cf1\par
+\tab\tab\tab\cf2 DECLARE\cf1  @TotalAmount \cf2 DECIMAL\cf3 (\cf1 10\cf3 ,\cf1  2\cf3 );\cf1\par
+\par
+\tab\tab\tab\cf2 SELECT\cf1  @TotalAmount \cf3 =\cf1  \cf6 SUM\cf3 (\cf1 Subtotal\cf3 )\cf1\par
+\tab\tab\tab\cf2 FROM\cf1  OrderItem\par
+\tab\tab\tab\cf2 WHERE\cf1  OrderID \cf3 =\cf1  @OrderID\cf3 ;\cf1\par
+\par
+\tab\tab\tab\cf2 RETURN\cf1  @TotalAmount\cf3 ;\cf1\par
+\tab\tab\cf2 END\cf3 ;\cf1\par
+\par
+\tab\tab\cf2 DECLARE\cf1  @OrderTotal \cf2 DECIMAL\cf3 (\cf1 10\cf3 ,\cf1  2\cf3 );\cf1\par
+\tab\tab\cf2 SET\cf1  @OrderTotal \cf3 =\cf1  dbo\cf3 .\cf1 CalculateOrderTotal\cf3 (\cf1 1\cf3 );\cf1\par
+\tab\tab\cf2 PRINT\cf1  \cf5 'Total Amount for OrderID 1: '\cf1  \cf3 +\cf1  \cf6 CAST\cf3 (\cf1 @OrderTotal \cf2 AS\cf1  \cf2 VARCHAR\cf3 );\cf1\par
+\cf0\tab\par
+\tab\ul\b 2. Library Management DB\par
+\cf4\ulnone\b0\par
+\tab -- 1. GetAuthorAge\cf1\par
+\tab\tab\cf2 CREATE\cf1  \cf2 FUNCTION\cf1  GetAuthorAge\cf3 (\cf1 @AuthorID \cf2 INT\cf3 )\cf1\par
+\tab\tab\cf2 RETURNS\cf1  \cf2 INT\cf1\par
+\tab\tab\cf2 AS\cf1\par
+\tab\tab\cf2 BEGIN\cf1\par
+\tab\tab\tab\cf2 DECLARE\cf1  @Age \cf2 INT\cf3 ;\cf1\par
+\par
+\tab\tab\tab\cf2 SELECT\cf1  @Age \cf3 =\cf1  \cf6 DATEDIFF\cf3 (\cf6 YEAR\cf3 ,\cf1  BirthDate\cf3 ,\cf1  \cf6 GETDATE\cf3 ())\cf1\par
+\tab\tab\tab\cf2 FROM\cf1  Author\par
+\tab\tab\tab\cf2 WHERE\cf1  AuthorID \cf3 =\cf1  @AuthorID\cf3 ;\cf1\par
+\par
+\tab\tab\tab\cf2 RETURN\cf1  @Age\cf3 ;\cf1\par
+\tab\tab\cf2 END\cf3 ;\cf1\par
+\par
+\tab\tab\cf2 SELECT\cf1  dbo\cf3 .\cf1 GetAuthorAge\cf3 (\cf1 1\cf3 )\cf1  \cf2 AS\cf1  AuthorAge\cf3 ;\cf1\par
+\par
+\tab\cf4 -- 2. CalculateLateFee\cf1\par
+\tab\tab\cf2 CREATE\cf1  \cf2 FUNCTION\cf1  CalculateLateFee\cf3 (\cf1 @LoanID \cf2 INT\cf3 )\cf1\par
+\tab\tab\cf2 RETURNS\cf1  \cf2 DECIMAL\cf3 (\cf1 10\cf3 ,\cf1  2\cf3 )\cf1\par
+\tab\tab\cf2 AS\cf1\par
+\tab\tab\cf2 BEGIN\cf1\par
+\tab\tab\tab\cf2 DECLARE\cf1  @LateFee \cf2 DECIMAL\cf3 (\cf1 10\cf3 ,\cf1  2\cf3 );\cf1\par
+\par
+\tab\tab\tab\cf2 SELECT\cf1  @LateFee \cf3 =\cf1  \par
+\tab\tab\tab\tab\cf2 CASE\cf1\par
+\tab\tab\tab\tab\tab\cf2 WHEN\cf1  \cf6 DATEDIFF\cf3 (\cf6 DAY\cf3 ,\cf1  LoanDate\cf3 ,\cf1  \cf6 GETDATE\cf3 ())\cf1  \cf3 >\cf1  30 \cf2 THEN \cf3 (\cf6 DATEDIFF\cf3 (\cf6 DAY\cf3 ,\cf1  LoanDate\cf3 ,\cf1  \cf6 GETDATE\cf3 ())\cf1  \cf3 -\cf1  30\cf3 )\cf1  \cf3 *\cf1  0.50\par
+\tab\tab\tab\tab\tab\cf2 ELSE\cf1  0\par
+\tab\tab\tab\tab\cf2 END\cf1\par
+\tab\tab\tab\cf2 FROM\cf1  Loan\par
+\tab\tab\tab\cf2 WHERE\cf1  LoanID \cf3 =\cf1  @LoanID\cf3 ;\cf1\par
+\par
+\tab\tab\tab\cf2 RETURN\cf1  @LateFee\cf3 ;\cf1\par
+\tab\tab\cf2 END\cf3 ;\cf1\par
+\par
+\tab\tab\cf2 SELECT\cf1  dbo\cf3 .\cf1 CalculateLateFee\cf3 (\cf1 1\cf3 )\cf1  \cf2 AS\cf1  LateFee\cf3 ;\cf1\par
+\cf0\par
+\tab\ul\b 3. Social Media App DB\ulnone\b0\par
+\cf4\par
+\tab -- 1. GetUserFullName\cf1\par
+\tab\tab\cf2 CREATE\cf1  \cf2 FUNCTION\cf1  dbo\cf3 .\cf1 GetUserFullName\cf2  \cf3 (\cf1 @UserID \cf2 INT\cf3 )\cf1\par
+\tab\tab\cf2 RETURNS\cf1  \cf2 NVARCHAR\cf3 (\cf1 100\cf3 )\cf1\par
+\tab\tab\cf2 AS\cf1\par
+\tab\tab\cf2 BEGIN\cf1\par
+\tab\tab\tab\cf2 DECLARE\cf1  @FullName \cf2 NVARCHAR\cf3 (\cf1 100\cf3 );\cf1\par
+\par
+\tab\tab\tab\cf2 SELECT\cf1  @FullName \cf3 =\cf1  \cf6 CONCAT\cf3 (\cf1 FirstName\cf3 ,\cf1  \cf5 ' '\cf3 ,\cf1  LastName\cf3 )\cf1\par
+\tab\tab\tab\cf2 FROM\cf1  [User]\par
+\tab\tab\tab\cf2 WHERE\cf1  UserID \cf3 =\cf1  @UserID\cf3 ;\cf1\par
+\tab\tab\tab\cf2 RETURN\cf1  @FullName\cf3 ;\cf1\par
+\tab\tab\cf2 END\cf3 ;\cf1\par
+\par
+\tab\tab\cf2 DECLARE\cf1  @FullName \cf2 NVARCHAR\cf3 (\cf1 100\cf3 );\cf1\par
+\tab\tab\cf2 SET\cf1  @FullName \cf3 =\cf1  dbo\cf3 .\cf1 GetUserFullName\cf3 (\cf1 5\cf3 );\cf1\par
+\tab\tab\cf2 SELECT\cf1  @FullName \cf2 AS\cf1  UserFullName\cf3 ;\cf1\par
+\par
+\par
+\par
+\tab\cf4 -- 2. GetPostLikesCount\cf1\par
+\tab\tab\cf2 CREATE\cf1  \cf2 FUNCTION\cf1  dbo\cf3 .\cf1 GetPostLikesCount\cf2  \cf3 (\cf1 @PostID \cf2 INT\cf3 )\cf1\par
+\tab\tab\cf2 RETURNS\cf1  \cf2 INT\cf1\par
+\tab\tab\cf2 AS\cf1\par
+\tab\tab\cf2 BEGIN\cf1\par
+\tab\tab\tab\cf2 DECLARE\cf1  @LikesCount \cf2 INT\cf3 ;\cf1\par
+\par
+\tab\tab\tab\cf2 SELECT\cf1  @LikesCount \cf3 =\cf1  LikesCount\par
+\tab\tab\tab\cf2 FROM\cf1  Post\par
+\tab\tab\tab\cf2 WHERE\cf1  PostID \cf3 =\cf1  @PostID\cf3 ;\cf1\par
+\par
+\tab\tab\tab\cf2 RETURN\cf1  @LikesCount\cf3 ;\cf1\par
+\tab\tab\cf2 END\cf3 ;\cf1\par
+\par
+\tab\tab\cf2 DECLARE\cf1  @LikesCount \cf2 INT\cf3 ;\cf1\par
+\tab\tab\cf2 SET\cf1  @LikesCount \cf3 =\cf1  dbo\cf3 .\cf1 GetPostLikesCount\cf3 (\cf1 8\cf3 );\cf1\par
+\tab\tab\cf2 SELECT\cf1  @LikesCount \cf2 AS\cf1  PostLikesCount\cf3 ;\cf1\par
+\par
+\par
+\cf0\ul\b Q10. Create 5 store procedures (select, add, update, delete and full).\par
+\cf1\ulnone\b0\tab\par
+\tab\cf0\ul\b 1. Inventory DB\ulnone\b0\par
+\cf1\par
+\tab\cf4 -- 1. Select\cf1\par
+\tab\tab\cf2 CREATE\cf1  \cf2 PROCEDURE\cf1  SelectProduct\par
+\tab\tab\tab @ProductID \cf2 INT\cf1\par
+\tab\tab\cf2 AS\cf1\par
+\tab\tab\cf2 BEGIN\cf1\par
+\tab\tab\tab\cf2 SELECT\cf1  \cf3 *\cf1\par
+\tab\tab\tab\cf2 FROM\cf1  Product\par
+\tab\tab\tab\cf2 WHERE\cf1  ProductID \cf3 =\cf1  @ProductID\cf3 ;\cf1\par
+\tab\tab\cf2 END\cf3 ;\cf1\par
+\par
+\tab\tab\cf2 Exec\cf1  SelectProduct\cf2  \cf1 @ProductID \cf3 =\cf1  7\cf3 ;\cf1\par
+\tab     \cf2 select\cf1  \cf3 *\cf1  \cf2 from\cf1  Product\cf3 ;\cf1\par
+\par
+\tab\par
+\tab\cf4 -- 2. Create\cf1\par
+\tab\tab\cf2 CREATE\cf1  \cf2 PROCEDURE\cf1  AddProduct\par
+\tab\tab\tab @ProductName \cf2 VARCHAR\cf3 (\cf1 50\cf3 ),\cf1\par
+\tab\tab\tab @CategoryID \cf2 INT\cf3 ,\cf1\par
+\tab\tab\tab @Price \cf2 DECIMAL\cf3 (\cf1 10\cf3 ,\cf1  2\cf3 ),\cf1\par
+\tab\tab\tab @StockQuantity \cf2 INT\cf1\par
+\tab\tab\cf2 AS\cf1\par
+\tab\tab\cf2 BEGIN\cf1\par
+\tab\tab\tab\cf2 INSERT\cf1  \cf2 INTO\cf1  Product\cf2  \cf3 (\cf1 ProductName\cf3 ,\cf1  CategoryID\cf3 ,\cf1  Price\cf3 ,\cf1  StockQuantity\cf3 )\cf1\par
+\tab\tab\tab\cf2 VALUES \cf3 (\cf1 @ProductName\cf3 ,\cf1  @CategoryID\cf3 ,\cf1  @Price\cf3 ,\cf1  @StockQuantity\cf3 );\cf1\par
+\tab\tab\cf2 END\cf3 ;\cf1\par
+\par
+\tab\tab\cf2 Exec\cf1  AddProduct\cf2   \cf1 @ProductName \cf3 =\cf1  \cf5 'Divyesh'\cf3 ,\cf1  @CategoryID \cf3 =\cf1  3\cf3 ,\cf1 @Price \cf3 =\cf1  300\cf3 ,\cf1  @StockQuantity \cf3 =\cf1  99\cf3 ;\cf1\par
+\tab\tab\cf2 select\cf1  \cf3 *\cf1  \cf2 from\cf1  Product\cf3 ;\cf1\par
+\par
+\tab\cf4 -- 3. Update\cf1\par
+\tab\tab\cf2 CREATE\cf1  \cf2 PROCEDURE\cf1  UpdateProduct\par
+\tab\tab\tab @ProductID \cf2 INT\cf3 ,\cf1\par
+\tab\tab\tab @ProductName \cf2 VARCHAR\cf3 (\cf1 50\cf3 ),\cf1\par
+\tab\tab\tab @CategoryID \cf2 INT\cf3 ,\cf1\par
+\tab\tab\tab @Price \cf2 DECIMAL\cf3 (\cf1 10\cf3 ,\cf1  2\cf3 ),\cf1\par
+\tab\tab\tab @StockQuantity \cf2 INT\cf1\par
+\tab\tab\cf2 AS\cf1\par
+\tab\tab\cf2 BEGIN\cf1\par
+\tab\tab\tab\cf6 UPDATE\cf1  Product\par
+\tab\tab\tab\cf2 SET\cf1\par
+\tab\tab\tab\tab ProductName \cf3 =\cf1  @ProductName\cf3 ,\cf1\par
+\tab\tab\tab\tab CategoryID \cf3 =\cf1  @CategoryID\cf3 ,\cf1\par
+\tab\tab\tab\tab Price \cf3 =\cf1  @Price\cf3 ,\cf1\par
+\tab\tab\tab\tab StockQuantity \cf3 =\cf1  @StockQuantity\par
+\tab\tab\tab\cf2 WHERE\cf1\par
+\tab\tab\tab\tab ProductID \cf3 =\cf1  @ProductID\cf3 ;\cf1\par
+\tab\tab\cf2 END\cf3 ;\cf1\par
+\par
+\tab\tab\cf2 Exec\cf1  UpdateProduct\cf2  \cf1 @ProductId \cf3 =\cf1  23\cf3 ,\cf1  @ProductName \cf3 =\cf1  \cf5 'Divu'\cf3 ,\cf1  @CategoryID \cf3 =\cf1  2\cf3 ,\cf1  @Price \cf3 =\cf1  299\cf3 ,\cf1  @StockQuantity \cf3 =\cf1  97\cf3 ;\cf1\par
+\tab\tab\cf2 select\cf1  \cf3 *\cf1  \cf2 from\cf1  Product\cf3 ;\cf1\par
+\par
+\tab\cf4 -- 4. Delete\cf1\par
+\tab\tab\cf2 CREATE\cf1  \cf2 PROCEDURE\cf1  DeleteProduct\par
+\tab\tab\tab @ProductID \cf2 INT\cf1\par
+\tab\tab\cf2 AS\cf1\par
+\tab\tab\cf2 BEGIN\cf1\par
+\tab\tab\tab\cf2 DELETE\cf1  \cf2 FROM\cf1  Product\par
+\tab\tab\tab\cf2 WHERE\cf1  ProductID \cf3 =\cf1  @ProductID\cf3 ;\cf1\par
+\tab\tab\cf2 END\cf3 ;\cf1\par
+\par
+\tab\tab\cf2 Exec\cf1  DeleteProduct\cf2  \cf1 @ProductId \cf3 =\cf1  23\cf3 ;\cf1\par
+\tab\tab\par
+\tab\cf4 -- 5. Fully\cf1\par
+\tab\tab\cf2 CREATE\cf1  \cf2 PROCEDURE\cf1  FullProductManagement\par
+\tab\tab\tab @NewProductName \cf2 VARCHAR\cf3 (\cf1 50\cf3 ),\cf1\par
+\tab\tab\tab @NewCategoryID \cf2 INT\cf3 ,\cf1\par
+\tab\tab\tab @NewPrice \cf2 DECIMAL\cf3 (\cf1 10\cf3 ,\cf1  2\cf3 ),\cf1\par
+\tab\tab\tab @NewStockQuantity \cf2 INT\cf3 ,\cf1\par
+\tab\tab\tab @UpdateProductID \cf2 INT\cf3 ,\cf1\par
+\tab\tab\tab @UpdateProductName \cf2 VARCHAR\cf3 (\cf1 50\cf3 ),\cf1\par
+\tab\tab\tab @UpdateCategoryID \cf2 INT\cf3 ,\cf1\par
+\tab\tab\tab @UpdatePrice \cf2 DECIMAL\cf3 (\cf1 10\cf3 ,\cf1  2\cf3 ),\cf1\par
+\tab\tab\tab @UpdateStockQuantity \cf2 INT\cf3 ,\cf1\par
+\tab\tab\tab @DeleteProductID \cf2 INT\cf1\par
+\tab\tab\cf2 AS\cf1\par
+\tab\tab\cf2 BEGIN\cf1\par
+\tab\tab\tab\cf4 -- Select all products\cf1\par
+\tab\tab\tab\cf2 SELECT\cf1  \cf3 *\cf1  \cf2 FROM\cf1  Product\cf3 ;\cf1\par
+\par
+\tab\tab\tab\cf4 -- Add a new product\cf1\par
+\tab\tab\tab\cf2 INSERT\cf1  \cf2 INTO\cf1  Product\cf2  \cf3 (\cf1 ProductName\cf3 ,\cf1  CategoryID\cf3 ,\cf1  Price\cf3 ,\cf1  StockQuantity\cf3 )\cf1\par
+\tab\tab\tab\cf2 VALUES \cf3 (\cf1 @NewProductName\cf3 ,\cf1  @NewCategoryID\cf3 ,\cf1  @NewPrice\cf3 ,\cf1  @NewStockQuantity\cf3 );\cf1\par
+\par
+\tab\tab\tab\cf4 -- Update an existing product\cf1\par
+\tab\tab\tab\cf6 UPDATE\cf1  Product\par
+\tab\tab\tab\cf2 SET\cf1\par
+\tab\tab\tab\tab ProductName \cf3 =\cf1  @UpdateProductName\cf3 ,\cf1\par
+\tab\tab\tab\tab CategoryID \cf3 =\cf1  @UpdateCategoryID\cf3 ,\cf1\par
+\tab\tab\tab\tab Price \cf3 =\cf1  @UpdatePrice\cf3 ,\cf1\par
+\tab\tab\tab\tab StockQuantity \cf3 =\cf1  @UpdateStockQuantity\par
+\tab\tab\tab\cf2 WHERE\cf1\par
+\tab\tab\tab\tab ProductID \cf3 =\cf1  @UpdateProductID\cf3 ;\cf1\par
+\par
+\tab\tab\tab\cf4 -- Delete a product\cf1\par
+\tab\tab\tab\cf2 DELETE\cf1  \cf2 FROM\cf1  Product\par
+\tab\tab\tab\cf2 WHERE\cf1  ProductID \cf3 =\cf1  @DeleteProductID\cf3 ;\cf1\par
+\tab\tab\cf2 END\cf3 ;\cf1\par
+\par
+\tab\tab\cf2 Exec\cf1  FullProductManagement\cf3 ;\cf1\par
+\cf0\tab\par
+\tab\ul\b 2. Library Management DB\par
+\cf4\ulnone\b0\par
+\tab -- 1. Select\cf1\par
+\tab\tab\cf2 CREATE\cf1  \cf2 PROCEDURE\cf1  SelectBook\par
+\tab\tab\tab @BookID \cf2 INT\cf1\par
+\tab\tab\cf2 AS\cf1\par
+\tab\tab\cf2 BEGIN\cf1\par
+\tab\tab\tab\cf2 SELECT\cf1  \cf3 *\cf1\par
+\tab\tab\tab\cf2 FROM\cf1  Book\par
+\tab\tab\tab\cf2 WHERE\cf1  BookID \cf3 =\cf1  @BookID\cf3 ;\cf1\par
+\tab\tab\cf2 END\cf3 ;\cf1\par
+\par
+\tab\tab\cf2 EXEC\cf1  SelectBook\cf2  \cf1 @BookID \cf3 =\cf1  2\cf3 ;\cf1\par
+\tab\par
+\tab\cf4 -- 2. Create\cf1\par
+\tab\tab\cf2 CREATE\cf1  \cf2 PROCEDURE\cf1  AddBook\par
+\tab\tab\tab @Title \cf2 VARCHAR\cf3 (\cf1 100\cf3 ),\cf1\par
+\tab\tab\tab @AuthorID \cf2 INT\cf3 ,\cf1\par
+\tab\tab\tab @ISBN \cf2 VARCHAR\cf3 (\cf1 20\cf3 ),\cf1\par
+\tab\tab\tab @PublishedDate \cf2 DATE\cf3 ,\cf1\par
+\tab\tab\tab @GenreID \cf2 INT\cf1\par
+\tab\tab\cf2 AS\cf1\par
+\tab\tab\cf2 BEGIN\cf1\par
+\tab\tab\tab\cf2 INSERT\cf1  \cf2 INTO\cf1  Book\cf2  \cf3 (\cf1 Title\cf3 ,\cf1  AuthorID\cf3 ,\cf1  ISBN\cf3 ,\cf1  PublishedDate\cf3 ,\cf1  GenreID\cf3 )\cf1\par
+\tab\tab\tab\cf2 VALUES \cf3 (\cf1 @Title\cf3 ,\cf1  @AuthorID\cf3 ,\cf1  @ISBN\cf3 ,\cf1  @PublishedDate\cf3 ,\cf1  @GenreID\cf3 );\cf1\par
+\tab\tab\cf2 END\cf3 ;\cf1\par
+\par
+\tab\tab\cf2 EXEC\cf1  AddBook\cf2  \cf1\par
+\cf2\tab\tab\cf1 @Title \cf3 =\cf1  \cf5 'Prison of Azakaban'\cf3 ,\cf1\par
+\tab\tab @AuthorID \cf3 =\cf1  1\cf3 ,\cf1\par
+\tab\tab @ISBN \cf3 =\cf1  \cf5 '978-1234567890'\cf3 ,\cf1\par
+\tab\tab @PublishedDate \cf3 =\cf1  \cf5 '2023-01-01'\cf3 ,\cf1\par
+\tab\tab @GenreID \cf3 =\cf1  1\cf3 ;\cf1\par
+\par
+\tab\tab\cf2 select\cf1  \cf3 *\cf1  \cf2 from\cf1  Book\cf3 ;\cf1\par
+\par
+\tab\cf4 -- 3. Update\cf1\par
+\par
+\tab\tab\cf2 CREATE\cf1  \cf2 PROCEDURE\cf1  UpdateBook\par
+\tab\tab\tab @BookID \cf2 INT\cf3 ,\cf1\par
+\tab\tab\tab @Title \cf2 VARCHAR\cf3 (\cf1 100\cf3 ),\cf1\par
+\tab\tab\tab @AuthorID \cf2 INT\cf3 ,\cf1\par
+\tab\tab\tab @ISBN \cf2 VARCHAR\cf3 (\cf1 20\cf3 ),\cf1\par
+\tab\tab\tab @PublishedDate \cf2 DATE\cf3 ,\cf1\par
+\tab\tab\tab @GenreID \cf2 INT\cf1\par
+\tab\tab\cf2 AS\cf1\par
+\tab\tab\cf2 BEGIN\cf1\par
+\tab\tab\tab\cf6 UPDATE\cf1  Book\par
+\tab\tab\tab\cf2 SET\cf1\par
+\tab\tab\tab\tab Title \cf3 =\cf1  @Title\cf3 ,\cf1\par
+\tab\tab\tab\tab AuthorID \cf3 =\cf1  @AuthorID\cf3 ,\cf1\par
+\tab\tab\tab\tab ISBN \cf3 =\cf1  @ISBN\cf3 ,\cf1\par
+\tab\tab\tab\tab PublishedDate \cf3 =\cf1  @PublishedDate\cf3 ,\cf1\par
+\tab\tab\tab\tab GenreID \cf3 =\cf1  @GenreID\par
+\tab\tab\tab\cf2 WHERE\cf1\par
+\tab\tab\tab\tab BookID \cf3 =\cf1  @BookID\cf3 ;\cf1\par
+\tab\tab\cf2 END\cf3 ;\cf1\par
+\par
+\tab\tab\cf2 EXEC\cf1  UpdateBook\cf2  \cf1\par
+\cf2\tab\tab\cf1 @BookID \cf3 =\cf1  6\cf3 ,\cf1\par
+\tab\tab @Title \cf3 =\cf1  \cf5 'goli book'\cf3 ,\cf1\par
+\tab\tab @AuthorID \cf3 =\cf1  2\cf3 ,\cf1\par
+\tab\tab @ISBN \cf3 =\cf1  \cf5 '978-9876543210'\cf3 ,\cf1\par
+\tab\tab @PublishedDate \cf3 =\cf1  \cf5 '2022-12-01'\cf3 ,\cf1\par
+\tab\tab @GenreID \cf3 =\cf1  2\cf3 ;\cf1\par
+\tab\tab\par
+\tab\cf4 -- 4. Delete\cf1\par
+\tab\tab\cf2 CREATE\cf1  \cf2 PROCEDURE\cf1  DeleteBook\par
+\tab\tab\tab @BookID \cf2 INT\cf1\par
+\tab\tab\cf2 AS\cf1\par
+\tab\tab\cf2 BEGIN\cf1\par
+\tab\tab\tab\cf2 DELETE\cf1  \cf2 FROM\cf1  Book\par
+\tab\tab\tab\cf2 WHERE\cf1  BookID \cf3 =\cf1  @BookID\cf3 ;\cf1\par
+\tab\tab\cf2 END\cf3 ;\cf1\par
+\par
+\tab\tab\cf2 EXEC\cf1  DeleteBook\cf2  \cf1 @BookID \cf3 =\cf1  6\cf3 ;\cf1\par
+\par
+\tab\cf4 -- 5. Fully\cf1\par
+\tab\tab\cf2 CREATE\cf1  \cf2 PROCEDURE\cf1  FullBookOperation\par
+\tab\tab\tab @OperationType \cf2 NVARCHAR\cf3 (\cf1 10\cf3 ),\cf1\par
+\tab\tab\tab @BookID \cf2 INT\cf1  \cf3 =\cf1  \cf3 NULL,\cf1\par
+\tab\tab\tab @Title \cf2 VARCHAR\cf3 (\cf1 100\cf3 )\cf1  \cf3 =\cf1  \cf3 NULL,\cf1\par
+\tab\tab\tab @AuthorID \cf2 INT\cf1  \cf3 =\cf1  \cf3 NULL,\cf1\par
+\tab\tab\tab @ISBN \cf2 VARCHAR\cf3 (\cf1 20\cf3 )\cf1  \cf3 =\cf1  \cf3 NULL,\cf1\par
+\tab\tab\tab @PublishedDate \cf2 DATE\cf1  \cf3 =\cf1  \cf3 NULL,\cf1\par
+\tab\tab\tab @GenreID \cf2 INT\cf1  \cf3 =\cf1  \cf3 NULL\cf1\par
+\tab\tab\cf2 AS\cf1\par
+\tab\tab\cf2 BEGIN\cf1\par
+\tab\tab\tab\cf2 IF\cf1  @OperationType \cf3 =\cf1  \cf5 'Select'\cf1\par
+\tab\tab\tab\cf2 BEGIN\cf1\par
+\tab\tab\tab\tab\cf2 EXEC\cf1  SelectBook\cf2  \cf1 @BookID\cf3 ;\cf1\par
+\tab\tab\tab\cf2 END\cf1\par
+\tab\tab\tab\cf2 ELSE\cf1  \cf2 IF\cf1  @OperationType \cf3 =\cf1  \cf5 'Add'\cf1\par
+\tab\tab\tab\cf2 BEGIN\cf1\par
+\tab\tab\tab\tab\cf2 EXEC\cf1  AddBook\cf2  \cf1 @Title\cf3 ,\cf1  @AuthorID\cf3 ,\cf1  @ISBN\cf3 ,\cf1  @PublishedDate\cf3 ,\cf1  @GenreID\cf3 ;\cf1\par
+\tab\tab\tab\cf2 END\cf1\par
+\tab\tab\tab\cf2 ELSE\cf1  \cf2 IF\cf1  @OperationType \cf3 =\cf1  \cf5 'Update'\cf1\par
+\tab\tab\tab\cf2 BEGIN\cf1\par
+\tab\tab\tab\tab\cf2 EXEC\cf1  UpdateBook\cf2  \cf1 @BookID\cf3 ,\cf1  @Title\cf3 ,\cf1  @AuthorID\cf3 ,\cf1  @ISBN\cf3 ,\cf1  @PublishedDate\cf3 ,\cf1  @GenreID\cf3 ;\cf1\par
+\tab\tab\tab\cf2 END\cf1\par
+\tab\tab\tab\cf2 ELSE\cf1  \cf2 IF\cf1  @OperationType \cf3 =\cf1  \cf5 'Delete'\cf1\par
+\tab\tab\tab\cf2 BEGIN\cf1\par
+\tab\tab\tab\tab\cf2 EXEC\cf1  DeleteBook\cf2  \cf1 @BookID\cf3 ;\cf1\par
+\tab\tab\tab\cf2 END\cf1\par
+\tab\tab\cf2 END\cf3 ;\cf1\par
+\par
+\tab\tab\cf2 EXEC\cf1  FullBookOperation\cf2  \cf1 @OperationType \cf3 =\cf1  \cf5 'Select'\cf3 ,\cf1  @BookID \cf3 =\cf1  1\cf3 ;\cf1\par
+\par
+\tab\tab\cf2 EXEC\cf1  FullBookOperation\cf2  \cf1 @OperationType \cf3 =\cf1  \cf5 'Add'\cf3 ,\cf1\par
+\tab\tab\tab @Title \cf3 =\cf1  \cf5 'Harry Potter'\cf3 ,\cf1\par
+\tab\tab\tab @AuthorID \cf3 =\cf1  1\cf3 ,\cf1\par
+\tab\tab\tab @ISBN \cf3 =\cf1  \cf5 '978-1234567890'\cf3 ,\cf1\par
+\tab\tab\tab @PublishedDate \cf3 =\cf1  \cf5 '2023-01-01'\cf3 ,\cf1\par
+\tab\tab\tab @GenreID \cf3 =\cf1  1\cf3 ;\cf1\par
+\par
+\tab\tab\cf2 EXEC\cf1  FullBookOperation\cf2  \cf1 @OperationType \cf3 =\cf1  \cf5 'Update'\cf3 ,\cf1\par
+\tab\tab\tab @BookID \cf3 =\cf1  1\cf3 ,\cf1\par
+\tab\tab\tab @Title \cf3 =\cf1  \cf5 'Choota bheem'\cf3 ,\cf1\par
+\tab\tab\tab @AuthorID \cf3 =\cf1  2\cf3 ,\cf1\par
+\tab\tab\tab @ISBN \cf3 =\cf1  \cf5 '978-9876543210'\cf3 ,\cf1\par
+\tab\tab\tab @PublishedDate \cf3 =\cf1  \cf5 '2022-12-01'\cf3 ,\cf1\par
+\tab\tab\tab @GenreID \cf3 =\cf1  2\cf3 ;\cf1\par
+\par
+\tab\tab\cf2 EXEC\cf1  FullBookOperation\cf2  \cf1 @OperationType \cf3 =\cf1  \cf5 'Delete'\cf3 ,\cf1  @BookID \cf3 =\cf1  3\cf3 ;\cf1\par
+\cf0\par
+\tab\ul\b 3. Social Media App DB\ulnone\b0\par
+\cf4\par
+\tab -- 1. Select\cf1\par
+\tab\tab\cf2 CREATE\cf1  \cf2 PROCEDURE\cf1  SelectUser\par
+\tab\tab @UserID \cf2 INT\cf1\par
+\tab\tab\cf2 AS\cf1\par
+\tab\tab\cf2 BEGIN\cf1\par
+\tab\tab\tab\cf2 Select\cf1  \cf3 *\cf1  \cf2 from\cf1  [User] \cf2 Where\cf1  UserID \cf3 =\cf1  @userID\cf3 ;\cf1\par
+\tab\tab\cf2 END\cf3 ;\cf1\par
+\tab\tab\par
+\tab\tab\cf2 Exec\cf1  SelectUser\cf2  \cf1 @UserID \cf3 =\cf1  5\cf3 ;\cf1\par
+\par
+\tab\cf4 -- 2. Create\cf1\par
+\tab\tab\cf2 CREATE\cf1  \cf2 PROCEDURE\cf1  CreateUser \par
+\tab\tab\tab @FirstName \cf2 VARCHAR\cf3 (\cf1 50\cf3 ),\cf1\par
+\tab\tab\tab @LastName \cf2 VARCHAR\cf3 (\cf1 50\cf3 ),\cf1\par
+\tab\tab\tab @Email \cf2 VARCHAR\cf3 (\cf1 100\cf3 ),\cf1\par
+\tab\tab\tab @BirthDate \cf2 DATE\cf1\par
+\tab\tab\cf2 AS\cf1\par
+\tab\tab\cf2 BEGIN\cf1\par
+\tab\tab\tab\cf2 INSERT\cf1  \cf2 INTO\cf1  [User]\cf2  \cf3 (\cf1 FirstName\cf3 ,\cf1  LastName\cf3 ,\cf1  Email\cf3 ,\cf1  BirthDate\cf3 )\cf1\par
+\tab\tab\tab\cf2 VALUES \cf3 (\cf1 @FirstName\cf3 ,\cf1 @LastName\cf3 ,\cf1 @Email\cf3 ,\cf1 @BirthDate\cf3 );\cf1\par
+\tab\tab\cf2 END\cf3 ;\cf1\par
+\par
+\tab\tab\cf2 select\cf1  \cf3 *\cf1  \cf2 from\cf1  [User]\cf3 ;\cf1\par
+\par
+\tab\tab\cf2 Exec\cf1  CreateUser\cf2  \cf1 @FirstName \cf3 =\cf1  \cf5 'Divyesh'\cf3 ,\cf1  @LastName \cf3 =\cf1  \cf5 'Mavadiya'\cf3 ,\cf1  @Email \cf3 =\cf1  \cf5 'mavadiyadivyesh56@gmail.com'\cf3 ,\cf1  @BirthDate \cf3 =\cf1  \cf5 '2003-08-17'\cf3 ;\cf1\par
+\par
+\tab\cf4 -- 3. Update\cf1\par
+\tab\tab\par
+\tab\tab\cf2 CREATE\cf1  \cf2 PROCEDURE\cf1  UpdateUser \par
+\tab\tab\tab @UserID \cf2 INT\cf3 ,\cf1\par
+\tab\tab\tab @UpdatedFirstName \cf2 VARCHAR\cf3 (\cf1 50\cf3 ),\cf1\par
+\tab\tab\tab @UpdatedLastName \cf2 VARCHAR\cf3 (\cf1 50\cf3 ),\cf1\par
+\tab\tab\tab @UpdatedEmail \cf2 VARCHAR\cf3 (\cf1 100\cf3 ),\cf1\par
+\tab\tab\tab @UpdatedBirthDate \cf2 DATE\cf1\par
+\tab\tab\cf2 AS\cf1\par
+\tab\tab\cf2 BEGIN\cf1\par
+\tab\tab\tab\cf6 Update\cf1  [User] \cf2 SET\cf1\par
+\tab\tab\tab\tab FirstName \cf3 =\cf1  @UpdatedFirstName\cf3 ,\cf1\par
+\tab\tab\tab\tab LastName \cf3 =\cf1  @UpdatedLastName\cf3 ,\cf1\par
+\tab\tab\tab\tab Email \cf3 =\cf1  @UpdatedEmail\cf3 ,\cf1\par
+\tab\tab\tab\tab BirthDate \cf3 =\cf1  @UpdatedBirthDate \cf2 WHERE\cf1  UserID \cf3 =\cf1  @UserID\cf3 ;\cf1\par
+\tab\tab\cf2 END\cf3 ;\cf1\par
+\par
+\tab\tab\cf2 Exec\cf1  UpdateUser\cf2  \cf1 @UserID \cf3 =\cf1  6\cf3 ,\cf1  @UpdatedFirstName \cf3 =\cf1  \cf5 'Divu'\cf3 ,\cf1  @UpdatedLastName \cf3 =\cf1  \cf5 'Mavadiya'\cf3 ,\cf1  @UpdatedEmail \cf3 =\cf1  \cf5 'Divu0017@gmail.com'\cf3 ,\cf1  @UpdatedBirthDate \cf3 =\cf1  \cf5 '2003-08-17'\cf3 ;\cf1\par
+\par
+\tab\cf4 -- 5. Fully\cf1\par
+\tab\tab\cf2 CREATE\cf1  \cf2 PROCEDURE\cf1  UserCRUD\par
+\tab\tab\tab @Action \cf2 VARCHAR\cf3 (\cf1 10\cf3 ),\cf1  \par
+\tab\tab\tab @UserID \cf2 INT\cf1  \cf3 =\cf1  \cf3 NULL,\cf1\par
+\tab\tab\tab @FirstName \cf2 VARCHAR\cf3 (\cf1 50\cf3 )\cf1  \cf3 =\cf1  \cf3 NULL,\cf1\par
+\tab\tab\tab @LastName \cf2 VARCHAR\cf3 (\cf1 50\cf3 )\cf1  \cf3 =\cf1  \cf3 NULL,\cf1\par
+\tab\tab\tab @Email \cf2 VARCHAR\cf3 (\cf1 100\cf3 )\cf1  \cf3 =\cf1  \cf3 NULL,\cf1\par
+\tab\tab\tab @BirthDate \cf2 DATE\cf1  \cf3 =\cf1  \cf3 NULL\cf1\par
+\tab\tab\cf2 AS\cf1\par
+\tab\tab\cf2 BEGIN\cf1\par
+\tab\tab\tab\cf2 IF\cf1  @Action \cf3 =\cf1  \cf5 'SELECT'\cf1\par
+\tab\tab\tab\cf2 BEGIN\cf1\par
+\tab\tab\tab\tab\cf2 SELECT\cf1  \cf3 *\cf1\par
+\tab\tab\tab\tab\cf2 FROM\cf1  [User]\par
+\tab\tab\tab\tab\cf2 WHERE\cf1  UserID \cf3 =\cf1  @UserID\cf3 ;\cf1\par
+\tab\tab\tab\cf2 END\cf1\par
+\tab\tab\tab\cf2 ELSE\cf1  \cf2 IF\cf1  @Action \cf3 =\cf1  \cf5 'INSERT'\cf1\par
+\tab\tab\tab\cf2 BEGIN\cf1\par
+\tab\tab\tab\tab\cf2 INSERT\cf1  \cf2 INTO\cf1  [User]\cf2  \cf3 (\cf1 FirstName\cf3 ,\cf1  LastName\cf3 ,\cf1  Email\cf3 ,\cf1  BirthDate\cf3 )\cf1\par
+\tab\tab\tab\tab\cf2 VALUES \cf3 (\cf1 @FirstName\cf3 ,\cf1  @LastName\cf3 ,\cf1  @Email\cf3 ,\cf1  @BirthDate\cf3 );\cf1\par
+\tab\tab\tab\cf2 END\cf1\par
+\tab\tab\tab\cf2 ELSE\cf1  \cf2 IF\cf1  @Action \cf3 =\cf1  \cf5 'UPDATE'\cf1\par
+\tab\tab\tab\cf2 BEGIN\cf1\par
+\tab\tab\tab\tab\cf6 UPDATE\cf1  [User]\par
+\tab\tab\tab\tab\cf2 SET\cf1  FirstName \cf3 =\cf1  \cf6 ISNULL\cf3 (\cf1 @FirstName\cf3 ,\cf1  FirstName\cf3 ),\cf1\par
+\tab\tab\tab\tab\tab LastName \cf3 =\cf1  \cf6 ISNULL\cf3 (\cf1 @LastName\cf3 ,\cf1  LastName\cf3 ),\cf1\par
+\tab\tab\tab\tab\tab Email \cf3 =\cf1  \cf6 ISNULL\cf3 (\cf1 @Email\cf3 ,\cf1  Email\cf3 ),\cf1\par
+\tab\tab\tab\tab\tab BirthDate \cf3 =\cf1  \cf6 ISNULL\cf3 (\cf1 @BirthDate\cf3 ,\cf1  BirthDate\cf3 )\cf1\par
+\tab\tab\tab\tab\cf2 WHERE\cf1  UserID \cf3 =\cf1  @UserID\cf3 ;\cf1\par
+\tab\tab\tab\cf2 END\cf1\par
+\tab\tab\tab\cf2 ELSE\cf1  \cf2 IF\cf1  @Action \cf3 =\cf1  \cf5 'DELETE'\cf1\par
+\tab\tab\tab\cf2 BEGIN\cf1\par
+\tab\tab\tab\tab\cf2 DELETE\cf1  \cf2 FROM\cf1  [User]\par
+\tab\tab\tab\tab\cf2 WHERE\cf1  UserID \cf3 =\cf1  @UserID\cf3 ;\cf1\par
+\tab\tab\tab\cf2 END\cf1\par
+\tab\tab\cf2 END\cf3 ;\cf1\par
+\par
+\tab\tab\cf2 EXEC\cf1  UserCRUD\cf2  \cf5 'INSERT'\cf3 ,\cf1  \cf3 NULL,\cf1  \cf5 'John'\cf3 ,\cf1  \cf5 'Doe'\cf3 ,\cf1  \cf5 'john.doe@email.com'\cf3 ,\cf1  \cf5 '1990-01-01'\cf3 ;\cf1\par
+\tab\tab\cf2 EXEC\cf1  UserCRUD\cf2  \cf5 'UPDATE'\cf3 ,\cf1  1\cf3 ,\cf1  \cf5 'Updated'\cf3 ,\cf1  \cf5 'User'\cf3 ,\cf1  \cf5 'updated.user@email.com'\cf3 ,\cf1  \cf5 '1995-05-05'\cf3 ;\cf1\par
+\tab\tab\cf2 EXEC\cf1  UserCRUD\cf2  \cf5 'DELETE'\cf3 ,\cf1  2\cf3 ;\cf1\par
+\tab\tab\cf2 EXEC\cf1  UserCRUD\cf2  \cf5 'SELECT'\cf3 ,\cf1  3\cf3 ;\cf1\par
+\par
+\par
+\cf0\ul\b Q11.  Create 2 non-clustered indexes.\par
+\cf1\ulnone\b0\tab\par
+\tab\cf0\ul\b 1. Inventory DB\ulnone\b0\par
+\cf1\par
+\tab\cf4 -- 1. Non-Clustered Index on Product Table (ProductName)\cf1\par
+\tab\tab\cf2 CREATE\cf1  \cf2 NONCLUSTERED\cf1  \cf2 INDEX\cf1  IX_Product_ProductName\par
+\tab\tab\cf2 ON\cf1  Product\cf2  \cf3 (\cf1 ProductName\cf3 );\cf1\par
+\par
+\tab\cf4 --2. Non-Clustered Index on OrderItem Table (OrderID)\cf1\par
+\tab\tab\cf2 CREATE\cf1  \cf2 NONCLUSTERED\cf1  \cf2 INDEX\cf1  IX_OrderItem_OrderID\par
+\tab\tab\cf2 ON\cf1  OrderItem\cf2  \cf3 (\cf1 OrderID\cf3 );\cf1\par
+\cf0\tab\par
+\tab\ul\b 2. Library Management DB\par
+\cf4\ulnone\b0\par
+\tab -- 1. Non-Clustered Index on Author Table (AuthorID)\cf1\par
+\tab\tab\cf2 CREATE\cf1  \cf2 NONCLUSTERED\cf1  \cf2 INDEX\cf1  IX_Book_AuthorID\par
+\tab\tab\cf2 ON\cf1  Book\cf2  \cf3 (\cf1 AuthorID\cf3 );\cf1\par
+\par
+\par
+\tab\cf4 -- 2. Non-Clustered Index on Genre Table (GenreID)\cf1\par
+\tab\tab\cf2 CREATE\cf1  \cf2 NONCLUSTERED\cf1  \cf2 INDEX\cf1  IX_Book_GenreID\par
+\tab\tab\cf2 ON\cf1  Book\cf2  \cf3 (\cf1 GenreID\cf3 );\cf1\par
+\cf0\par
+\tab\ul\b 3. Social Media App DB\ulnone\b0\par
+\cf1\par
+\cf4\tab --1. Non-Clustered Index on Post Table (UserID)\cf1\par
+\tab\tab\cf2 CREATE\cf1  \cf2 NONCLUSTERED\cf1  \cf2 INDEX\cf1  IX_Post_UserID\par
+\tab\tab\cf2 ON\cf1  Post\cf2  \cf3 (\cf1 UserID\cf3 );\cf1\par
+\par
+\tab\cf4 --2. Non-Clustered Index on Comment Table (PostID)\cf1\par
+\tab\tab\cf2 CREATE\cf1  \cf2 NONCLUSTERED\cf1  \cf2 INDEX\cf1  IX_Comment_PostID\par
+\tab\tab\cf2 ON\cf1  Comment\cf2  \cf3 (\cf1 PostID\cf3 );\cf1\par
+\par
+\par
+\cf0\ul\b Q12.  Create Before and After triggers for insert, update and delete operations.\cf1\ulnone\b0\par
+\cf0\par
+\tab\ul\b 1. Inventory DB\ulnone\b0\par
+\cf1\par
+\tab\cf4 --1 Before Insert\cf1\par
+\tab\tab\cf2 CREATE\cf1  \cf2 TRIGGER\cf1  tr_Product_BeforeInsert\par
+\tab\tab\cf2 ON\cf1  Product\par
+\tab\tab\cf2 FOR\cf1  \cf2 INSERT\cf1\par
+\tab\tab\cf2 AS\cf1\par
+\tab\tab\cf2 BEGIN\cf1\par
+\tab\tab\tab\cf2 PRINT\cf1  \cf5 'BEFORE INSERT trigger on Product table'\cf3 ;\cf1\par
+\tab\tab\cf2 END\cf3 ;\cf1\par
+\par
+\tab\cf4 --2 After Insert\cf1\par
+\tab\tab\cf2 CREATE\cf1  \cf2 TRIGGER\cf1  tr_Product_AfterInsert\par
+\tab\tab\cf2 ON\cf1  Product\par
+\tab\tab\cf2 AFTER\cf1  \cf2 INSERT\cf1\par
+\tab\tab\cf2 AS\cf1\par
+\tab\tab\cf2 BEGIN\cf1\par
+\tab\tab\tab\cf2 PRINT\cf1  \cf5 'AFTER INSERT trigger on Product table'\cf3 ;\cf1\par
+\tab\tab\cf2 END\cf3 ;\cf1\par
+\par
+\tab\cf4 --3 Before Update\cf1\par
+\tab\tab\cf2 CREATE\cf1  \cf2 TRIGGER\cf1  tr_Product_BeforeUpdate\par
+\tab\tab\cf2 ON\cf1  Product\par
+\tab\tab\cf2 FOR\cf1  \cf6 UPDATE\cf1\par
+\tab\tab\cf2 AS\cf1\par
+\tab\tab\cf2 BEGIN\cf1\par
+\tab\tab\tab\cf2 PRINT\cf1  \cf5 'BEFORE UPDATE trigger on Product table'\cf3 ;\cf1\par
+\tab\tab\cf2 END\cf3 ;\cf1\par
+\par
+\tab\cf4 --4 After Update\cf1\par
+\tab\tab\cf2 CREATE\cf1  \cf2 TRIGGER\cf1  tr_Product_AfterUpdate\par
+\tab\tab\cf2 ON\cf1  Product\par
+\tab\tab\cf2 AFTER\cf1  \cf6 UPDATE\cf1\par
+\tab\tab\cf2 AS\cf1\par
+\tab\tab\cf2 BEGIN\cf1\par
+\tab\tab\tab\cf2 PRINT\cf1  \cf5 'AFTER UPDATE trigger on Product table'\cf3 ;\cf1\par
+\tab\tab\cf2 END\cf3 ;\cf1\par
+\par
+\tab\cf4 --5 After Delete\cf1\par
+\tab\tab\cf2 CREATE\cf1  \cf2 TRIGGER\cf1  tr_Product_AfterDelete\par
+\tab\tab\cf2 ON\cf1  Product\par
+\tab\tab\cf2 AFTER\cf1  \cf2 DELETE\cf1\par
+\tab\tab\cf2 AS\cf1\par
+\tab\tab\cf2 BEGIN\cf1\par
+\tab\tab\tab\cf2 PRINT\cf1  \cf5 'AFTER DELETE trigger on Product table'\cf3 ;\cf1\par
+\tab\tab\cf2 END\cf3 ;\cf1\par
+\cf0\tab\par
+\tab\ul\b 2. Library Management DB\par
+\cf4\ulnone\b0\par
+\tab --1 Before Insert\cf1\par
+\tab\tab\cf2 CREATE\cf1  \cf2 TRIGGER\cf1  BeforeInsertBook\par
+\tab\tab\cf2 ON\cf1  Book\par
+\tab\tab\cf2 FOR\cf1  \cf2 INSERT\cf1\par
+\tab\tab\cf2 AS\cf1\par
+\tab\tab\cf2 BEGIN\cf1\par
+\tab\tab\tab\cf2 PRINT\cf1  \cf5 'Before Insert Book Trigger is called'\cf3 ;\cf1\par
+\tab\tab\cf2 END\cf3 ;\cf1\par
+\par
+\tab\cf4 --2 After Insert\cf1\par
+\tab\tab\cf2 CREATE\cf1  \cf2 TRIGGER\cf1  AfterInsertBook\par
+\tab\tab\cf2 ON\cf1  Book\par
+\tab\tab\cf2 AFTER\cf1  \cf2 INSERT\cf1\par
+\tab\tab\cf2 AS\cf1\par
+\tab\tab\cf2 BEGIN\cf1\par
+\tab\tab\tab\cf2 PRINT\cf1  \cf5 'After Inser Book Trigger is Called'\cf3 ;\cf1\par
+\tab\tab\cf2 END\cf3 ;\cf1\par
+\par
+\par
+\tab\cf4 --3 Before Update\cf1\par
+\tab\tab\cf2 CREATE\cf1  \cf2 TRIGGER\cf1  BeforeUpdateBook\par
+\tab\tab\cf2 ON\cf1  Book\par
+\tab\tab\cf2 FOR\cf1  \cf6 UPDATE\cf1\par
+\tab\tab\cf2 AS\cf1\par
+\tab\tab\cf2 BEGIN\cf1\par
+\tab\tab\tab\cf2 PRINT\cf1  \cf5 'Before Update Book Trigger is called'\cf3 ;\cf1\par
+\tab\tab\cf2 END\cf3 ;\cf1\par
+\par
+\par
+\tab\cf4 --4 After Update\cf1\par
+\tab\tab\cf2 CREATE\cf1  \cf2 TRIGGER\cf1  AfterUpdateBook\par
+\tab\tab\cf2 ON\cf1  Book\par
+\tab\tab\cf2 AFTER\cf1  \cf6 UPDATE\cf1\par
+\tab\tab\cf2 AS\cf1\par
+\tab\tab\cf2 BEGIN\cf1\par
+\tab\tab\tab\cf2 PRINT\cf1  \cf5 'After Update Book Trigger is called'\cf3 ;\cf1\par
+\tab\tab\cf2 END\cf3 ;\cf1\par
+\par
+\par
+\tab\cf4 --5 Before Delete\cf1\par
+\tab\tab\cf2 CREATE\cf1  \cf2 TRIGGER\cf1  BeforeDeleteBook\par
+\tab\tab\cf2 ON\cf1  Book\par
+\tab\tab\cf2 FOR\cf1  \cf2 DELETE\cf1\par
+\tab\tab\cf2 AS\cf1\par
+\tab\tab\cf2 BEGIN\cf1\par
+\tab\tab\tab\cf2 PRINT\cf1  \cf5 'Before Delete Book Trigger is called'\cf3 ;\cf1\par
+\tab\tab\cf2 END\cf3 ;\cf1\par
+\par
+\tab\cf4 --6 After Delete\cf1\par
+\tab\tab\cf2 CREATE\cf1  \cf2 TRIGGER\cf1  AfterDeleteBook\par
+\tab\tab\cf2 ON\cf1  Book\par
+\tab\tab\cf2 AFTER\cf1  \cf2 DELETE\cf1\par
+\tab\tab\cf2 AS\cf1\par
+\tab\tab\cf2 BEGIN\cf1\par
+\tab\tab\tab\cf2 PRINT\cf1  \cf5 'After Delete Book Trigger is called'\cf3 ;\cf1\par
+\tab\tab\cf2 END\cf3 ;\cf1\par
+\tab\cf0\par
+\tab\ul\b 3. Social Media App DB\par
+\par
+\cf4\ulnone\b0\tab --1 Before Insert\cf1\par
+\tab\tab\cf2 CREATE\cf1  \cf2 TRIGGER\cf1  BeforeInsertUser\par
+\tab\tab\cf2 ON\cf1  [User]\par
+\tab\tab\cf2 FOR\cf1  \cf2 INSERT\cf1\par
+\tab\tab\cf2 AS\cf1\par
+\tab\tab\cf2 BEGIN\cf1\par
+\tab\tab\tab\cf2 PRINT\cf1  \cf5 'Before Insert User Trigger is called'\cf3 ;\cf1\par
+\tab\tab\cf2 END\cf3 ;\cf1\par
+\par
+\tab\cf4 --2 After Insert\cf1\par
+\tab\tab\cf2 CREATE\cf1  \cf2 TRIGGER\cf1  AfterInsertUser\par
+\tab\tab\cf2 ON\cf1  [User]\par
+\tab\tab\cf2 AFTER\cf1  \cf2 INSERT\cf1\par
+\tab\tab\cf2 AS\cf1\par
+\tab\tab\cf2 BEGIN\cf1\par
+\tab\tab\tab\cf2 PRINT\cf1  \cf5 'After Insert User Trigger is Called'\cf3 ;\cf1\par
+\tab\tab\cf2 END\cf3 ;\cf1\par
+\par
+\tab\cf4 --3 Before Update\cf1\par
+\tab\tab\cf2 CREATE\cf1  \cf2 TRIGGER\cf1  BeforeUpdateUser\par
+\tab\tab\cf2 ON\cf1  [User]\par
+\tab\tab\cf2 FOR\cf1  \cf6 UPDATE\cf1\par
+\tab\tab\cf2 AS\cf1\par
+\tab\tab\cf2 BEGIN\cf1\par
+\tab\tab\tab\cf2 PRINT\cf1  \cf5 'Before Update User Trigger is Called'\cf3 ;\cf1\par
+\tab\tab\cf2 END\cf3 ;\cf1\par
+\par
+\tab\cf4 --4 After Update\cf1\par
+\tab\tab\cf2 CREATE\cf1  \cf2 TRIGGER\cf1  AfterUpdateUser\par
+\tab\tab\cf2 ON\cf1  [User]\par
+\tab\tab\cf2 AFTER\cf1  \cf6 UPDATE\cf1\par
+\tab\tab\cf2 AS\cf1\par
+\tab\tab\cf2 BEGIN\cf1\par
+\tab\tab\tab\cf2 PRINT\cf1  \cf5 'After Update User Trigger is Called'\cf3 ;\cf1\par
+\tab\tab\cf2 END\cf3 ;\cf1\tab\tab\par
+\par
+\tab\cf4 --5 Before Delete\cf1\par
+\tab\tab\cf2 CREATE\cf1  \cf2 TRIGGER\cf1  BeforeDeleteUser\par
+\tab\tab\cf2 ON\cf1  [User]\par
+\tab\tab\cf2 FOR\cf1  \cf2 DELETE\cf1\par
+\tab\tab\cf2 AS\cf1\par
+\tab\tab\cf2 BEGIN\cf1\par
+\tab\tab\tab\cf2 PRINT\cf1  \cf5 'Before Delete User Trigger is Called'\cf3 ;\cf1\par
+\tab\tab\cf2 END\cf3 ;\cf1\par
+\par
+\tab\cf4 --6 After Delete\cf1\par
+\tab\tab\cf2 CREATE\cf1  \cf2 TRIGGER\cf1  AfterDeleteUser\par
+\tab\tab\cf2 ON\cf1  [User]\par
+\tab\tab\cf2 AFTER\cf1  \cf2 DELETE\cf1\par
+\tab\tab\cf2 AS\cf1\par
+\tab\tab\cf2 BEGIN\cf1\par
+\tab\tab\tab\cf2 PRINT\cf1  \cf5 'After Delte User Trigger is Called'\cf3 ;\cf1\par
+\tab\tab\cf2 END\cf3 ;\cf0\par
+\cf1\par
+\par
+\cf0\ul\b Q13. Write SQL queries for Union and Union All.\par
+\cf1\ulnone\b0\tab\par
+\tab\cf0\ul\b 1. Inventory DB\ulnone\b0\par
+\cf1\par
+\tab\cf4 -- 1. UNION\cf1\par
+\tab\tab\cf2 SELECT\cf1  CategoryID \cf2 FROM\cf1  Product\par
+\tab\tab\cf2 UNION\cf1\par
+\tab\tab\cf2 SELECT\cf1  OrderID \cf2 FROM\cf1  OrderItem\cf3 ;\cf1\par
+\par
+\tab\cf4 --2; UNION ALL\cf1\par
+\tab\tab\cf2 SELECT\cf1  CategoryID \cf2 FROM\cf1  Product\par
+\tab\tab\cf2 UNION\cf1  \cf3 ALL\cf1\par
+\tab\tab\cf2 SELECT\cf1  OrderID \cf2 FROM\cf1  OrderItem\cf3 ;\cf1\par
+\tab\cf0\tab\par
+\tab\ul\b 2. Library Management DB\cf1\ulnone\b0\par
+\par
+\tab\cf4 -- 1. UNION\cf1\par
+\tab\tab\cf2 SELECT\cf1  Title \cf2 AS\cf1  \cf2 Name\cf1  \cf2 FROM\cf1  Book\par
+\tab\tab\cf2 UNION\cf1\par
+\tab\tab\cf2 SELECT\cf1  FirstName \cf2 AS\cf1  \cf2 Name\cf1  \cf2 FROM\cf1  Member\cf3 ;\cf1\par
+\par
+\tab\cf4 --2; UNION ALL\cf1\par
+\tab\tab\cf2 SELECT\cf1  Title \cf2 AS\cf1  \cf2 Name\cf1  \cf2 FROM\cf1  Book\par
+\tab\tab\cf2 UNION\cf1  \cf3 ALL\cf1\par
+\tab\tab\cf2 SELECT\cf1  FirstName \cf2 AS\cf1  \cf2 Name\cf1  \cf2 FROM\cf1  Member\cf3 ;\cf1\tab\par
+\cf0\tab\par
+\tab\ul\b 3. Social Media App DB\ulnone\b0\par
+\cf1\tab\par
+\tab\cf4 -- 1. UNION\cf1\tab\par
+\tab\par
+\par
+\tab\cf4 --2; UNION ALL\cf1\par
+\tab\tab\cf2 SELECT\cf1  PostID\cf3 ,\cf1  Content\cf3 ,\cf1  \cf5 'Post'\cf1  \cf2 AS\cf1  ItemType\par
+\tab\tab\cf2 FROM\cf1  Post\par
+\tab\tab\cf2 WHERE\cf1  LikesCount \cf3 >\cf1  10\par
+\par
+\tab\tab\cf2 UNION\cf1  \cf3 ALL\cf1\par
+\par
+\tab\tab\cf2 SELECT\cf1  CommentID\cf3 ,\cf1  CommentText\cf3 ,\cf1  \cf5 'Comment'\cf1  \cf2 AS\cf1  ItemType\par
+\tab\tab\cf2 FROM\cf1  Comment\par
+\tab\tab\cf2 WHERE\cf1  \cf6 DATALENGTH\cf3 (\cf1 CommentText\cf3 )\cf1  \cf3 >\cf1  20\cf3 ;\cf1\par
+\par
+\par
+\cf0\ul\b Q14. JOINS\par
+\cf1\ulnone\b0\tab\par
+\tab\cf0\ul\b 1. Inventory DB\ulnone\b0\par
+\cf1\par
+\tab\cf4 -- 1. Inner Join\cf1\par
+\tab\tab\cf2 SELECT\cf1\par
+\tab\tab\tab Product\cf3 .\cf1 ProductID\cf3 ,\cf1\par
+\tab\tab\tab Product\cf3 .\cf1 ProductName\cf3 ,\cf1\par
+\tab\tab\tab Product\cf3 .\cf1 Price\cf3 ,\cf1\par
+\tab\tab\tab Product\cf3 .\cf1 StockQuantity\cf3 ,\cf1\par
+\tab\tab\tab Category\cf3 .\cf1 CategoryName\par
+\tab\tab\cf2 FROM\cf1\par
+\tab\tab\tab Product\par
+\tab\tab\cf3 INNER\cf1  \cf3 JOIN\cf1\par
+\tab\tab\tab Category \cf2 ON\cf1  Product\cf3 .\cf1 CategoryID \cf3 =\cf1  Category\cf3 .\cf1 CategoryID\cf3 ;\cf1\par
+\par
+\tab\cf4 -- 2. Left Outer Join\cf1\par
+\tab\tab\cf2 SELECT\cf1\par
+\tab\tab\tab Product\cf3 .\cf1 ProductID\cf3 ,\cf1\par
+\tab\tab\tab Product\cf3 .\cf1 ProductName\cf3 ,\cf1\par
+\tab\tab\tab Product\cf3 .\cf1 Price\cf3 ,\cf1\par
+\tab\tab\tab Product\cf3 .\cf1 StockQuantity\cf3 ,\cf1\par
+\tab\tab\tab Category\cf3 .\cf1 CategoryName\par
+\tab\tab\cf2 FROM\cf1\par
+\tab\tab\tab Product\par
+\tab\tab\cf3 LEFT\cf1  \cf3 JOIN\cf1\par
+\tab\tab\tab Category \cf2 ON\cf1  Product\cf3 .\cf1 CategoryID \cf3 =\cf1  Category\cf3 .\cf1 CategoryID\cf3 ;\cf1\par
+\par
+\tab\cf4 -- 3. Right Outer Join\cf1\par
+\tab\tab\cf2 SELECT\cf1\par
+\tab\tab\tab Product\cf3 .\cf1 ProductID\cf3 ,\cf1\par
+\tab\tab\tab Product\cf3 .\cf1 ProductName\cf3 ,\cf1\par
+\tab\tab\tab Product\cf3 .\cf1 Price\cf3 ,\cf1\par
+\tab\tab\tab Product\cf3 .\cf1 StockQuantity\cf3 ,\cf1\par
+\tab\tab\tab Category\cf3 .\cf1 CategoryName\par
+\tab\tab\cf2 FROM\cf1\par
+\tab\tab\tab Product\par
+\tab\tab\cf3 RIGHT\cf1  \cf3 JOIN\cf1\par
+\tab\tab\tab Category \cf2 ON\cf1  Product\cf3 .\cf1 CategoryID \cf3 =\cf1  Category\cf3 .\cf1 CategoryID\cf3 ;\cf1\par
+\par
+\tab\cf4 -- 4. Full Outer Join\cf1\par
+\tab\tab\cf2 SELECT\cf1\par
+\tab\tab\tab Product\cf3 .\cf1 ProductID\cf3 ,\cf1\par
+\tab\tab\tab Product\cf3 .\cf1 ProductName\cf3 ,\cf1\par
+\tab\tab\tab Product\cf3 .\cf1 Price\cf3 ,\cf1\par
+\tab\tab\tab Product\cf3 .\cf1 StockQuantity\cf3 ,\cf1\par
+\tab\tab\tab Category\cf3 .\cf1 CategoryName\par
+\tab\tab\cf2 FROM\cf1\par
+\tab\tab\tab Product\par
+\tab\tab\cf2 FULL\cf1  \cf3 JOIN\cf1\par
+\tab\tab\tab Category \cf2 ON\cf1  Product\cf3 .\cf1 CategoryID \cf3 =\cf1  Category\cf3 .\cf1 CategoryID\cf3 ;\cf1\par
+\par
+\tab\cf4 -- 5. Cross Join\cf1\par
+\tab\tab\cf2 SELECT\cf1\par
+\tab\tab\tab Product\cf3 .\cf1 ProductID\cf3 ,\cf1\par
+\tab\tab\tab Product\cf3 .\cf1 ProductName\cf3 ,\cf1\par
+\tab\tab\tab Product\cf3 .\cf1 Price\cf3 ,\cf1\par
+\tab\tab\tab Product\cf3 .\cf1 StockQuantity\cf3 ,\cf1\par
+\tab\tab\tab Category\cf3 .\cf1 CategoryID\cf3 ,\cf1\par
+\tab\tab\tab Category\cf3 .\cf1 CategoryName\par
+\tab\tab\cf2 FROM\cf1\par
+\tab\tab\tab Product\par
+\tab\tab\cf3 CROSS\cf1  \cf3 JOIN\cf1\par
+\tab\tab\tab Category\cf3 ;\cf1\par
+\cf0\tab\par
+\tab\ul\b 2. Library Management DB\par
+\par
+\cf1\ulnone\b0\par
+\tab\cf4 -- 1. Inner Join\cf1\par
+\tab\tab\cf2 SELECT\cf1  Book\cf3 .\cf1 Title\cf3 ,\cf1  Author\cf3 .\cf1 AuthorName\par
+\tab\tab\cf2 FROM\cf1  Book\par
+\tab\tab\cf3 INNER\cf1  \cf3 JOIN\cf1  Author \cf2 ON\cf1  Book\cf3 .\cf1 AuthorID \cf3 =\cf1  Author\cf3 .\cf1 AuthorID\cf3 ;\cf1\par
+\tab\tab\par
+\tab\cf4 -- 2. Left Outer Join\cf1\par
+\tab\tab\cf2 SELECT\cf1  Book\cf3 .\cf1 Title\cf3 ,\cf1  \cf6 ISNULL\cf3 (\cf1 Author\cf3 .\cf1 AuthorName\cf3 ,\cf1  \cf5 'Unknown Author'\cf3 )\cf1  \cf2 AS\cf1  AuthorName\par
+\tab\tab\cf2 FROM\cf1  Book\par
+\tab\tab\cf3 LEFT\cf1  \cf3 JOIN\cf1  Author \cf2 ON\cf1  Book\cf3 .\cf1 AuthorID \cf3 =\cf1  Author\cf3 .\cf1 AuthorID\cf3 ;\cf1\par
+\par
+\tab\cf4 -- 3. Right Outer Join\cf1\par
+\tab\tab\cf2 SELECT\cf1  \cf6 ISNULL\cf3 (\cf1 Book\cf3 .\cf1 Title\cf3 ,\cf1  \cf5 'No Books'\cf3 )\cf1  \cf2 AS\cf1  Title\cf3 ,\cf1  Author\cf3 .\cf1 AuthorName\par
+\tab\tab\cf2 FROM\cf1  Author\par
+\tab\tab\cf3 RIGHT\cf1  \cf3 JOIN\cf1  Book \cf2 ON\cf1  Author\cf3 .\cf1 AuthorID \cf3 =\cf1  Book\cf3 .\cf1 AuthorID\cf3 ;\cf1\par
+\par
+\tab\cf4 -- 4. Full Outer Join\cf1\par
+\tab\tab\cf2 SELECT\cf1  \cf6 ISNULL\cf3 (\cf1 Book\cf3 .\cf1 Title\cf3 ,\cf1  \cf5 'No Books'\cf3 )\cf1  \cf2 AS\cf1  Title\cf3 ,\cf1  \cf6 ISNULL\cf3 (\cf1 Author\cf3 .\cf1 AuthorName\cf3 ,\cf1  \cf5 'Unknown Author'\cf3 )\cf1  \cf2 AS\cf1  AuthorName\par
+\tab\tab\cf2 FROM\cf1  Book\par
+\tab\tab\cf2 FULL\cf1  \cf3 JOIN\cf1  Author \cf2 ON\cf1  Book\cf3 .\cf1 AuthorID \cf3 =\cf1  Author\cf3 .\cf1 AuthorID\cf3 ;\cf1\par
+\par
+\tab\cf4 -- 5. Cross Join\cf1\par
+\tab\tab\cf2 SELECT\cf1  Book\cf3 .\cf1 Title\cf3 ,\cf1  Author\cf3 .\cf1 AuthorName\par
+\tab\tab\cf2 FROM\cf1  Book\par
+\tab\tab\cf3 CROSS\cf1  \cf3 JOIN\cf1  Author\cf3 ;\cf1\tab\cf0\par
+\tab\par
+\tab\ul\b 3. Social Media App DB\ulnone\b0\par
+\par
+\cf4\tab -- 1. Inner Join\cf1\par
+\tab\tab\cf2 SELECT\cf1  Post\cf3 .\cf1 PostID\cf3 ,\cf1  Post\cf3 .\cf1 Content\cf3 ,\cf1  [User]\cf3 .\cf1 FirstName\cf3 ,\cf1  [User]\cf3 .\cf1 LastName\par
+\tab\tab\cf2 FROM\cf1  Post\par
+\tab\tab\cf3 INNER\cf1  \cf3 JOIN\cf1  [User] \cf2 ON\cf1  Post\cf3 .\cf1 UserID \cf3 =\cf1  [User]\cf3 .\cf1 UserID\cf3 ;\cf1\par
+\par
+\tab\cf4 -- 2. Left Outer Join\cf1\par
+\tab\tab\cf2 SELECT\cf1  [User]\cf3 .\cf1 UserID\cf3 ,\cf1  [User]\cf3 .\cf1 FirstName\cf3 ,\cf1  [User]\cf3 .\cf1 LastName\cf3 ,\cf1  Post\cf3 .\cf1 Content\par
+\tab\tab\cf2 FROM\cf1  [User]\par
+\tab\tab\cf3 LEFT\cf1  \cf3 JOIN\cf1  Post \cf2 ON\cf1  [User]\cf3 .\cf1 UserID \cf3 =\cf1  Post\cf3 .\cf1 UserID\cf3 ;\cf1\tab\tab\par
+\par
+\tab\cf4 -- 3. Right Outer Join\cf1\par
+\tab\tab\cf2 SELECT\cf1  [User]\cf3 .\cf1 UserID\cf3 ,\cf1  [User]\cf3 .\cf1 FirstName\cf3 ,\cf1  [User]\cf3 .\cf1 LastName\cf3 ,\cf1  Post\cf3 .\cf1 Content\par
+\tab\tab\cf2 FROM\cf1  Post\par
+\tab\tab\cf3 RIGHT\cf1  \cf3 JOIN\cf1  [User] \cf2 ON\cf1  Post\cf3 .\cf1 UserID \cf3 =\cf1  [User]\cf3 .\cf1 UserID\cf3 ;\cf1\par
+\par
+\tab\cf4 -- 4. Full Outer Join\cf1\par
+\tab\tab\cf2 SELECT\cf1  [User]\cf3 .\cf1 UserID\cf3 ,\cf1  [User]\cf3 .\cf1 FirstName\cf3 ,\cf1  [User]\cf3 .\cf1 LastName\cf3 ,\cf1  Post\cf3 .\cf1 Content\par
+\tab\tab\cf2 FROM\cf1  [User]\par
+\tab\tab\cf2 FULL\cf1  \cf3 OUTER\cf1  \cf3 JOIN\cf1  Post \cf2 ON\cf1  [User]\cf3 .\cf1 UserID \cf3 =\cf1  Post\cf3 .\cf1 UserID\cf3 ;\cf1\tab\par
+\par
+\tab\cf4 -- 5. Cross Join\cf1\par
+\tab\tab\cf2 SELECT\cf1  [User]\cf3 .\cf1 UserID\cf3 ,\cf1  [User]\cf3 .\cf1 FirstName\cf3 ,\cf1  [User]\cf3 .\cf1 LastName\cf3 ,\cf1  Post\cf3 .\cf1 PostID\cf3 ,\cf1  Post\cf3 .\cf1 Content\par
+\tab\tab\cf2 FROM\cf1  [User]\par
+\tab\tab\cf3 CROSS\cf1  \cf3 JOIN\cf1  Post\cf3 ;\cf1\par
+\cf0\par
+\ul\b\par
+Q15. Create Data Dictionary\par
+\cf1\ulnone\b0\tab\par
+\tab\cf0\ul\b 1. Inventory DB\par
+\cf1\ulnone\b0\f1\fs19\par
+
+\pard\li720\sa200\sl276\slmult1\tab\cf2\f0\fs28 use\cf1  Inventory\cf3 ;\cf1\par
+\par
+\tab\cf2 SELECT\cf1  \par
+\tab\tab t\cf3 .\cf2 name\cf1  \cf2 AS\cf1  TableName\cf3 ,\cf1\par
+\tab\tab c\cf3 .\cf2 name\cf1  \cf2 AS\cf1  ColumnName\cf3 ,\cf1\par
+\tab\tab ty\cf3 .\cf2 name\cf1  \cf2 AS\cf1  DataType\cf3 ,\cf1\par
+\tab\tab c\cf3 .\cf1 max_length \cf2 AS\cf1  Size\cf3 ,\cf1\par
+\tab\tab c\cf3 .\cf1 is_nullable \cf2 AS\cf1  IsNullable\par
+\tab\cf2 FROM\cf1  \par
+\tab\tab\cf7 sys\cf3 .\cf7 tables\cf1  t\par
+\tab\cf3 INNER\cf1  \cf3 JOIN\cf1  \par
+\tab\tab\cf7 sys\cf3 .\cf7 columns\cf1  c \cf2 ON\cf1  t\cf3 .\cf6 object_id\cf1  \cf3 =\cf1  c\cf3 .\cf6 object_id\cf1\par
+\tab\cf3 INNER\cf1  \cf3 JOIN\cf1  \par
+\tab\tab\cf7 sys\cf3 .\cf7 types\cf1  ty \cf2 ON\cf1  c\cf3 .\cf1 user_type_id \cf3 =\cf1  ty\cf3 .\cf1 user_type_id\par
+\tab\cf2 ORDER\cf1  \cf2 BY\cf1  \par
+\tab\tab TableName\cf3 ,\cf1\par
+\tab\tab ColumnName\cf3 ;\cf0\ul\b\par
+
+\pard\sa200\sl276\slmult1\cf1\ulnone\b0\tab\par
+\tab\cf0\ul\b 2. Library Management DB\par
+\par
+
+\pard\li720\sa200\sl276\slmult1\cf1\ulnone\b0\f1\fs19\tab\cf2\f0\fs28 use\cf1  LibraryManagement\cf3 ;\cf1\par
+\par
+\tab\cf2 SELECT\cf1  \par
+\tab\tab t\cf3 .\cf2 name\cf1  \cf2 AS\cf1  TableName\cf3 ,\cf1\par
+\tab\tab c\cf3 .\cf2 name\cf1  \cf2 AS\cf1  ColumnName\cf3 ,\cf1\par
+\tab\tab ty\cf3 .\cf2 name\cf1  \cf2 AS\cf1  DataType\cf3 ,\cf1\par
+\tab\tab c\cf3 .\cf1 max_length \cf2 AS\cf1  Size\cf3 ,\cf1\par
+\tab\tab c\cf3 .\cf1 is_nullable \cf2 AS\cf1  IsNullable\par
+\tab\cf2 FROM\cf1  \par
+\tab\tab\cf7 sys\cf3 .\cf7 tables\cf1  t\par
+\tab\cf3 INNER\cf1  \cf3 JOIN\cf1  \par
+\tab\tab\cf7 sys\cf3 .\cf7 columns\cf1  c \cf2 ON\cf1  t\cf3 .\cf6 object_id\cf1  \cf3 =\cf1  c\cf3 .\cf6 object_id\cf1\par
+\tab\cf3 INNER\cf1  \cf3 JOIN\cf1  \par
+\tab\tab\cf7 sys\cf3 .\cf7 types\cf1  ty \cf2 ON\cf1  c\cf3 .\cf1 user_type_id \cf3 =\cf1  ty\cf3 .\cf1 user_type_id\par
+\tab\cf2 ORDER\cf1  \cf2 BY\cf1  \par
+\tab\tab TableName\cf3 ,\cf1\par
+\tab\tab ColumnName\cf3 ;\cf0\ul\b\par
+
+\pard\sa200\sl276\slmult1\ulnone\b0\par
+\cf1\tab\cf0\ul\b 3. Social Media App DB\ulnone\b0\par
+\par
+
+\pard\li720\sa200\sl276\slmult1\cf1\f1\fs19\tab\cf2\f0\fs28 use\cf1  SocialMediaApp\cf3 ;\cf1\par
+\par
+\tab\cf2 SELECT\cf1  \par
+\tab\tab t\cf3 .\cf2 name\cf1  \cf2 AS\cf1  TableName\cf3 ,\cf1\par
+\tab\tab c\cf3 .\cf2 name\cf1  \cf2 AS\cf1  ColumnName\cf3 ,\cf1\par
+\tab\tab ty\cf3 .\cf2 name\cf1  \cf2 AS\cf1  DataType\cf3 ,\cf1\par
+\tab\tab c\cf3 .\cf1 max_length \cf2 AS\cf1  Size\cf3 ,\cf1\par
+\tab\tab c\cf3 .\cf1 is_nullable \cf2 AS\cf1  IsNullable\par
+\tab\cf2 FROM\cf1  \par
+\tab\tab\cf7 sys\cf3 .\cf7 tables\cf1  t\par
+\tab\cf3 INNER\cf1  \cf3 JOIN\cf1  \par
+\tab\tab\cf7 sys\cf3 .\cf7 columns\cf1  c \cf2 ON\cf1  t\cf3 .\cf6 object_id\cf1  \cf3 =\cf1  c\cf3 .\cf6 object_id\cf1\par
+\tab\cf3 INNER\cf1  \cf3 JOIN\cf1  \par
+\tab\tab\cf7 sys\cf3 .\cf7 types\cf1  ty \cf2 ON\cf1  c\cf3 .\cf1 user_type_id \cf3 =\cf1  ty\cf3 .\cf1 user_type_id\par
+\tab\cf2 ORDER\cf1  \cf2 BY\cf1  \par
+\tab\tab TableName\cf3 ,\cf1\par
+\tab\tab ColumnName\cf3 ;\cf0\ul\b\par
+
+\pard\sa200\sl276\slmult1\ulnone\b0\par
+\par
+\par
+\par
+\par
+\par
+}
+ 

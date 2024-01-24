@@ -497,11 +497,12 @@ select * from Book
 	--1 Before Insert
 		CREATE TRIGGER BeforeInsertBook
 		ON Book
-		INSTEAD OF INSERT
+		FOR INSERT
 		AS
 		BEGIN
 			PRINT 'Before Insert Book Trigger is called';
 		END;
+
 
 	--2 After Insert
 		CREATE TRIGGER AfterInsertBook
@@ -516,7 +517,7 @@ select * from Book
 	--3 Before Update
 		CREATE TRIGGER BeforeUpdateBook
 		ON Book
-		INSTEAD OF UPDATE
+		FOR UPDATE
 		AS
 		BEGIN
 			PRINT 'Before Update Book Trigger is called';
@@ -536,7 +537,7 @@ select * from Book
 	--5 Before Delete
 		CREATE TRIGGER BeforeDeleteBook
 		ON Book
-		INSTEAD OF DELETE
+		FOR DELETE
 		AS
 		BEGIN
 			PRINT 'Before Delete Book Trigger is called';
@@ -596,3 +597,25 @@ select * from Book
 		SELECT Book.Title, Author.AuthorName
 		FROM Book
 		CROSS JOIN Author;	
+
+
+-- Data Dictionary
+
+	use LibraryManagement;
+
+
+	SELECT 
+		t.name AS TableName,
+		c.name AS ColumnName,
+		ty.name AS DataType,
+		c.max_length AS Size,
+		c.is_nullable AS IsNullable
+	FROM 
+		sys.tables t
+	INNER JOIN 
+		sys.columns c ON t.object_id = c.object_id
+	INNER JOIN 
+		sys.types ty ON c.user_type_id = ty.user_type_id
+	ORDER BY 
+		TableName,
+		ColumnName;
