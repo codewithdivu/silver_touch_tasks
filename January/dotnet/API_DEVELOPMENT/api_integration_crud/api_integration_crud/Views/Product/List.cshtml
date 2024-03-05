@@ -1,0 +1,41 @@
+﻿@model List<Product>
+
+@{
+    ViewData["Title"] = "Product List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Product List</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Product ID</th>
+            <th>Product Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model)
+        {
+            <tr>
+                <td>@product.ProductId</td>
+                <td>@product.ProductName</td>
+                <td>@product.Description</td>
+                <td>@product.Price</td>
+                <td>
+                    <a class="btn btn-info" asp-controller="Product" asp-action="Details" asp-route-id="@product.ProductId">Details</a>
+                    <a class="btn btn-primary" asp-controller="Product" asp-action="Edit" asp-route-id="@product.ProductId">Edit</a>
+                     <a class="btn btn-danger" asp-controller="Product" asp-action="DeleteConfirm" asp-route-id="@product.ProductId">Delete</a> 
+                    @* @Html.ActionLink("Delete", "delete", new { id = product.ProductId }, new { @class = "btn delete" }) *@
+
+                  
+</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+

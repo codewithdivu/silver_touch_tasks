@@ -1,0 +1,20 @@
+﻿@model demoMVCApplication.ViewModels.BestMovieViewModel
+
+@{
+    ViewBag.Title = "BestMovie";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>BestMovie @Model.Movie.name</h2>
+
+@if (Model.Customers.Count == 0)
+{
+    <h1>No one have rented this movie yet</h1>
+    return;
+}
+<ul>
+    @foreach (var customer in Model.Customers)
+    {
+        <li>@customer.Name</li>
+    }
+</ul>

@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\3TierArchitecture_demo_asp_net_core.props" />
+</Project>

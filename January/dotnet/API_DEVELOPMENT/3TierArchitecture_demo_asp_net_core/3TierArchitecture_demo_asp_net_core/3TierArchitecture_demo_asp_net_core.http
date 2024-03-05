@@ -1,0 +1,6 @@
+@_3TierArchitecture_demo_asp_net_core_HostAddress = http://localhost:5297
+
+GET {{_3TierArchitecture_demo_asp_net_core_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

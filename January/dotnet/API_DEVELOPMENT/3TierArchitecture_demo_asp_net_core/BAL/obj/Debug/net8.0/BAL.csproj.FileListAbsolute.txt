@@ -1,0 +1,17 @@
+C:\Users\BAPS\Desktop\dotnet\API_DEVELOPMENT\3TierArchitecture_demo_asp_net_core\BAL\bin\Debug\net8.0\BAL.deps.json
+C:\Users\BAPS\Desktop\dotnet\API_DEVELOPMENT\3TierArchitecture_demo_asp_net_core\BAL\bin\Debug\net8.0\BAL.runtimeconfig.json
+C:\Users\BAPS\Desktop\dotnet\API_DEVELOPMENT\3TierArchitecture_demo_asp_net_core\BAL\bin\Debug\net8.0\BAL.dll
+C:\Users\BAPS\Desktop\dotnet\API_DEVELOPMENT\3TierArchitecture_demo_asp_net_core\BAL\bin\Debug\net8.0\BAL.pdb
+C:\Users\BAPS\Desktop\dotnet\API_DEVELOPMENT\3TierArchitecture_demo_asp_net_core\BAL\bin\Debug\net8.0\DAL.dll
+C:\Users\BAPS\Desktop\dotnet\API_DEVELOPMENT\3TierArchitecture_demo_asp_net_core\BAL\bin\Debug\net8.0\DAL.pdb
+C:\Users\BAPS\Desktop\dotnet\API_DEVELOPMENT\3TierArchitecture_demo_asp_net_core\BAL\obj\Debug\net8.0\BAL.csproj.AssemblyReference.cache
+C:\Users\BAPS\Desktop\dotnet\API_DEVELOPMENT\3TierArchitecture_demo_asp_net_core\BAL\obj\Debug\net8.0\BAL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\BAPS\Desktop\dotnet\API_DEVELOPMENT\3TierArchitecture_demo_asp_net_core\BAL\obj\Debug\net8.0\BAL.AssemblyInfoInputs.cache
+C:\Users\BAPS\Desktop\dotnet\API_DEVELOPMENT\3TierArchitecture_demo_asp_net_core\BAL\obj\Debug\net8.0\BAL.AssemblyInfo.cs
+C:\Users\BAPS\Desktop\dotnet\API_DEVELOPMENT\3TierArchitecture_demo_asp_net_core\BAL\obj\Debug\net8.0\BAL.csproj.CoreCompileInputs.cache
+C:\Users\BAPS\Desktop\dotnet\API_DEVELOPMENT\3TierArchitecture_demo_asp_net_core\BAL\obj\Debug\net8.0\BAL.csproj.CopyComplete
+C:\Users\BAPS\Desktop\dotnet\API_DEVELOPMENT\3TierArchitecture_demo_asp_net_core\BAL\obj\Debug\net8.0\BAL.dll
+C:\Users\BAPS\Desktop\dotnet\API_DEVELOPMENT\3TierArchitecture_demo_asp_net_core\BAL\obj\Debug\net8.0\refint\BAL.dll
+C:\Users\BAPS\Desktop\dotnet\API_DEVELOPMENT\3TierArchitecture_demo_asp_net_core\BAL\obj\Debug\net8.0\BAL.pdb
+C:\Users\BAPS\Desktop\dotnet\API_DEVELOPMENT\3TierArchitecture_demo_asp_net_core\BAL\obj\Debug\net8.0\BAL.genruntimeconfig.cache
+C:\Users\BAPS\Desktop\dotnet\API_DEVELOPMENT\3TierArchitecture_demo_asp_net_core\BAL\obj\Debug\net8.0\ref\BAL.dll

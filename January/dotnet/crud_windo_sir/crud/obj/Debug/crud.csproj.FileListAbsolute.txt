@@ -1,0 +1,20 @@
+D:\Training Docs\Create Project Screenshots\Practical\crud\crud\bin\Debug\crud.exe.config
+D:\Training Docs\Create Project Screenshots\Practical\crud\crud\bin\Debug\crud.exe
+D:\Training Docs\Create Project Screenshots\Practical\crud\crud\bin\Debug\crud.pdb
+D:\Training Docs\Create Project Screenshots\Practical\crud\crud\obj\Debug\crud.csproj.AssemblyReference.cache
+D:\Training Docs\Create Project Screenshots\Practical\crud\crud\obj\Debug\crud.Form1.resources
+D:\Training Docs\Create Project Screenshots\Practical\crud\crud\obj\Debug\crud.Properties.Resources.resources
+D:\Training Docs\Create Project Screenshots\Practical\crud\crud\obj\Debug\crud.csproj.GenerateResource.cache
+D:\Training Docs\Create Project Screenshots\Practical\crud\crud\obj\Debug\crud.csproj.CoreCompileInputs.cache
+D:\Training Docs\Create Project Screenshots\Practical\crud\crud\obj\Debug\crud.exe
+D:\Training Docs\Create Project Screenshots\Practical\crud\crud\obj\Debug\crud.pdb
+C:\Users\BAPS\Desktop\dotnet\crud_windo_sir\crud\bin\Debug\crud.exe.config
+C:\Users\BAPS\Desktop\dotnet\crud_windo_sir\crud\bin\Debug\crud.exe
+C:\Users\BAPS\Desktop\dotnet\crud_windo_sir\crud\bin\Debug\crud.pdb
+C:\Users\BAPS\Desktop\dotnet\crud_windo_sir\crud\obj\Debug\crud.csproj.AssemblyReference.cache
+C:\Users\BAPS\Desktop\dotnet\crud_windo_sir\crud\obj\Debug\crud.Form1.resources
+C:\Users\BAPS\Desktop\dotnet\crud_windo_sir\crud\obj\Debug\crud.Properties.Resources.resources
+C:\Users\BAPS\Desktop\dotnet\crud_windo_sir\crud\obj\Debug\crud.csproj.GenerateResource.cache
+C:\Users\BAPS\Desktop\dotnet\crud_windo_sir\crud\obj\Debug\crud.csproj.CoreCompileInputs.cache
+C:\Users\BAPS\Desktop\dotnet\crud_windo_sir\crud\obj\Debug\crud.exe
+C:\Users\BAPS\Desktop\dotnet\crud_windo_sir\crud\obj\Debug\crud.pdb

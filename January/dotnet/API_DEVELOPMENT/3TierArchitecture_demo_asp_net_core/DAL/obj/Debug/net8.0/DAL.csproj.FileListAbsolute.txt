@@ -1,0 +1,14 @@
+C:\Users\BAPS\Desktop\dotnet\API_DEVELOPMENT\3TierArchitecture_demo_asp_net_core\DAL\bin\Debug\net8.0\DAL.deps.json
+C:\Users\BAPS\Desktop\dotnet\API_DEVELOPMENT\3TierArchitecture_demo_asp_net_core\DAL\bin\Debug\net8.0\DAL.runtimeconfig.json
+C:\Users\BAPS\Desktop\dotnet\API_DEVELOPMENT\3TierArchitecture_demo_asp_net_core\DAL\bin\Debug\net8.0\DAL.dll
+C:\Users\BAPS\Desktop\dotnet\API_DEVELOPMENT\3TierArchitecture_demo_asp_net_core\DAL\bin\Debug\net8.0\DAL.pdb
+C:\Users\BAPS\Desktop\dotnet\API_DEVELOPMENT\3TierArchitecture_demo_asp_net_core\DAL\obj\Debug\net8.0\DAL.csproj.AssemblyReference.cache
+C:\Users\BAPS\Desktop\dotnet\API_DEVELOPMENT\3TierArchitecture_demo_asp_net_core\DAL\obj\Debug\net8.0\DAL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\BAPS\Desktop\dotnet\API_DEVELOPMENT\3TierArchitecture_demo_asp_net_core\DAL\obj\Debug\net8.0\DAL.AssemblyInfoInputs.cache
+C:\Users\BAPS\Desktop\dotnet\API_DEVELOPMENT\3TierArchitecture_demo_asp_net_core\DAL\obj\Debug\net8.0\DAL.AssemblyInfo.cs
+C:\Users\BAPS\Desktop\dotnet\API_DEVELOPMENT\3TierArchitecture_demo_asp_net_core\DAL\obj\Debug\net8.0\DAL.csproj.CoreCompileInputs.cache
+C:\Users\BAPS\Desktop\dotnet\API_DEVELOPMENT\3TierArchitecture_demo_asp_net_core\DAL\obj\Debug\net8.0\DAL.dll
+C:\Users\BAPS\Desktop\dotnet\API_DEVELOPMENT\3TierArchitecture_demo_asp_net_core\DAL\obj\Debug\net8.0\refint\DAL.dll
+C:\Users\BAPS\Desktop\dotnet\API_DEVELOPMENT\3TierArchitecture_demo_asp_net_core\DAL\obj\Debug\net8.0\DAL.pdb
+C:\Users\BAPS\Desktop\dotnet\API_DEVELOPMENT\3TierArchitecture_demo_asp_net_core\DAL\obj\Debug\net8.0\DAL.genruntimeconfig.cache
+C:\Users\BAPS\Desktop\dotnet\API_DEVELOPMENT\3TierArchitecture_demo_asp_net_core\DAL\obj\Debug\net8.0\ref\DAL.dll

@@ -1,0 +1,42 @@
+﻿
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using Newtonsoft.Json;
+
+@{
+    Product product = JsonConvert.DeserializeObject(Model.data);
+}
+<h1>Edit</h1>
+
+<h4>Product</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <div id="error-message" class="alert alert-danger" style="display: none;"></div>
+        <form id="edit-product-form" asp-action="Edit" method="post">
+            <input type="hidden" name="Id" value="@ViewBag.ProductId" />
+            <div class="form-group">
+                <label for="ProductName" class="control-label">Product Name</label>
+                <input type="text" id="ProductName" name="ProductName" class="form-control" value="@product.ProductName" />
+            </div>
+            <div class="form-group">
+                <label for="Description" class="control-label">Description</label>
+                <input type="text" id="Description" name="Description" class="form-control" value="@product.Description" />
+            </div>
+            <div class="form-group">
+                <label for="Price" class="control-label">Price</label>
+                <input type="text" id="Price" name="Price" class="form-control" value="@product.Price" />
+            </div>
+            <div class="form-group" style="margin-top:2rem;">
+                <button type="button" class="btn btn-primary">Save</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a href="/Product/Index" class="btn btn-secondary">Back to List</a>
+</div>
+
